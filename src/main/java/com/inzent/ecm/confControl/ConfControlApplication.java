@@ -8,6 +8,7 @@ public class ConfControlApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ConfControlApplication.class, args);
+	
 	}
 
 }
