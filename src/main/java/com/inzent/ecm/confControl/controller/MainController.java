@@ -45,6 +45,12 @@ public class MainController{
 		return "/main";
 	}
 	
+	@GetMapping("/detail")
+	public String detial() {
+		
+		return "/detail";
+	}
+	
 	@GetMapping("/service")
 	@ResponseBody
 	public String service(){
