@@ -1,15 +1,13 @@
 package service;
 
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class MainService {
+public class ArchiveService {
 
-	public String test() {
+	public void test() {
 		// TODO Auto-generated method stub
-		return "service test";
+		System.out.println("archive");
 	}
 
 }

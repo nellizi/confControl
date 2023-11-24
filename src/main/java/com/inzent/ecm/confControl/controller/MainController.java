@@ -5,33 +5,37 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
- 
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-
 import lombok.RequiredArgsConstructor;
-import service.MainService;
+import service.ArchiveService;
+import service.CommService;
+import service.DataService;
+import service.ServerService;
 
 @Controller
 @RequiredArgsConstructor
 public class MainController{
 	
 	
- private final MainService mainService; 
+ private final ArchiveService archiveService; 
+ private final CommService commService; 
+ private final DataService dataService; 
+ private final ServerService serverService; 
  
- public MainController(MainService mainService) {
-     this.mainService = mainService;
+ public MainController(ArchiveService archiveService,CommService commService, DataService dataService, ServerService serverService) {
+     this.archiveService =archiveService;
+     this.commService=commService;
+     this.dataService=dataService;
+     this.serverService=serverService;
  }
 
 	@GetMapping("/test")
@@ -44,8 +48,12 @@ public class MainController{
 	@ResponseBody
 	public String service(){
 		
-		String result =mainService.test();
-		return result;
+		archiveService.test();
+		commService.test();
+		dataService.test();
+		serverService.test();
+		
+		return "Service test";
 	}
 	
 	
