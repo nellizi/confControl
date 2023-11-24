@@ -1,13 +1,13 @@
-package service;
+package com.inzent.ecm.confControl.service;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class ServerService {
+public class CommService {
 
 	public void test() {
 		// TODO Auto-generated method stub
-			System.out.println("server");		
+		System.out.println("comm");
 	}
 
 }

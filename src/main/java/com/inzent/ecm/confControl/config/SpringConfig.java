@@ -3,10 +3,10 @@ package com.inzent.ecm.confControl.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import service.ArchiveService;
-import service.CommService;
-import service.DataService;
-import service.ServerService;
+import com.inzent.ecm.confControl.service.ArchiveService;
+import com.inzent.ecm.confControl.service.CommService;
+import com.inzent.ecm.confControl.service.DataService;
+import com.inzent.ecm.confControl.service.ServerService;
 
 @Configuration
 public class SpringConfig {

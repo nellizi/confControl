@@ -1,4 +1,4 @@
-package service;
+package com.inzent.ecm.confControl.service;
 
 import lombok.RequiredArgsConstructor;
 

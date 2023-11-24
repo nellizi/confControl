@@ -15,11 +15,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.inzent.ecm.confControl.service.ArchiveService;
+import com.inzent.ecm.confControl.service.CommService;
+import com.inzent.ecm.confControl.service.DataService;
+import com.inzent.ecm.confControl.service.ServerService;
+
 import lombok.RequiredArgsConstructor;
-import service.ArchiveService;
-import service.CommService;
-import service.DataService;
-import service.ServerService;
 
 @Controller
 @RequiredArgsConstructor
