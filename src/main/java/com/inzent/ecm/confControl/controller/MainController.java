@@ -64,48 +64,54 @@ public class MainController{
 	}
 	
 	
-	
-	@GetMapping("/parse")
-	public String domPaser() throws ParserConfigurationException, SAXException, IOException {
-		// XML 문서 파싱
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-		Document document = documentBuilder.parse("xml/conf.xml");
-		
-		// root 구하기
-		Element root = document.getDocumentElement();
-		
-		// root의 속성
-		System.out.println("class name: XVARM");
-		
-		NodeList childeren = root.getChildNodes(); // 자식 노드 목록 get
-		for(int i = 0; i < childeren.getLength(); i++){
-			Node node = childeren.item(i);
-			if(node.getNodeType() == Node.ELEMENT_NODE){ // 해당 노드의 종류 판정(Element일 때)
-				Element ele = (Element)node;
-				String nodeName = ele.getNodeName();
-				System.out.println("node name: " + nodeName);
-				if(nodeName.equals("server")){
-					System.out.println("node attribute: " + ele.getAttribute("name"));
-				}
-				else if(nodeName.equals("logwriter")){
-					// 이름이 student인 노드는 자식노드가 더 존재함
-					NodeList childeren2 = ele.getChildNodes();
-					for(int a = 0; a < childeren2.getLength(); a++){
-						Node node2 = childeren2.item(a);
-						if(node2.getNodeType() == Node.ELEMENT_NODE){
-							Element ele2 = (Element)node2;
-							String nodeName2 = ele2.getNodeName();
-							System.out.println("node name2: " + nodeName2);
-							System.out.println("node attribute2: " + ele2.getAttribute("class"));
-						}
-					}
-				}
-			}
-		}
-		return null;
+	  @GetMapping("/parse")
+	    public String domPaser() throws ParserConfigurationException, SAXException, IOException {
+	        // XML 문서 파싱
+	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+	        Document document = documentBuilder.parse("xml/conf.xml");
+
+	        // root 구하기       <XVARM>
+	        Element root = document.getDocumentElement();
+//	        System.out.println("=========root : " + root + "==========");
+
+	        NodeList childeren = root.getChildNodes(); // 자식 노드 목록 get
+
+	        for (int i = 0; i < childeren.getLength(); i++) {
+	            Node node = childeren.item(i);    //   1. server, 2. localagents
+
+	            if (node.getNodeType() == Node.ELEMENT_NODE) { // 해당 노드의 종류 판정(Element일 때)    *XVARM은 root, 하위 태그들이 element -> XVARM 태그 걸러내기
+	                Element ele = (Element) node;
+	                String nodeName = ele.getNodeName();    // element 노드 이름 구하기 (첫번째 태그 값) 1.server, 2.localagents
+	                if (nodeName.equals("server")) {
+	                    serverService.getAttribute(ele);
+
+	                } else if (nodeName.equals("localagents")) {      // localAgent 시작, localAgent는 type별로 구분 필요
+	                    NodeList childeren2 = ele.getChildNodes(); // localAgent 하위 3개 element (comm, archive, data)가 존재
+	                    for (int a = 0; a < childeren2.getLength(); a++) {
+	                        Node node2 = childeren2.item(a);
+	                        if (node2.getNodeType() == Node.ELEMENT_NODE) {  //하위 element (agent태그) 에서 type으로 구분해서 불러오기
+	                            Element ele2 = (Element) node2;
+	                            String type = ele2.getAttribute("type");
+	                            switch (type) {
+	                                case "COMM":
+	                                    commService.test();
+	                                    break;
+	                                case "ARCHIVE":
+	                                    archiveService.test();
+	                                    break;
+	                                case "DATA":
+	                                    dataService.test();
+	                                    break;
+
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	        return null;
+	    }
+
+
 	}
-	
-	
-	
-}
