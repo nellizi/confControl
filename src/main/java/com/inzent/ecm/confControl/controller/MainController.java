@@ -100,8 +100,8 @@ public class MainController {
 								break;
 							case "ARCHIVE":
 								 archive = archiveService.getAttribute(ele2);
-								 model.addAttribute("archive", archive);
 								 archiveList.add(archive);
+								 model.addAttribute("archiveList", archiveList);
 								break;
 							case "DATA":
 								 data = dataService.getAttribute(ele2);
@@ -114,7 +114,7 @@ public class MainController {
 			}
 		}
 		
-		return "newTest";
+		return "newTest2";
 	}
 
 }
