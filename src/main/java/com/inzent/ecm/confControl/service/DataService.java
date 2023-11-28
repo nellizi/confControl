@@ -4,6 +4,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.inzent.ecm.confControl.model.DataAgentDto;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -14,7 +16,9 @@ public class DataService {
 		System.out.println("Data");
 	}
 
-	public void getAttribute(Element ele) { // ele.getNodeName = agent
+	public DataAgentDto getAttribute(Element ele) { // ele.getNodeName = agent
+		
+		DataAgentDto data = new DataAgentDto();
 		// TODO Auto-generated method stub
 		System.out.println("============3." + ele.getNodeName());
 		System.out.println("name: " + ele.getAttribute("name"));
@@ -77,6 +81,9 @@ public class DataService {
 			}
 
 		}
+		
+		return data;
+		
 	}
 
 }

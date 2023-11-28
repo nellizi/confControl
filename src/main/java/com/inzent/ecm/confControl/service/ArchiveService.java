@@ -4,6 +4,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.inzent.ecm.confControl.model.ArchiveAgentDto;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -14,15 +16,18 @@ public class ArchiveService {
 		System.out.println("archive");
 	}
 
-	public void getAttribute(Element ele) { // ele.getNodeName = agent    -> type이 archive인 agent만 받음
+	public ArchiveAgentDto getAttribute(Element ele) { // ele.getNodeName = agent    -> type이 archive인 agent만 받음
+		
+		ArchiveAgentDto archive =new ArchiveAgentDto();
 		// TODO Auto-generated method stub
 		System.out.println("============2." + ele.getNodeName());
-		System.out.println("name: " + ele.getAttribute("name"));
-		System.out.println("type: " + ele.getAttribute("type"));
-		System.out.println("desc: " + ele.getAttribute("desc"));
-		System.out.println("class: " + ele.getAttribute("class"));
-		System.out.println("opclass: " + ele.getAttribute("opclass"));
-		System.out.println("msgfile: " + ele.getAttribute("msgfile"));
+		
+		archive.setAg_Name(ele.getAttribute("name"));
+		archive.setAg_Type(ele.getAttribute("type"));
+		archive.setAg_Desc(ele.getAttribute("desc"));
+		archive.setAg_class(ele.getAttribute("class"));
+		archive.setAg_Opclass(ele.getAttribute("opclass"));
+		archive.setAg_Msgfile(ele.getAttribute("msgfile"));
 
 		NodeList childeren = ele.getChildNodes(); // archiveAgent에는 자식element인 scheduler 존재
 
@@ -32,8 +37,8 @@ public class ArchiveService {
 				Element ele2 = (Element) node2;
 				String nodeName2 = ele2.getNodeName();
 				System.out.println("node name2: " + nodeName2); // scheduler
-				System.out.println("class: " + ele2.getAttribute("class"));
-				System.out.println("=================1====================");
+				archive.setSc_class(ele2.getAttribute("class"));
+				
 
 			}
 
@@ -48,16 +53,18 @@ public class ArchiveService {
 					switch (nodeName3) {
 					case "deviceIF":
 						System.out.println("node name3: " + nodeName3);
-						System.out.println("class: " + ele3.getAttribute("class"));
-						System.out.println("basedir: " + ele3.getAttribute("basedir"));
-						System.out.println("hashdirs: " + ele3.getAttribute("hashdirs"));
-						System.out.println("=================2====================");
+						
+						archive.setDe_class(ele3.getAttribute("class"));
+						archive.setDe_Basedir(ele3.getAttribute("basedir"));
+						archive.setDe_Hashdirs(ele3.getAttribute("hashdirs"));
+						archive.setDe_Dateformat(ele3.getAttribute("dateformat"));
+						archive.setDe_filesystemclass(ele3.getAttribute("filesystemclass"));
+						archive.setDe_filesystemkb(ele3.getAttribute("filesystemkb"));
 						break;
 					case "threadpool":
 						System.out.println("node name3: " + nodeName3);
-						System.out.println("ops: " + ele3.getAttribute("ops"));
-						System.out.println("count: " + ele3.getAttribute("count"));
-						System.out.println("=================3====================");
+						archive.setTh_Ops(ele3.getAttribute("ops"));
+						archive.setTh_Count(ele3.getAttribute("count"));
 						break;
 
 					}
@@ -66,6 +73,9 @@ public class ArchiveService {
 			}
 
 		}
+		
+		return archive;
+		
 	}
 
 }

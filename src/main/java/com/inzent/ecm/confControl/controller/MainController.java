@@ -60,8 +60,7 @@ public class MainController {
 
 		// root 구하기 <XVARM>
 		Element root = document.getDocumentElement();
-	    System.out.println("=========root==========");
-	    System.out.println(root.getNodeName());
+	    System.out.println(root.getNodeName());   //XVARM
 
 		NodeList childeren = root.getChildNodes(); // 자식 노드 목록 get
 

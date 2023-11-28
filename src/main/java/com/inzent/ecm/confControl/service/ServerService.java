@@ -1,19 +1,28 @@
 package com.inzent.ecm.confControl.service;
 
+import javax.naming.event.NamespaceChangeListener;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.inzent.ecm.confControl.model.ServerDto;
+
+import jakarta.websocket.server.ServerEndpoint;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class ServerService {
 
-	public void getAttribute(Element ele) { // ele.getNodeName = SERVER
+	public ServerDto getAttribute(Element ele) { // ele.getNodeName = SERVER
+		
+		ServerDto server = new ServerDto();
 		// TODO Auto-generated method stub
 		System.out.println(ele.getNodeName()); //server
-		System.out.println("keepperfstats : " + ele.getAttribute("keepperfstats"));
-		System.out.println("basemsg: " + ele.getAttribute("basemsg"));
+		
+		
+		server.setSe_keepperfstats(ele.getAttribute("keepperfstats"));
+		server.setSe_basemsg(ele.getAttribute("basemsg"));
 
 		NodeList childeren = ele.getChildNodes(); // SEVER의 자식 element 구하기 -> logwriter
 
@@ -23,8 +32,8 @@ public class ServerService {
 				Element ele2 = (Element) node;
 				String nodeName = ele2.getNodeName();
 				System.out.println("node name: " + nodeName);
-				System.out.println("class: " + ele2.getAttribute("class"));
-				System.out.println("level: " + ele2.getAttribute("level"));
+				server.setLo_Class(ele2.getAttribute("class"));
+				server.setLo_Level(ele2.getAttribute("level"));
 			}
 
 			NodeList childeren2 = node.getChildNodes();
@@ -34,13 +43,13 @@ public class ServerService {
 					Element ele3 = (Element) node2;
 					String nodeName2 = ele3.getNodeName();
 					System.out.println("node name2: " + nodeName2);
-					System.out.println("name: " + ele3.getAttribute("name"));
-					System.out.println("section: " + ele3.getAttribute("section"));
+					server.setPo_Name(ele3.getAttribute("name"));
+					server.setPo_Section(ele3.getAttribute("section"));
 
 				}
 			}
 
 		}
-
+		return server;	
 	}
 }
