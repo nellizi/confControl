@@ -17,6 +17,8 @@ public class CommService {
 	public void getAttribute(Element ele) { // ele.getNodeName = agent
 		// TODO Auto-generated method stub
 		System.out.println("============1."+ele.getNodeName());
+		System.out.println("name: " + ele.getAttribute("name"));
+		System.out.println("class: " + ele.getAttribute("class"));
 
 		NodeList childeren = ele.getChildNodes(); // childeren : agent
 		for (int a = 0; a < childeren.getLength(); a++) {
@@ -25,17 +27,12 @@ public class CommService {
 				Element ele2 = (Element) node2;
 				String nodeName2 = ele2.getNodeName();
 				System.out.println("node name2: " + nodeName2);  //sockets
-				System.out.println("hostname: " + ele2.getAttribute("hostname"));
-				System.out.println("clienttimeout: " + ele2.getAttribute("clienttimeout"));
+//				System.out.println("hostname: " + ele2.getAttribute("hostname"));
+//				System.out.println("clienttimeout: " + ele2.getAttribute("clienttimeout"));
 				
 			}
 
-//			NodeList childeren2 = node2.getChildNodes();
-//			for (int i = 0; i < childeren2.getLength(); i++) {
-//				Node node3 = childeren2.item(i);
-//				if (node3.getNodeType() == Node.ELEMENT_NODE) {
-//					Element ele3 = (Element) node3;
-//					String nodeName3 = ele3.getNodeName();
+
 //
 //					switch (nodeName3) {
 //					case "property":

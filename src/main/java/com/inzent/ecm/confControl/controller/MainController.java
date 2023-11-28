@@ -97,10 +97,10 @@ public class MainController{
 	                                    commService.getAttribute(ele2);
 	                                    break;
 	                                case "ARCHIVE":
-	                                    archiveService.test();
+	                                    archiveService.getAttribute(ele2);
 	                                    break;
 	                                case "DATA":
-	                                    dataService.test();
+	                                    dataService.getAttribute(ele2);
 	                                    break;
 
 	                            }
