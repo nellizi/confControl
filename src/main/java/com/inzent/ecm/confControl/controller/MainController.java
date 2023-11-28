@@ -58,7 +58,6 @@ public class MainController{
 		archiveService.test();
 		commService.test();
 		dataService.test();
-		serverService.test();
 		
 		return "Service test";
 	}
