@@ -39,7 +39,6 @@ public class ArchiveService {
 				System.out.println("node name2: " + nodeName2); // scheduler
 				archive.setSc_class(ele2.getAttribute("class"));
 				
-
 			}
 
 			NodeList childeren2 = node2.getChildNodes();   //node2 = scheduler -> scheduler의 자식 element 구하기 
@@ -49,7 +48,6 @@ public class ArchiveService {
 					Element ele3 = (Element) node3;
 					String nodeName3 = ele3.getNodeName(); // 1. deviceIF, 2.threadpool
 					
-
 					switch (nodeName3) {
 					case "deviceIF":
 						System.out.println("node name3: " + nodeName3);
