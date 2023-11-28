@@ -100,11 +100,8 @@ public class MainController {
 								break;
 							case "ARCHIVE":
 								 archive = archiveService.getAttribute(ele2);
-<<<<<<< HEAD
 								 model.addAttribute("archive", archive);
-=======
 								 archiveList.add(archive);
->>>>>>> ee979b8f1478a62818275cfc8be1068baf2dc8a8
 								break;
 							case "DATA":
 								 data = dataService.getAttribute(ele2);
