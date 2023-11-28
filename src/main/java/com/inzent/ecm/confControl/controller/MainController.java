@@ -15,6 +15,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.inzent.ecm.confControl.model.ArchiveAgentDto;
+import com.inzent.ecm.confControl.model.CommAgentDto;
+import com.inzent.ecm.confControl.model.DataAgentDto;
+import com.inzent.ecm.confControl.model.ServerDto;
 import com.inzent.ecm.confControl.service.ArchiveService;
 import com.inzent.ecm.confControl.service.CommService;
 import com.inzent.ecm.confControl.service.DataService;
@@ -53,6 +57,11 @@ public class MainController {
 
 	@GetMapping("/parse")
 	public String domPaser() throws ParserConfigurationException, SAXException, IOException {
+		
+		CommAgentDto comm = null;
+		ArchiveAgentDto archive = null;
+		DataAgentDto data = null;
+		
 		// XML 문서 파싱
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
@@ -72,7 +81,7 @@ public class MainController {
 				Element ele = (Element) node;
 				String nodeName = ele.getNodeName(); // element 노드 이름 구하기 (첫번째 태그 값) 1.server, 2.localagents
 				if (nodeName.equals("server")) {
-					serverService.getAttribute(ele);
+					ServerDto server =serverService.getAttribute(ele);
 				} else if (nodeName.equals("localagents")) { // localAgent 시작, localAgent는 type별로 구분 필요
 					NodeList childeren2 = ele.getChildNodes(); // localAgent 자식 element 구하기
 					for (int a = 0; a < childeren2.getLength(); a++) {
@@ -83,13 +92,13 @@ public class MainController {
 
 							switch (type) {
 							case "COMM":
-								commService.getAttribute(ele2);
+								 comm = commService.getAttribute(ele2);
 								break;
 							case "ARCHIVE":
-								archiveService.getAttribute(ele2);
+								 archive = archiveService.getAttribute(ele2);
 								break;
 							case "DATA":
-								dataService.getAttribute(ele2);
+								 data = dataService.getAttribute(ele2);
 								break;
 							}
 						}
@@ -97,6 +106,7 @@ public class MainController {
 				}
 			}
 		}
+		
 		return null;
 	}
 
