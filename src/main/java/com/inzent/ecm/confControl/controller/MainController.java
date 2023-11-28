@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Document;
@@ -56,7 +57,7 @@ public class MainController {
 	}
 
 	@GetMapping("/parse")
-	public String domPaser() throws ParserConfigurationException, SAXException, IOException {
+	public String domPaser(Model model) throws ParserConfigurationException, SAXException, IOException {
 		
 		CommAgentDto comm = null;
 		ArchiveAgentDto archive = null;
@@ -93,12 +94,15 @@ public class MainController {
 							switch (type) {
 							case "COMM":
 								 comm = commService.getAttribute(ele2);
+								 model.addAttribute("comm", comm);
 								break;
 							case "ARCHIVE":
 								 archive = archiveService.getAttribute(ele2);
+								 model.addAttribute("archive", archive);
 								break;
 							case "DATA":
 								 data = dataService.getAttribute(ele2);
+								 model.addAttribute("data", data);
 								break;
 							}
 						}
@@ -107,7 +111,7 @@ public class MainController {
 			}
 		}
 		
-		return null;
+		return "newTest";
 	}
 
 }
