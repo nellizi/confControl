@@ -27,38 +27,31 @@ public class DataService {
 			if (node2.getNodeType() == Node.ELEMENT_NODE) {
 				Element ele2 = (Element) node2;
 				String nodeName2 = ele2.getNodeName();
-				System.out.println("node name2: " + nodeName2); // sockets
+				System.out.println("--------node name2: " + nodeName2); // sockets
 
 				switch (nodeName2) {
 				case "dbpools":
-					System.out.println("node name2: " + nodeName2);
 					System.out.println("name: " + ele2.getAttribute("name"));
 					break;
 				case "startup":
-					System.out.println("node name2: " + nodeName2);
 					System.out.println("mainpool: " + ele2.getAttribute("mainpool"));
 					break;
 				case "listspooler":
-					System.out.println("node name2: " + nodeName2);
 					System.out.println("listdir: " + ele2.getAttribute("listdir"));
 					break;
 				case "physicalvolumemanager":
-					System.out.println("node name2: " + nodeName2);
 					System.out.println("iteration: " + ele2.getAttribute("iteration"));
 					break;
 				case "activemanager":
-					System.out.println("node name2: " + nodeName2);
 					System.out.println("iteration: " + ele2.getAttribute("iteration"));
 					break;
 				case "checkquery":
-					System.out.println("node name2: " + nodeName2);
 					System.out.println("CHECKQUERYENABLE: " + ele2.getAttribute("CHECKQUERYENABLE"));
 					break;
 				case "defaultaudit":
-					System.out.println("node name2: " + nodeName2);
 					System.out.println("agentserver: " + ele2.getAttribute("agentserver"));
 					break;
-					
+
 				}
 			}
 

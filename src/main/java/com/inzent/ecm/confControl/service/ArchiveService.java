@@ -14,7 +14,7 @@ public class ArchiveService {
 		System.out.println("archive");
 	}
 
-	public void getAttribute(Element ele) { // ele.getNodeName = agent
+	public void getAttribute(Element ele) { // ele.getNodeName = agent    -> type이 archive인 agent만 받음
 		// TODO Auto-generated method stub
 		System.out.println("============2." + ele.getNodeName());
 		System.out.println("name: " + ele.getAttribute("name"));
@@ -24,10 +24,10 @@ public class ArchiveService {
 		System.out.println("opclass: " + ele.getAttribute("opclass"));
 		System.out.println("msgfile: " + ele.getAttribute("msgfile"));
 
-		NodeList childeren = ele.getChildNodes(); // childeren : agent
+		NodeList childeren = ele.getChildNodes(); // archiveAgent에는 자식element인 scheduler 존재
 
 		for (int a = 0; a < childeren.getLength(); a++) {
-			Node node2 = childeren.item(a);
+			Node node2 = childeren.item(a);   
 			if (node2.getNodeType() == Node.ELEMENT_NODE) {
 				Element ele2 = (Element) node2;
 				String nodeName2 = ele2.getNodeName();
@@ -37,12 +37,13 @@ public class ArchiveService {
 
 			}
 
-			NodeList childeren2 = node2.getChildNodes();
+			NodeList childeren2 = node2.getChildNodes();   //node2 = scheduler -> scheduler의 자식 element 구하기 
 			for (int i = 0; i < childeren2.getLength(); i++) {
 				Node node3 = childeren2.item(i);
 				if (node3.getNodeType() == Node.ELEMENT_NODE) {
 					Element ele3 = (Element) node3;
 					String nodeName3 = ele3.getNodeName(); // 1. deviceIF, 2.threadpool
+					
 
 					switch (nodeName3) {
 					case "deviceIF":
