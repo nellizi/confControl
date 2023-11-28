@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .accordion {
+    background-color: #99999930;
+    }
+
+    .accordion ul > li {
+    overflow: hidden;
+    max-height: 40px;
+    transition: 0.3s;
+    }
+    .accordion ul > li.on {
+    max-height: 600px;
+    }
+    .accordion ul > li .title {
+    background-color: antiquewhite;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    }
+    .accordion ul > li .desc {
+    padding: 0.5rem;
+    }
+    </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    
+    <section>
+        <div class="accordion">
+          
+          <ul>
+            <li class="on">
+              <div class="title"><span>Archive 1</span></div>
+              <strong><p style="font-size: 23px;">Agent</p></strong>
+              <div class="row" id="hello">
+              <div class="col-auto">
+                <label for="arch-name" class="form-label">name</label>
+                <input type="text" class="form-control" name="" th:value="${arc.agName}" id="arch-name">
+              </div>
+              <div class="col-auto">
+                <label for="arch-type" class="form-label">type</label>
+                <input type="text" class="form-control" name="" th:value="${ag_Type}" id="arch-type">
+              </div>
+              <div class="col-auto">
+                <label for="arch-age-class" class="form-label">class</label>
+                <input type="text" class="form-control" name="" th:value="${ag_class}" id="arch-age-class">
+              </div>
+              <div class="col-auto">
+                <label for="arch-opclass" class="form-label">opclass</label>
+                <input type="text" class="form-control" name="" value="" id="arch-opclass">
+              </div>
+              <div class="col-auto">
+                <label for="arch-msgfile" class="form-label">msgfile</label>
+                <input type="text" class="form-control" name="" value="" id="arch-msgfile">
+              </div>
+              </div>
+
+              <strong><p style="font-size: 23px;">scheduler</p></strong>
+              <div class="row" id="hello">
+              <div class="col-auto">
+                <label for="arch-shc-class" class="form-label">class</label>
+                <input type="text" class="form-control" name="" value="" id="arch-shc-class">
+              </div>
+              </div>
+
+              <strong><p style="font-size: 23px;">device-if</p></strong>
+              <div class="row" id="hello">
+              <div class="col-auto">
+                <label for="arch-shc-class" class="form-label">class</label>
+                <input type="text" class="form-control" name="" value="" id="arch-shc-class">
+              </div>
+              <div class="col-auto">
+                <label for="arch-basedir" class="form-label">basedir</label>
+                <input type="text" class="form-control" name="" value="" id="arch-basedir">
+              </div>
+              <div class="col-auto">
+                <label for="arch-hashdirs" class="form-label">hashdirs</label>
+                <input type="text" class="form-control" name="" value="" id="arch-hashdirs">
+              </div>
+              <div class="col-auto">
+                <label for="arch-dateformat" class="form-label">dateformat</label>
+                <input type="text" class="form-control" name="" value="" id="arch-dateformat">
+              </div>
+              <div class="col-auto">
+                <label for="arch-filesystemclass" class="form-label">filesystemclass</label>
+                <input type="text" class="form-control" name="" value="" id="arch-filesystemclass">
+              </div>
+              <div class="col-auto">
+                <label for="arch-filesystemkb" class="form-label">filesystemkb</label>
+                <input type="text" class="form-control" name="" value="" id="arch-filesystemkb">
+              </div>
+              </div>
+
+              <strong><p style="font-size: 23px;">threadpool</p></strong>
+              <div class="row" id="hello">
+              <div class="col-auto">
+                <label for="arch-ops" class="form-label">ops</label>
+                <input type="text" class="form-control" name="" value="" id="arch-ops">
+              </div>
+              <div class="col-auto">
+                <label for="arch-count" class="form-label">count</label>
+                <input type="text" class="form-control" name="" value="" id="count">
+              </div>
+              </div>
+
+
+            </li>
+            <li>
+              <div class="title"><span>Archive 2</span></div>
+              <div class="desc">내용2</div>
+            </li>
+            <li>
+              <div class="title"><span>제목3</span></div>
+              <div class="desc">내용3</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+
+    <script>
+    const accordion = document.querySelector(".accordion");
+    
+    function toggleAccordion() {
+    const clickedItem = this.parentNode;
+    const items = accordion.querySelectorAll("li");
+
+    items.forEach((item) => {
+      if (clickedItem === item) {
+        item.classList.toggle("on");
+      } else {
+        item.classList.remove("on");
+      }
+    });
+  }
+
+  const titles = accordion.querySelectorAll(".title");
+  titles.forEach((title) => {
+    title.addEventListener("click", toggleAccordion);
+  });
+    </script>
+    </body>
+
+</html>
