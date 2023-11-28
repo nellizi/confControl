@@ -20,9 +20,12 @@ public class DataService {
 		
 		DataAgentDto data = new DataAgentDto();
 		// TODO Auto-generated method stub
-		System.out.println("============3." + ele.getNodeName());
-		System.out.println("name: " + ele.getAttribute("name"));
-		System.out.println("class: " + ele.getAttribute("class"));
+		System.out.println("============3." + ele.getNodeName());   //agent
+		
+		data.setAg_Name(ele.getAttribute("name"));
+		data.setAg_Type(ele.getAttribute("type"));		
+		data.setAg_Class(ele.getAttribute("class"));
+		data.setAg_Msgfile(ele.getAttribute("msgfile"));
 
 		NodeList childeren = ele.getChildNodes(); // childeren : agent
 
@@ -34,26 +37,34 @@ public class DataService {
 				System.out.println("--------node name2: " + nodeName2); // sockets
 
 				switch (nodeName2) {
-				case "dbpools":
+				case "dbpools":		
 					System.out.println("name: " + ele2.getAttribute("name"));
 					break;
 				case "startup":
-					System.out.println("mainpool: " + ele2.getAttribute("mainpool"));
+					data.setSt_MainpoolString(ele2.getAttribute("mainpool"));
+					data.setSt_Locasysime(ele2.getAttribute("locasysime"));
+					data.setSt_retentionignore(ele2.getAttribute("retentionignore"));
 					break;
 				case "listspooler":
-					System.out.println("listdir: " + ele2.getAttribute("listdir"));
+					data.setLi_Lisrdir(ele2.getAttribute("listdir"));
+					data.setLi_Memcache(ele2.getAttribute("memcache"));
+					data.setLi_Timeout(ele2.getAttribute("timeout"));
 					break;
 				case "physicalvolumemanager":
-					System.out.println("iteration: " + ele2.getAttribute("iteration"));
+					data.setPh_Iteration(ele2.getAttribute("iteration"));
+					data.setPh_OnErrorReadOnly(ele2.getAttribute("OnErrorReadOnly"));
 					break;
 				case "activemanager":
-					System.out.println("iteration: " + ele2.getAttribute("iteration"));
+					data.setAc_Iteration(ele2.getAttribute("iteration"));
 					break;
 				case "checkquery":
-					System.out.println("CHECKQUERYENABLE: " + ele2.getAttribute("CHECKQUERYENABLE"));
+					data.setCh_CheckQueryEnable( ele2.getAttribute("CHECKQUERYENABLE"));
+					data.setCh_SheckQueryTimeout( ele2.getAttribute("CHECKQUERYTIMEOUT"));
+					data.setCh_Validationinterval( ele2.getAttribute("VALIDATIONINTERVAL"));
 					break;
 				case "defaultaudit":
-					System.out.println("agentserver: " + ele2.getAttribute("agentserver"));
+					data.setDe_Agentserver(ele2.getAttribute("agentserver"));
+					data.setDe_AgentName(ele2.getAttribute("agentname"));
 					break;
 
 				}
@@ -66,17 +77,17 @@ public class DataService {
 					Element ele3 = (Element) node3;
 					String nodeName3 = ele3.getNodeName();
 					System.out.println("node name3: " + nodeName3); // pool
-
-					System.out.println("name: " + ele3.getAttribute("name"));
-					System.out.println("driver: " + ele3.getAttribute("driver"));
-					System.out.println("connect: " + ele3.getAttribute("connect"));
-					System.out.println("dbtype: " + ele3.getAttribute("dbtype"));
-					System.out.println("user: " + ele3.getAttribute("user"));
-					System.out.println("pswd: " + ele3.getAttribute("pswd"));
-					System.out.println("count: " + ele3.getAttribute("count"));
-					System.out.println("preconnect: " + ele3.getAttribute("preconnect"));
-					System.out.println("unicode: " + ele3.getAttribute("unicode"));
-
+				
+					data.setPo_Name(ele3.getAttribute("name"));
+					data.setPo_Driver(ele3.getAttribute("driver"));
+					data.setPo_Connect(ele3.getAttribute("connect"));
+					data.setPo_Dbtype(ele3.getAttribute("dbtype"));
+					data.setPo_User(ele3.getAttribute("user"));
+					data.setPo_Pswd(ele3.getAttribute("pswd"));
+					data.setPo_Count(ele3.getAttribute("count"));
+					data.setPo_Preconnect(ele3.getAttribute("preconnect"));
+					data.setPo_Unicode(ele3.getAttribute("unicode"));
+	
 				}
 			}
 

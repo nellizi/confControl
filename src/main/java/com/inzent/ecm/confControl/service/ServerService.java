@@ -17,9 +17,7 @@ public class ServerService {
 	public ServerDto getAttribute(Element ele) { // ele.getNodeName = SERVER
 		
 		ServerDto server = new ServerDto();
-		// TODO Auto-generated method stub
-		System.out.println(ele.getNodeName()); //server
-		
+//		System.out.println(ele.getNodeName()); //server
 		
 		server.setSe_keepperfstats(ele.getAttribute("keepperfstats"));
 		server.setSe_basemsg(ele.getAttribute("basemsg"));
@@ -31,7 +29,7 @@ public class ServerService {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				Element ele2 = (Element) node;
 				String nodeName = ele2.getNodeName();
-				System.out.println("node name: " + nodeName);
+//				System.out.println("node name: " + nodeName);
 				server.setLo_Class(ele2.getAttribute("class"));
 				server.setLo_Level(ele2.getAttribute("level"));
 			}
@@ -42,7 +40,7 @@ public class ServerService {
 				if (node2.getNodeType() == Node.ELEMENT_NODE) {
 					Element ele3 = (Element) node2;
 					String nodeName2 = ele3.getNodeName();
-					System.out.println("node name2: " + nodeName2);
+//					System.out.println("node name2: " + nodeName2);
 					server.setPo_Name(ele3.getAttribute("name"));
 					server.setPo_Section(ele3.getAttribute("section"));
 
