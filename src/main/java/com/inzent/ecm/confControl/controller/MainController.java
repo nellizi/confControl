@@ -94,7 +94,7 @@ public class MainController{
 	                            String type = ele2.getAttribute("type");
 	                            switch (type) {
 	                                case "COMM":
-	                                    commService.test();
+	                                    commService.getAttribute(ele2);
 	                                    break;
 	                                case "ARCHIVE":
 	                                    archiveService.test();
