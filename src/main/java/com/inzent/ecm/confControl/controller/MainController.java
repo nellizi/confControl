@@ -99,9 +99,9 @@ public class MainController {
 								 model.addAttribute("comm", comm);
 								break;
 							case "ARCHIVE":
-								archive = archiveService.getAttribute(ele2);
+								 archive = archiveService.getAttribute(ele2);
 								 archiveList.add(archive);
-								 model.addAttribute("archive", archive);
+								 model.addAttribute("archiveList", archiveList);
 								break;
 							case "DATA":
 								 data = dataService.getAttribute(ele2);
@@ -114,7 +114,7 @@ public class MainController {
 			}
 		}
 		
-		return "newTest";
+		return "newTest2";
 	}
 
 }

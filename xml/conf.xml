@@ -28,6 +28,12 @@
 				<threadpool ops="read,write,delete" count="20" />
 			</scheduler>
 		</agent>
+				<agent name="TEST_ARC" type="ARCHIVE" desc="TEST Archive" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc">
+			<scheduler class="com.windfire.agents.archive.asysAgentArSchedFifo">
+				<deviceIF class="com.windfire.agents.archive.asysAgentArMediaFilesys" basedir="" hashdirs="100" dateformat="yyyyMMdd" filesystemclass="com.windfire.agents.archive.asysFileSystemShell" filesystemkb="true" />
+				<threadpool ops="read,write,delete" count="20" />
+			</scheduler>
+		</agent>
 
 		<!-- OS HP-UX Use 'filesystemkb' option 'false'
 		<agent name="MAIN_ARC" type="ARCHIVE" desc="FileSystem Disk in HP-UX" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc">
