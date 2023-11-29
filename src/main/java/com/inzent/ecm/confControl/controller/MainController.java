@@ -1,8 +1,10 @@
 package com.inzent.ecm.confControl.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -11,7 +13,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -57,9 +61,11 @@ public class MainController {
 
 		return "/detail";
 	}
+	
+	
 
-	@GetMapping("/parse")
-	public String domPaser(Model model) throws ParserConfigurationException, SAXException, IOException {
+	@PostMapping("/parse")
+	public String domPaser(Model model, @RequestParam MultipartFile file) throws ParserConfigurationException, SAXException, IOException {
 		
 		CommAgentDto comm = null;
 		ArchiveAgentDto archive = null;
@@ -68,7 +74,10 @@ public class MainController {
 		// XML 문서 파싱
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-		Document document = documentBuilder.parse("xml/conf.xml"); // file 불러오기로 수정
+		File requestFile = new File("C://TEST/" + UUID.randomUUID().toString());// 임시로 파일 생성
+		file.transferTo(requestFile);// 파일로 변환
+		System.out.println(file);
+		Document document = documentBuilder.parse(requestFile.getAbsoluteFile());
 
 		// root 구하기 <XVARM>
 		Element root = document.getDocumentElement();
