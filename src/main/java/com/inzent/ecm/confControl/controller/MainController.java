@@ -117,4 +117,11 @@ public class MainController {
 		return "newTest2";
 	}
 
+	
+	@GetMapping("/ajax")
+	public String ajax() {
+		
+		
+		return "test";
+	}
 }
