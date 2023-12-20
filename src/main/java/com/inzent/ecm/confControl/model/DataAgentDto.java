@@ -38,7 +38,7 @@ public class DataAgentDto {
 	
 	private String st_retentionignore;
 	
-	private String li_Lisrdir;
+	private String li_Listdir;
 	
 	private String li_Memcache;
 	
@@ -190,12 +190,12 @@ public class DataAgentDto {
 		this.st_retentionignore = st_retentionignore;
 	}
 
-	public String getLi_Lisrdir() {
-		return li_Lisrdir;
+	public String getLi_Listdir() {
+		return li_Listdir;
 	}
 
 	public void setLi_Lisrdir(String li_Lisrdir) {
-		this.li_Lisrdir = li_Lisrdir;
+		this.li_Listdir = li_Lisrdir;
 	}
 
 	public String getLi_Memcache() {

@@ -16,10 +16,10 @@
             <div class="login__wrap">
                 <div class="login-form__wrap">
                     <div class="enroll">
-                            <form action="enroll.do" style="width: 100%;">
+                            <form action="parse" style="width: 100%;" method="post" enctype="multipart/form-data">
                             
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="inputGroupFile02">
+                                    <input type="file" class="form-control" id="inputGroupFile02" name="file">
                                   </div>
                                   <br>
                                 <button type="submit" class="btn btn-danger custom-btn" value="test">등록</button>
