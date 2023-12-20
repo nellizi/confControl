@@ -11,6 +11,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -115,6 +117,15 @@ public class MainController {
 		}
 		
 		return "newTest2";
+	}
+	
+	@PostMapping("/read")
+	@ResponseBody
+	public String readFile(@ModelAttribute("ArchiveAgentDto") ArchiveAgentDto ArchiveDto) {
+		System.out.println("!!!!!!!!!!!!!!!!!!!넘겨받는 값");
+		System.out.println(ArchiveDto.getAg_Name());
+		
+		return "hi";
 	}
 
 }
