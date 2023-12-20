@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.inzent.ecm.confControl.service.ArchiveService;
 import com.inzent.ecm.confControl.service.CommService;
 import com.inzent.ecm.confControl.service.DataService;
+import com.inzent.ecm.confControl.service.LocalAgentService;
 import com.inzent.ecm.confControl.service.ServerService;
 
 @Configuration
@@ -30,6 +31,11 @@ public class SpringConfig {
 	@Bean
 	public ServerService serverService() {
 		return new ServerService();
+	}
+	
+	@Bean
+	public LocalAgentService localService() {
+		return new LocalAgentService();
 	}
 	
 
