@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.inzent.ecm.confControl.service.ArchiveService;
 import com.inzent.ecm.confControl.service.CommService;
+import com.inzent.ecm.confControl.service.CreateXML;
 import com.inzent.ecm.confControl.service.DataService;
 import com.inzent.ecm.confControl.service.LocalAgentService;
 import com.inzent.ecm.confControl.service.ServerService;
@@ -37,6 +38,13 @@ public class SpringConfig {
 	public LocalAgentService localService() {
 		return new LocalAgentService();
 	}
+	
+	@Bean
+	public CreateXML createXML() {
+		return new CreateXML();
+	}
+	
+	
 	
 
 
