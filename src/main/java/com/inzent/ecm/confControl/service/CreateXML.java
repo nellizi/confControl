@@ -53,7 +53,7 @@ public class CreateXML {
 		System.out.println(serverDto.getPo_Name());
 		property.setAttribute("section", serverDto.getPo_Section());
 		
-		Element localAgent = document.createElement("localAgent");
+		Element localAgent = document.createElement("localagents");
 		localAgent.setAttribute("machineid", localDto.getMachineId());
 		xvarm.appendChild(server);
 		xvarm.appendChild(localAgent);
@@ -119,7 +119,7 @@ public class CreateXML {
 		//data
 		
 		
-		Element Dagent = document.createElement("name");
+		Element Dagent = document.createElement("agent");
 		Dagent.setAttribute("name", dataDto.getDag_Name());
 		Dagent.setAttribute("type", dataDto.getDag_Type());
 		Dagent.setAttribute("class", dataDto.getDag_Class());
