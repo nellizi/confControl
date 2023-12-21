@@ -15,15 +15,15 @@ import lombok.ToString;
 @NoArgsConstructor
 public class CommAgentDto {
 
-	private String ag_Name;
+	private String Cag_Name;
 	
-	private String ag_Type;
+	private String Cag_Type;
 	
-	private String ag_Class;
+	private String Cag_Class;
 	
-	private String ag_Opclss;
+	private String Cag_Opclss;
 	
-	private String ag_Msgfile;
+	private String Cag_Msgfile;
 	
 	private String so_Hostname;
 	
@@ -31,44 +31,46 @@ public class CommAgentDto {
 	
 	private String so_ClientTimeOut;
 
-	public String getAg_Name() {
-		return ag_Name;
+	
+
+	public String getCag_Name() {
+		return Cag_Name;
 	}
 
-	public void setAg_Name(String ag_Name) {
-		this.ag_Name = ag_Name;
+	public void setCag_Name(String cag_Name) {
+		Cag_Name = cag_Name;
 	}
 
-	public String getAg_Type() {
-		return ag_Type;
+	public String getCag_Type() {
+		return Cag_Type;
 	}
 
-	public void setAg_Type(String ag_Type) {
-		this.ag_Type = ag_Type;
+	public void setCag_Type(String cag_Type) {
+		Cag_Type = cag_Type;
 	}
 
-	public String getAg_Class() {
-		return ag_Class;
+	public String getCag_Class() {
+		return Cag_Class;
 	}
 
-	public void setAg_Class(String ag_Class) {
-		this.ag_Class = ag_Class;
+	public void setCag_Class(String cag_Class) {
+		Cag_Class = cag_Class;
 	}
 
-	public String getAg_Opclss() {
-		return ag_Opclss;
+	public String getCag_Opclss() {
+		return Cag_Opclss;
 	}
 
-	public void setAg_Opclss(String ag_Opclss) {
-		this.ag_Opclss = ag_Opclss;
+	public void setCag_Opclss(String cag_Opclss) {
+		Cag_Opclss = cag_Opclss;
 	}
 
-	public String getAg_Msgfile() {
-		return ag_Msgfile;
+	public String getCag_Msgfile() {
+		return Cag_Msgfile;
 	}
 
-	public void setAg_Msgfile(String ag_Msgfile) {
-		this.ag_Msgfile = ag_Msgfile;
+	public void setCag_Msgfile(String cag_Msgfile) {
+		Cag_Msgfile = cag_Msgfile;
 	}
 
 	public String getSo_Hostname() {

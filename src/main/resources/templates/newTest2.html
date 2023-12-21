@@ -92,6 +92,8 @@
 </head>
 
 <body>
+	<form action="create">
+		<button type="submit" class="btn btn-secondary" style="background-color: red; margin-left: 1146px;">저장</button>
    <div style="width: 1300px;">
       <div>
          <strong>
@@ -195,15 +197,15 @@
         -->
          <div class="list-content">
             <div class="list-a">
-               <button class="con" type="button" onclick="show(this); change_btn(event);" id="Comm_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this);change_btn(event);" id="Comm_con" name="show"
                   value="">
                   <span class="r_Comm">Comm</span>
                </button>
-               <button class="con" type="button" onclick="show(this);change_btn(event);" id="Arc_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this);change_btn(event);" id="Arc_con" name="show"
                   value="">
                   <span class="r_Arc">Archive</span>
                </button>
-               <button class="con" type="button" onclick="show(this); change_btn(event);" id="Data_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this); change_btn(event);" id="Data_con" name="show"
                   value="">
                   <span class="r_Data">Data</span>
                </button>
@@ -226,18 +228,18 @@
                         <div class="row" id="com_div">
                            <div class="col-md-3">
                               <label for="arch-name" class="form-label">name</label>
-                              <input type="text" class="form-control" name="cag_Name"
-                                 th:value="${comm.ag_Name}" id="arch-name">
+                              <input type="text" class="form-control" name="Cag_Name"
+                                 th:value="${comm.Cag_Name}" id="arch-name">
                            </div>
                            <div class="col-md-3">
                               <label for="arch-type" class="form-label">type</label>
-                              <input type="text" class="form-control" name="cag_Type"
-                                 th:value="${comm.ag_Type}" id="arch-type">
+                              <input type="text" class="form-control" name="Cag_Type"
+                                 th:value="${comm.Cag_Type}" id="arch-type">
                            </div>
                            <div class="col-md-6">
                               <label for="arch-age-class" class="form-label">class</label>
-                              <input type="text" class="form-control" name="cag_Class"
-                                 th:value="${comm.ag_Class}" id="arch-age-class">
+                              <input type="text" class="form-control" name="Cag_Class"
+                                 th:value="${comm.Cag_Class}" id="arch-age-class">
                            </div>
                         </div>
                         
@@ -245,13 +247,13 @@
                         <div class="row" id="com_div">
                            <div class="col-md-6">
                               <label for="arch-name" class="form-label">opclass</label>
-                              <input type="text" class="form-control" name="cag_Opclass"
-                                 th:value="${comm.ag_Opclss}" id="arch-name">
+                              <input type="text" class="form-control" name="Cag_Opclass"
+                                 th:value="${comm.Cag_Opclss}" id="arch-name">
                            </div>
                            <div class="col-md-6">
                               <label for="arch-type" class="form-label">msgfile</label>
-                              <input type="text" class="form-control" name="cag_Msgfile"
-                                 th:value="${comm.ag_Msgfile}" id="arch-type">
+                              <input type="text" class="form-control" name="Cag_Msgfile"
+                                 th:value="${comm.Cag_Msgfile}" id="arch-type">
                            </div>
                         </div>
                         <br>
@@ -298,37 +300,37 @@
                         <div class="accordion">
                            <ul>
                               <li class="off">
-                                 <div class="title"><span th:text="${archive.ag_Name}">Archive</span></div>
+                                 <div class="title"><span th:text="${archive.Aag_Name}">Archive</span></div>
                                  <strong>
                                     <p style="font-size: 23px;">Agent</p>
                                  </strong>
                                  <div class="row" id="hello">
                                     <div class="col-md-3">
                                        <label for="arch-name" class="form-label">name</label>
-                                       <input type="text" class="form-control" name="aag_Name"
-                                          th:value="${archive.ag_Name}" id="arch-name">
+                                       <input type="text" class="form-control" name="Aag_Name"
+                                          th:value="${archive.Aag_Name}" id="arch-name">
                                     </div>
                                     <div class="col-md-3">
                                        <label for="arch-type" class="form-label">type</label>
-                                       <input type="text" class="form-control" name="aag_Type"
-                                          th:value="${archive.ag_Type}" id="arch-type">
+                                       <input type="text" class="form-control" name="Aag_Type"
+                                          th:value="${archive.Aag_Type}" id="arch-type">
                                     </div>
                                     <div class="col-md-6">
                                        <label for="arch-age-class" class="form-label">class</label>
-                                       <input type="text" class="form-control" name="aag_class"
-                                          th:value="${archive.ag_class}" id="arch-age-class">
+                                       <input type="text" class="form-control" name="Aag_class"
+                                          th:value="${archive.Aag_class}" id="arch-age-class">
                                     </div>
                                  </div>
                                  <div class="row" id="hello">
                                     <div class="col-md-6">
                                        <label for="arch-opclass" class="form-label">opclass</label>
-                                       <input type="text" class="form-control" name="aag_Opclass"
-                                          th:value="${archive.ag_Opclass}" id="arch-opclass">
+                                       <input type="text" class="form-control" name="Aag_Opclass"
+                                          th:value="${archive.Aag_Opclass}" id="arch-opclass">
                                     </div>
                                     <div class="col-md-6">
                                        <label for="arch-msgfile" class="form-label">msgfile</label>
-                                       <input type="text" class="form-control" name="aag_Msgfile"
-                                          th:value="${archive.ag_Msgfile}" id="arch-msgfile">
+                                       <input type="text" class="form-control" name="Aag_Msgfile"
+                                          th:value="${archive.Aag_Msgfile}" id="arch-msgfile">
                                     </div>
                                  </div>
 
@@ -431,23 +433,23 @@
                         <div class="row" id="data_con">
                            <div class="col-md-3">
                               <label class="form-label">name</label>
-                              <input type="text" class="form-control" name="dag_Name"
-                                 th:value="${data.ag_Name}">
+                              <input type="text" class="form-control" name="Dag_Name"
+                                 th:value="${data.Dag_Name}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">type</label>
-                              <input type="text" class="form-control" name="dag_Type"
-                                 th:value="${data.ag_Type}">
+                              <input type="text" class="form-control" name="Dag_Type"
+                                 th:value="${data.Dag_Type}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">class</label>
-                              <input type="text" class="form-control" name="dag_Class"
-                                 th:value="${data.ag_Class}">
+                              <input type="text" class="form-control" name="Dag_Class"
+                                 th:value="${data.Dag_Class}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">msgfile</label>
-                              <input type="text" class="form-control" name="dag_Msgfile"
-                                 th:value="${data.ag_Msgfile}">
+                              <input type="text" class="form-control" name="Dag_Msgfile"
+                                 th:value="${data.Dag_Msgfile}">
                            </div>
                         </div>
                         
@@ -459,8 +461,8 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">name</label>
-                           <input type="text" class="form-control" name="po_Name"
-                              th:value="${data.po_Name}">
+                           <input type="text" class="form-control" name="DPo_Name"
+                              th:value="${data.DPo_Name}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">driver</label>
@@ -712,6 +714,8 @@
 
       </div>
    </div>
+   
+      </form>
 
    <script>
 
@@ -770,7 +774,7 @@
       }
    </script>
    <script>
-      function show(element) {
+      function show_btn(element) {
          let tag = document.getElementsByClassName("box");
 
          for (let i = 0; i < tag.length; i++) {
@@ -792,6 +796,7 @@
       function valueChange() {
 
          var dbtype = document.getElementById("dbtype");
+         
          var driver = (dbtype.options[dbtype.selectedIndex].value);
          $('#driver').val(driver);
 

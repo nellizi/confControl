@@ -16,17 +16,17 @@ import lombok.ToString;
 @ToString
 public class ArchiveAgentDto {
 	
-	private String ag_Name;
+	private String Aag_Name;
 	
-	private String ag_Type;
+	private String Aag_Type;
 	
-	private String ag_Desc;
+	private String Aag_Desc;
 	
-	private String ag_class;
+	private String Aag_class;
 	
-	private String ag_Opclass;
+	private String Aag_Opclass;
 	
-	private String ag_Msgfile;
+	private String Aag_Msgfile;
 	
 	private String sc_class;
 	
@@ -46,52 +46,54 @@ public class ArchiveAgentDto {
 	
 	private String th_Count;
 
-	public String getAg_Name() {
-		return ag_Name;
+	
+
+	public String getAag_Name() {
+		return Aag_Name;
 	}
 
-	public void setAg_Name(String ag_Name) {
-		this.ag_Name = ag_Name;
+	public void setAag_Name(String aag_Name) {
+		Aag_Name = aag_Name;
 	}
 
-	public String getAg_Type() {
-		return ag_Type;
+	public String getAag_Type() {
+		return Aag_Type;
 	}
 
-	public void setAg_Type(String ag_Type) {
-		this.ag_Type = ag_Type;
+	public void setAag_Type(String aag_Type) {
+		Aag_Type = aag_Type;
 	}
 
-	public String getAg_Desc() {
-		return ag_Desc;
+	public String getAag_Desc() {
+		return Aag_Desc;
 	}
 
-	public void setAg_Desc(String ag_Desc) {
-		this.ag_Desc = ag_Desc;
+	public void setAag_Desc(String aag_Desc) {
+		Aag_Desc = aag_Desc;
 	}
 
-	public String getAg_class() {
-		return ag_class;
+	public String getAag_class() {
+		return Aag_class;
 	}
 
-	public void setAg_class(String ag_class) {
-		this.ag_class = ag_class;
+	public void setAag_class(String aag_class) {
+		Aag_class = aag_class;
 	}
 
-	public String getAg_Opclass() {
-		return ag_Opclass;
+	public String getAag_Opclass() {
+		return Aag_Opclass;
 	}
 
-	public void setAg_Opclass(String ag_Opclass) {
-		this.ag_Opclass = ag_Opclass;
+	public void setAag_Opclass(String aag_Opclass) {
+		Aag_Opclass = aag_Opclass;
 	}
 
-	public String getAg_Msgfile() {
-		return ag_Msgfile;
+	public String getAag_Msgfile() {
+		return Aag_Msgfile;
 	}
 
-	public void setAg_Msgfile(String ag_Msgfile) {
-		this.ag_Msgfile = ag_Msgfile;
+	public void setAag_Msgfile(String aag_Msgfile) {
+		Aag_Msgfile = aag_Msgfile;
 	}
 
 	public String getSc_class() {
