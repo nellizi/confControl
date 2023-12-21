@@ -22,11 +22,11 @@ public class CommService {
 		// TODO Auto-generated method stub
 		System.out.println("============1." + ele.getNodeName());
 		
-		comm.setAg_Name(ele.getAttribute("name"));
-		comm.setAg_Type(ele.getAttribute("type"));
-		comm.setAg_Class(ele.getAttribute("class"));
-		comm.setAg_Opclss(ele.getAttribute("opclass"));
-		comm.setAg_Msgfile(ele.getAttribute("msgfile"));
+		comm.setCag_Name(ele.getAttribute("name"));
+		comm.setCag_Type(ele.getAttribute("type"));
+		comm.setCag_Class(ele.getAttribute("class"));
+		comm.setCag_Opclss(ele.getAttribute("opclass"));
+		comm.setCag_Msgfile(ele.getAttribute("msgfile"));
 		
 		NodeList childeren = ele.getChildNodes(); // childeren : agent
 		for (int a = 0; a < childeren.getLength(); a++) {

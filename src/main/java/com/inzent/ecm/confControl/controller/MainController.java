@@ -73,12 +73,6 @@ public class MainController {
 		return "/main";
 	}
 
-	@GetMapping("/detail")
-	public String detial() {
-
-		return "/detail";
-	}
-
 	@PostMapping("/parse")
 	public String domPaser(Model model, @RequestParam MultipartFile file)
 			throws ParserConfigurationException, SAXException, IOException {

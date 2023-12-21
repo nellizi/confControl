@@ -22,12 +22,12 @@ public class ArchiveService {
 		// TODO Auto-generated method stub
 		System.out.println("============2." + ele.getNodeName());
 		
-		archive.setAg_Name(ele.getAttribute("name"));
-		archive.setAg_Type(ele.getAttribute("type"));
-		archive.setAg_Desc(ele.getAttribute("desc"));
-		archive.setAg_class(ele.getAttribute("class"));
-		archive.setAg_Opclass(ele.getAttribute("opclass"));
-		archive.setAg_Msgfile(ele.getAttribute("msgfile"));
+		archive.setAag_Name(ele.getAttribute("name"));
+		archive.setAag_Type(ele.getAttribute("type"));
+		archive.setAag_Desc(ele.getAttribute("desc"));
+		archive.setAag_class(ele.getAttribute("class"));
+		archive.setAag_Opclass(ele.getAttribute("opclass"));
+		archive.setAag_Msgfile(ele.getAttribute("msgfile"));
 
 		NodeList childeren = ele.getChildNodes(); // archiveAgent에는 자식element인 scheduler 존재
 

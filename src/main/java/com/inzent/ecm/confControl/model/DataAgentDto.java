@@ -6,15 +6,15 @@ import org.apache.tomcat.util.buf.StringCache;
 
 public class DataAgentDto {
 	
-	private String ag_Name;
+	private String Dag_Name;
 	
-	private String ag_Type;
+	private String Dag_Type;
 	
-	private String ag_Class;
+	private String Dag_Class;
 	
-	private String ag_Msgfile;
+	private String Dag_Msgfile;
 	
-	private String po_Name;
+	private String Dpo_Name;
 	
 	private String po_Driver;
 
@@ -62,44 +62,50 @@ public class DataAgentDto {
 	
 	private List<String> farm;              //임시***
 
-	public String getAg_Name() {
-		return ag_Name;
+	
+
+	public String getDag_Name() {
+		return Dag_Name;
 	}
 
-	public void setAg_Name(String ag_Name) {
-		this.ag_Name = ag_Name;
+	public void setDag_Name(String dag_Name) {
+		Dag_Name = dag_Name;
 	}
 
-	public String getAg_Type() {
-		return ag_Type;
+	public String getDag_Type() {
+		return Dag_Type;
 	}
 
-	public void setAg_Type(String ag_Type) {
-		this.ag_Type = ag_Type;
+	public void setDag_Type(String dag_Type) {
+		Dag_Type = dag_Type;
 	}
 
-	public String getAg_Class() {
-		return ag_Class;
+	public String getDag_Class() {
+		return Dag_Class;
 	}
 
-	public void setAg_Class(String ag_Class) {
-		this.ag_Class = ag_Class;
+	public void setDag_Class(String dag_Class) {
+		Dag_Class = dag_Class;
 	}
 
-	public String getAg_Msgfile() {
-		return ag_Msgfile;
+	public String getDag_Msgfile() {
+		return Dag_Msgfile;
 	}
 
-	public void setAg_Msgfile(String ag_Msgfile) {
-		this.ag_Msgfile = ag_Msgfile;
+	public void setDag_Msgfile(String dag_Msgfile) {
+		Dag_Msgfile = dag_Msgfile;
 	}
 
-	public String getPo_Name() {
-		return po_Name;
+	public void setLi_Listdir(String li_Listdir) {
+		this.li_Listdir = li_Listdir;
 	}
 
-	public void setPo_Name(String po_Name) {
-		this.po_Name = po_Name;
+	public String getDPo_Name() {
+		return Dpo_Name;
+	}
+
+	public void setDPo_Name(String po_Name) {
+		this.Dpo_Name = po_Name;
 	}
 
 	public String getPo_Driver() {
