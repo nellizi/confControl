@@ -93,6 +93,8 @@
 
 <body>
    <div style="width: 1300px;">
+    <form action="create">
+    
       <div>
          <strong>
             <p style="font-size: 25px;">Server</p>
@@ -195,15 +197,15 @@
         -->
          <div class="list-content">
             <div class="list-a">
-               <button class="con" type="button" onclick="show(this); change_btn(event);" id="Comm_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this); " id="Comm_con" name="show"
                   value="">
                   <span class="r_Comm">Comm</span>
                </button>
-               <button class="con" type="button" onclick="show(this);change_btn(event);" id="Arc_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this);" id="Arc_con" name="show"
                   value="">
                   <span class="r_Arc">Archive</span>
                </button>
-               <button class="con" type="button" onclick="show(this); change_btn(event);" id="Data_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this);" id="Data_con" name="show"
                   value="">
                   <span class="r_Data">Data</span>
                </button>
@@ -285,7 +287,6 @@
                   </div>
                </div>
             </div>
-         </div>
          <br>
 
 
@@ -420,9 +421,8 @@
                 -->
 
          <div style="display: none; " class="box box3" id="Data_conshow">
-            <div class="end-box">
                <div id="farm-box">
-                  <div class="accordion">
+
                      <strong>
                         <p style="font-size: 25px;">agent</p>
                      </strong>
@@ -596,7 +596,8 @@
                            <label class="form-label">OnErrorReadOnly</label>
                            <input type="text" class="form-control" name="ph_OnErrorReadOnly"
                               th:value="${data.ph_OnErrorReadOnly}">
-                     </div>
+                        </div>
+                        </div>
 
                      
                         <strong>
@@ -700,17 +701,15 @@
                               <div class="col-auto">
                                  <input type="text" class="form-control" name="" value="">
                               </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
 
-            </div>
-            <br><br>
-         </div>
-
-      </div>
+        </div>
+    </div>    
+    </div>
+</div>
+</div>
+<button type="submit" class="btn btn-secondary" style="background-color: red; margin-left: 1146px;">저장</button>
+</form>
+</div>
    </div>
 
    <script>
@@ -770,7 +769,7 @@
       }
    </script>
    <script>
-      function show(element) {
+      function show_btn(element) {
          let tag = document.getElementsByClassName("box");
 
          for (let i = 0; i < tag.length; i++) {
