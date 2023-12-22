@@ -22,10 +22,10 @@ public class DataService {
 		// TODO Auto-generated method stub
 		System.out.println("============3." + ele.getNodeName());   //agent
 		
-		data.setAg_Name(ele.getAttribute("name"));
-		data.setAg_Type(ele.getAttribute("type"));		
-		data.setAg_Class(ele.getAttribute("class"));
-		data.setAg_Msgfile(ele.getAttribute("msgfile"));
+		data.setDag_Name(ele.getAttribute("name"));
+		data.setDag_Type(ele.getAttribute("type"));		
+		data.setDag_Class(ele.getAttribute("class"));
+		data.setDag_Msgfile(ele.getAttribute("msgfile"));
 
 		NodeList childeren = ele.getChildNodes(); // childeren : agent
 
@@ -37,7 +37,29 @@ public class DataService {
 				System.out.println("--------node name2: " + nodeName2); // sockets
 
 				switch (nodeName2) {
-				case "dbpools":		
+				case "dbpools":	
+					NodeList childeren2 = node2.getChildNodes();
+					for (int i = 0; i < childeren2.getLength(); i++) {
+						Node node3 = childeren2.item(i);
+						if (node3.getNodeType() == Node.ELEMENT_NODE) {
+							Element ele3 = (Element) node3;
+							String nodeName3 = ele3.getNodeName();
+							System.out.println("node name3: " + nodeName3); // pool
+						
+							data.setDPo_Name(ele3.getAttribute("name"));
+							data.setPo_Driver(ele3.getAttribute("driver"));
+							data.setPo_Connect(ele3.getAttribute("connect"));
+							data.setPo_Dbtype(ele3.getAttribute("dbtype"));
+							
+							data.setPo_User(ele3.getAttribute("user"));
+							data.setPo_Pswd(ele3.getAttribute("pswd"));
+							data.setPo_Count(ele3.getAttribute("count"));
+							data.setPo_Preconnect(ele3.getAttribute("preconnect"));
+							data.setPo_Unicode(ele3.getAttribute("unicode"));
+							System.out.println("dbtype: " + data.getPo_Dbtype());
+
+						}
+					}
 					System.out.println("name: " + ele2.getAttribute("name"));
 					break;
 				case "startup":
@@ -70,26 +92,7 @@ public class DataService {
 				}
 			}
 
-			NodeList childeren2 = node2.getChildNodes();
-			for (int i = 0; i < childeren2.getLength(); i++) {
-				Node node3 = childeren2.item(i);
-				if (node3.getNodeType() == Node.ELEMENT_NODE) {
-					Element ele3 = (Element) node3;
-					String nodeName3 = ele3.getNodeName();
-					System.out.println("node name3: " + nodeName3); // pool
-				
-					data.setPo_Name(ele3.getAttribute("name"));
-					data.setPo_Driver(ele3.getAttribute("driver"));
-					data.setPo_Connect(ele3.getAttribute("connect"));
-					data.setPo_Dbtype(ele3.getAttribute("dbtype"));
-					data.setPo_User(ele3.getAttribute("user"));
-					data.setPo_Pswd(ele3.getAttribute("pswd"));
-					data.setPo_Count(ele3.getAttribute("count"));
-					data.setPo_Preconnect(ele3.getAttribute("preconnect"));
-					data.setPo_Unicode(ele3.getAttribute("unicode"));
-	
-				}
-			}
+			
 
 		}
 		

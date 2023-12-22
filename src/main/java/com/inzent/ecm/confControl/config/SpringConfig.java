@@ -5,7 +5,10 @@ import org.springframework.context.annotation.Configuration;
 
 import com.inzent.ecm.confControl.service.ArchiveService;
 import com.inzent.ecm.confControl.service.CommService;
+import com.inzent.ecm.confControl.service.CreateXML;
 import com.inzent.ecm.confControl.service.DataService;
+import com.inzent.ecm.confControl.service.Delete;
+import com.inzent.ecm.confControl.service.LocalAgentService;
 import com.inzent.ecm.confControl.service.ServerService;
 
 @Configuration
@@ -31,6 +34,22 @@ public class SpringConfig {
 	public ServerService serverService() {
 		return new ServerService();
 	}
+	
+	@Bean
+	public LocalAgentService localService() {
+		return new LocalAgentService();
+	}
+	
+	@Bean
+	public CreateXML createXML() {
+		return new CreateXML();
+	}
+	
+	@Bean
+	public Delete delete() {
+		return new Delete();
+	}
+	
 	
 
 
