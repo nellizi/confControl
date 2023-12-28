@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Delete {
 
-	public void DeleteFile(File requestFile) {
+	public void DeleteFile(File requestFile) { 
 		File file = new File(requestFile.getAbsolutePath());
 		
 		if(file.exists()) {

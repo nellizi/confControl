@@ -9,12 +9,7 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -39,6 +33,7 @@ import com.inzent.ecm.confControl.service.ArchiveService;
 import com.inzent.ecm.confControl.service.CommService;
 import com.inzent.ecm.confControl.service.CreateXML;
 import com.inzent.ecm.confControl.service.DataService;
+import com.inzent.ecm.confControl.service.Delete;
 import com.inzent.ecm.confControl.service.LocalAgentService;
 import com.inzent.ecm.confControl.service.ServerService;
 
@@ -54,19 +49,19 @@ public class MainController {
 	private final ServerService serverService;
 	private final LocalAgentService localService;
 	private final CreateXML createXML;
-	
-	public int count = 1;
-	
 	/* private final Delete delete; */
 
+    private final Delete delete; 
+
 	public MainController(ArchiveService archiveService, CommService commService, DataService dataService,
-			ServerService serverService, LocalAgentService localService, CreateXML createXML) {
+			ServerService serverService, LocalAgentService localService, CreateXML createXML, Delete delete) {
 		this.archiveService = archiveService;
 		this.commService = commService;
 		this.dataService = dataService;
 		this.serverService = serverService;
 		this.localService = localService;
 		this.createXML = createXML;
+		this.delete = delete;
 
 	}
 
@@ -76,6 +71,11 @@ public class MainController {
 		return "/main";
 	}
 	
+//	@GetMapping("/parse")
+//	public String test_3() {
+//
+//		return "/newTest2";
+//	}
 
 	
 	@PostMapping("/parse")
@@ -101,9 +101,7 @@ public class MainController {
 		System.out.println(root.getNodeName()); // XVARM
 
 		NodeList childeren = root.getChildNodes(); // 자식 노드 목록 get
-		
-		
-		System.out.println(count);
+
 		 
 		
 		for (int i = 0; i < childeren.getLength(); i++) {
@@ -117,12 +115,6 @@ public class MainController {
 					ServerDto server = serverService.getAttribute(ele);
 					model.addAttribute("server", server);
 					
-					if (count > 1 ) {
-						System.out.println("@@찝중 : " + server.getLo_Level());
-						ServerDto server2 = serverService.getAttribute(ele);
-						model.addAttribute("server_after", server2);
-						
-					}
 				} else if (nodeName.equals("localagents")) { // localAgent 시작, localAgent는 type별로 구분 필요
 					LocalAgentDto local = localService.getAttribute(ele);
 					model.addAttribute("local", local);
@@ -172,25 +164,25 @@ public class MainController {
 		}
 		
 		
-		
+
+		  delete.DeleteFile(requestFile);
+		 
+
 
 		return "newTest2";
 		
 	}
 	
 	
-	@PostMapping("/create")
+	@GetMapping("/create")
 	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
 			@ModelAttribute LocalAgentDto localDto
 			) throws ParserConfigurationException, TransformerException {
 			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
-			this.count++;
-			
-			System.out.println(serverDto.getLo_Level());
 			
 						
-		return "redirect:/parse";
+		return "redirect:/";
 	}
 	
 	
