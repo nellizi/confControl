@@ -136,9 +136,16 @@
             <div class="col-auto">
                <label for="inputPassword6" class="col-form-label">level</label>
             </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" name="lo_Level" th:value="${server.lo_Level}">
-            </div>
+           <div class="col-auto">
+            <select class="form-control custom-control" th:value="${server.lo_Level}" name="lo_Level">
+               <option th:selected="${server.lo_Level}=='1'" th:text="1" th:value="1">1</option>
+               <option th:selected="${server.lo_Level}=='2'" th:text="2" th:value="2">2</option>
+               <option th:selected="${server.lo_Level}=='3'" th:text="3" th:value="3">3</option>
+               <option th:selected="${server.lo_Level}=='3'" th:text="4" th:value="4">4</option>
+               <option th:selected="${server.lo_Level}=='5'" th:text="5" th:value="5">5</option>
+            </select>
+         </div>
+
 
          </div>
 
@@ -497,19 +504,19 @@
                            <select class="form-control custom-control" id="dbtype" th:value="${data.po_Dbtype}" name="po_Dbtype"
                               onchange="valueChange()">
                               <option th:selected="${data.po_Dbtype}=='1'" th:text="1"
-                                 value="com.jnetdirect.jsql.JSQLDriver">1</option>
+                                 value="1">1</option>
                               <option th:selected="${data.po_Dbtype}=='2'" th:text="2"
-                                 value="oracle.jdbc.driver.OracleDriver">2</option>
+                                 value="2">2</option>
                               <option th:selected="${data.po_Dbtype}=='3'" th:text="3"
-                                 value="com.ibm.db2.jcc.DB2Driver">3</option>
+                                 value="3">3</option>
                               <option th:selected="${data.po_Dbtype}=='5'" th:text="5"
-                                 value="com.mysql.cj.jdbc.Driver">5</option>
+                                 value="5">5</option>
                               <option th:selected="${data.po_Dbtype}=='5'" th:text="5"
-                                 value="org.mariadb.jdbc.Driver">5</option>
+                                 value="5">5</option>
                               <option th:selected="${data.po_Dbtype}=='8'" th:text="8"
-                                 value="com.tmax.tibero.jdbc.TbDriver">8</option>
+                                 value="8">8</option>
                               <option th:selected="${data.po_Dbtype}=='9'" th:text="9"
-                                 value="org.postgresql.Driver">9</option>
+                                 value="9">9</option>
                            </select>
                         </div>
                         <div class="col-md-4">
@@ -809,10 +816,32 @@
    <script>
       function valueChange() {
 
-         var dbtype = document.getElementById("dbtype");
+         var dbtype = document.getElementById("dbtype").selectedIndex;
+         console.log(dbtype);
          
-         var driver = (dbtype.options[dbtype.selectedIndex].value);
-         $('#driver').val(driver);
+       
+         var newDriver = ""; 	
+       	 
+         
+         if(dbtype=='0'){
+			 newDriver = "com.jnetdirect.jsql.JSQLDriver";
+		 }else if(dbtype=='1'){
+			 newDriver = "oracle.jdbc.driver.OracleDriver";
+		 }else if(dbtype=='2'){
+			 newDriver = "com.ibm.db2.jcc.DB2Driver";
+		 }else if(dbtype=='3'){
+			 newDriver = "com.mysql.cj.jdbc.Driver";
+		 }else if(dbtype=='4'){
+			 newDriver = "org.mariadb.jdbc.Driver";
+		 }else if(dbtype=='5'){
+			 newDriver = "com.tmax.tibero.jdbc.TbDriver";
+		 }else if(dbtype=='6'){
+			 newDriver = "org.postgresql.Driver";
+		 };
+		 
+         
+         document.getElementById("driver").value = newDriver;
+         console.log(newDriver);
 
       };
 
