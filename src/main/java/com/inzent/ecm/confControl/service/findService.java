@@ -1,4 +1,4 @@
-package com.inzent.ecm.confControl.controller;
+package com.inzent.ecm.confControl.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,21 +9,9 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -35,18 +23,12 @@ import com.inzent.ecm.confControl.model.CommAgentDto;
 import com.inzent.ecm.confControl.model.DataAgentDto;
 import com.inzent.ecm.confControl.model.LocalAgentDto;
 import com.inzent.ecm.confControl.model.ServerDto;
-import com.inzent.ecm.confControl.service.ArchiveService;
-import com.inzent.ecm.confControl.service.CommService;
-import com.inzent.ecm.confControl.service.CreateXML;
-import com.inzent.ecm.confControl.service.DataService;
-import com.inzent.ecm.confControl.service.LocalAgentService;
-import com.inzent.ecm.confControl.service.ServerService;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@Service
 @RequiredArgsConstructor
-public class MainController {
+public class findService  {
 
 	private final ArchiveService archiveService;
 	private final CommService commService;
@@ -55,11 +37,7 @@ public class MainController {
 	private final LocalAgentService localService;
 	private final CreateXML createXML;
 	
-	public int count = 1;
-	
-	/* private final Delete delete; */
-
-	public MainController(ArchiveService archiveService, CommService commService, DataService dataService,
+	public findService(ArchiveService archiveService, CommService commService, DataService dataService,
 			ServerService serverService, LocalAgentService localService, CreateXML createXML) {
 		this.archiveService = archiveService;
 		this.commService = commService;
@@ -69,43 +47,26 @@ public class MainController {
 		this.createXML = createXML;
 
 	}
-
-	@GetMapping("/main")
-	public String test() {
-
-		return "/main";
-	}
 	
-
-	
-	@PostMapping("/parse")
-	public String domPaser(Model model, @RequestParam MultipartFile file)
-			throws ParserConfigurationException, SAXException, IOException {
+	public void findObject(Model model) throws ParserConfigurationException, SAXException, IOException {
 		
-
 		CommAgentDto comm = null;
 		ArchiveAgentDto archive = null;
 		DataAgentDto data = null;
 		List<ArchiveAgentDto> archiveList = new ArrayList<>();
-
-		// XML 문서 파싱
+		
+		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-		File requestFile = new File("C://TEST/" + UUID.randomUUID().toString());// 임시로 파일 생성
-		file.transferTo(requestFile);// 파일로 변환
-		System.out.println(file);
+		File requestFile = new File("c://test//conf.xml");// 임시로 파일 생성
 		Document document = documentBuilder.parse(requestFile.getAbsoluteFile());
-
+		
 		// root 구하기 <XVARM>
 		Element root = document.getDocumentElement();
 		System.out.println(root.getNodeName()); // XVARM
 
 		NodeList childeren = root.getChildNodes(); // 자식 노드 목록 get
-		
-		
-		System.out.println(count);
-		 
-		
+
 		for (int i = 0; i < childeren.getLength(); i++) {
 			Node node = childeren.item(i); // 1. server, 2. localagents
 
@@ -116,13 +77,6 @@ public class MainController {
 				if (nodeName.equals("server")) {
 					ServerDto server = serverService.getAttribute(ele);
 					model.addAttribute("server", server);
-					
-					if (count > 1 ) {
-						System.out.println("@@찝중 : " + server.getLo_Level());
-						ServerDto server2 = serverService.getAttribute(ele);
-						model.addAttribute("server_after", server2);
-						
-					}
 				} else if (nodeName.equals("localagents")) { // localAgent 시작, localAgent는 type별로 구분 필요
 					LocalAgentDto local = localService.getAttribute(ele);
 					model.addAttribute("local", local);
@@ -151,14 +105,10 @@ public class MainController {
 								model.addAttribute("data", data);
 								break;
 							}
-
-							
 						}
-						
 					}
 				}
 			}
-			
 		}
 
 		if (requestFile.exists()) {
@@ -171,28 +121,8 @@ public class MainController {
 			System.out.println("파일이 존재하지 않습니다.");
 		}
 		
-		
-		
-
-		return "newTest2";
-		
 	}
 	
 	
-	@PostMapping("/create")
-	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
-			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
-			@ModelAttribute LocalAgentDto localDto
-			) throws ParserConfigurationException, TransformerException {
-			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
-			this.count++;
-			
-			System.out.println(serverDto.getLo_Level());
-			
-						
-		return "redirect:/parse";
-	}
 	
-	
-
 }

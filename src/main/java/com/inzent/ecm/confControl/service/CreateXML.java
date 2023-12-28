@@ -30,6 +30,7 @@ public class CreateXML {
 	
 	public void createXML(ServerDto serverDto, ArchiveAgentDto arcAgentDto, CommAgentDto commDto, DataAgentDto dataDto, LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
 		
+
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		Document document = builder.newDocument();

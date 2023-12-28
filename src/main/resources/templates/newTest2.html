@@ -140,6 +140,7 @@
             <div class="col-auto">
                <input type="text" class="form-control custom-control" name="lo_Level" th:value="${server.lo_Level}">
             </div>
+            
 
          </div>
 
@@ -238,6 +239,7 @@
                               <input type="text" class="form-control" name="Cag_Type"
                                  th:value="${comm.Cag_Type}" id="arch-type">
                            </div>
+                           
                            <div class="col-md-6">
                               <label for="arch-age-class" class="form-label">class</label>
                               <input type="text" class="form-control" name="Cag_Class"
@@ -249,7 +251,7 @@
                         <div class="row" id="com_div">
                            <div class="col-md-6">
                               <label for="arch-name" class="form-label">opclass</label>
-                              <input type="text" class="form-control" name="Cag_Opclass"
+                              <input type="text" class="form-control" name="Cag_Opclss"
                                  th:value="${comm.Cag_Opclss}" id="arch-name">
                            </div>
                            <div class="col-md-6">
@@ -306,29 +308,35 @@
                                     <p style="font-size: 23px;">Agent</p>
                                  </strong>
                                  <div class="row" id="hello">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                        <label for="arch-name" class="form-label">name</label>
                                        <input type="text" class="form-control" name="Aag_Name"
                                           th:value="${archive.Aag_Name}" id="arch-name">
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                        <label for="arch-type" class="form-label">type</label>
                                        <input type="text" class="form-control" name="Aag_Type"
                                           th:value="${archive.Aag_Type}" id="arch-type">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                       <label for="arch-age-class" class="form-label">desc</label>
+                                       <input type="text" class="form-control" name="Aag_Desc"
+                                          th:value="${archive.Aag_Desc}" id="arch-age-class">
+                                    </div>
+                                    
+                                 </div>
+                                 <div class="row" id="hello">
+									 <div class="col-md-4">
                                        <label for="arch-age-class" class="form-label">class</label>
                                        <input type="text" class="form-control" name="Aag_class"
                                           th:value="${archive.Aag_class}" id="arch-age-class">
                                     </div>
-                                 </div>
-                                 <div class="row" id="hello">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                        <label for="arch-opclass" class="form-label">opclass</label>
                                        <input type="text" class="form-control" name="Aag_Opclass"
                                           th:value="${archive.Aag_Opclass}" id="arch-opclass">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                        <label for="arch-msgfile" class="form-label">msgfile</label>
                                        <input type="text" class="form-control" name="Aag_Msgfile"
                                           th:value="${archive.Aag_Msgfile}" id="arch-msgfile">
