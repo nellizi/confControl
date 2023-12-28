@@ -7,6 +7,7 @@ import com.inzent.ecm.confControl.service.ArchiveService;
 import com.inzent.ecm.confControl.service.CommService;
 import com.inzent.ecm.confControl.service.CreateXML;
 import com.inzent.ecm.confControl.service.DataService;
+import com.inzent.ecm.confControl.service.Delete;
 import com.inzent.ecm.confControl.service.LocalAgentService;
 import com.inzent.ecm.confControl.service.ServerService;
 
@@ -44,6 +45,10 @@ public class SpringConfig {
 		return new CreateXML();
 	}
 	
+	@Bean
+	public Delete delete() {
+		return new Delete();
+	}
 	
 	
 
