@@ -736,7 +736,13 @@
       </div>
    </div>
    <button type="submit" class="btn btn-secondary" style="background-color: red; margin-left: 1146px;">저장</button>
+   <button type="button" class="btn btn-secondary" style="background-color: black; margin-left: 1146px;" onclick="middle_check();">중간저장</button>
       </form>
+      
+      
+      
+      
+      
 
    <script>
 
@@ -794,6 +800,8 @@
          document.getElementById('box').removeChild(obj.parentNode);
       }
    </script>
+   
+   <!-- 버튼 클릭 시  아카이브 바뀜-->
    <script>
       function show_btn(element) {
          let tag = document.getElementsByClassName("box");
