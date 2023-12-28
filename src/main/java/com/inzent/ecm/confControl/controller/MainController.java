@@ -182,7 +182,7 @@ public class MainController {
 			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
 			
 						
-		return "redirect:/";
+		return "main";
 	}
 	
 	
