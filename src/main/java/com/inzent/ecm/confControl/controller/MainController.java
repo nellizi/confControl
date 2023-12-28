@@ -11,11 +11,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.springframework.context.weaving.DefaultContextLoadTimeWeaver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
@@ -25,6 +27,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.inzent.ecm.confControl.model.ArchiveAgentDto;
+import com.inzent.ecm.confControl.model.ArchiveAgentDtoList;
 import com.inzent.ecm.confControl.model.CommAgentDto;
 import com.inzent.ecm.confControl.model.DataAgentDto;
 import com.inzent.ecm.confControl.model.LocalAgentDto;
@@ -76,7 +79,8 @@ public class MainController {
 		CommAgentDto comm = null;
 		ArchiveAgentDto archive = null;
 		DataAgentDto data = null;
-		List<ArchiveAgentDto> archiveList = new ArrayList<>();
+		//List<ArchiveAgentDto> archiveList = new ArrayList<>();
+		ArchiveAgentDtoList archiveList =  new ArchiveAgentDtoList();
 
 		// XML 문서 파싱
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -115,27 +119,31 @@ public class MainController {
 							switch (type) {
 							case "COMM":
 								comm = commService.getAttribute(ele2);
-
 								model.addAttribute("comm", comm);
-
 								break;
 							case "ARCHIVE":
 								archive = archiveService.getAttribute(ele2);
-								archiveList.add(archive);
+//								System.out.println("1.archive.getAag_class() ======================");
+//								System.out.println(archive.getAag_class());
+								archiveList.archiveAgentDtos.add(archive);
 								model.addAttribute("archiveList", archiveList);
+								//model.addAttribute("archiveList", archiveList.archiveAgentDtos);
+//								System.out.println(archiveList.archiveAgentDtos.size());
 								break;
 							case "DATA":
 								data = dataService.getAttribute(ele2);
-								
 								model.addAttribute("data", data);
 								break;
 							}
+							
 						}
 					}
 				}
 			}
 		}
 
+		
+		
 		  delete.DeleteFile(requestFile);
 		 
 		 
@@ -145,11 +153,19 @@ public class MainController {
 	
 	
 	@GetMapping("/create")
-	public String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
+	public String createXml(@ModelAttribute ServerDto serverDto,@ModelAttribute(value="ArchiveAgentDtoList") ArchiveAgentDtoList archiveList,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
 			@ModelAttribute LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
+		
+			
+		System.out.println("===================================");
+		System.out.println("===================================");
+		System.out.println("===================================");
 
-		createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
+		List<ArchiveAgentDto> archiveDtoList = archiveList.getArchiveAgentDtos();
+			System.out.println("create archive size(): "+ archiveDtoList.size());
+		//createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
+		
 
 		return "/main";
 	}
