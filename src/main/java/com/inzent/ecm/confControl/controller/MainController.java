@@ -52,6 +52,8 @@ public class MainController {
 	private final ServerService serverService;
 	private final LocalAgentService localService;
 	private final CreateXML createXML;
+	/* private final Delete delete; */
+
     private final Delete delete; 
 
 	public MainController(ArchiveService archiveService, CommService commService, DataService dataService,
@@ -71,10 +73,18 @@ public class MainController {
 
 		return "/main";
 	}
+	
+//	@GetMapping("/parse")
+//	public String test_3() {
+//
+//		return "/newTest2";
+//	}
 
+	
 	@PostMapping("/parse")
 	public String domPaser(Model model, @RequestParam MultipartFile file)
 			throws ParserConfigurationException, SAXException, IOException {
+		
 
 		CommAgentDto comm = null;
 		ArchiveAgentDto archive = null;
@@ -96,6 +106,8 @@ public class MainController {
 
 		NodeList childeren = root.getChildNodes(); // 자식 노드 목록 get
 
+		 
+		
 		for (int i = 0; i < childeren.getLength(); i++) {
 			Node node = childeren.item(i); // 1. server, 2. localagents
 
@@ -106,6 +118,7 @@ public class MainController {
 				if (nodeName.equals("server")) {
 					ServerDto server = serverService.getAttribute(ele);
 					model.addAttribute("server", server);
+					
 				} else if (nodeName.equals("localagents")) { // localAgent 시작, localAgent는 type별로 구분 필요
 					LocalAgentDto local = localService.getAttribute(ele);
 					model.addAttribute("local", local);
@@ -135,24 +148,47 @@ public class MainController {
 								model.addAttribute("data", data);
 								break;
 							}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
 							
 						}
+						
 					}
 				}
 			}
+			
 		}
 
+<<<<<<< HEAD
 		
 		
+=======
+		if (requestFile.exists()) {
+			if (requestFile.delete()) {
+				System.out.println("삭제성공");
+			} else {
+				System.out.println("삭제실패");
+			}
+		} else {
+			System.out.println("파일이 존재하지 않습니다.");
+		}
+		
+		
+
+>>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
 		  delete.DeleteFile(requestFile);
 		 
-		 
+
 
 		return "newTest2";
+		
 	}
 	
 	
 	@GetMapping("/create")
+<<<<<<< HEAD
 	public String createXml(@ModelAttribute ServerDto serverDto,@ModelAttribute(value="ArchiveAgentDtoList") ArchiveAgentDtoList archiveList,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
 			@ModelAttribute LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
@@ -168,6 +204,16 @@ public class MainController {
 		
 
 		return "/main";
+=======
+	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
+			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
+			@ModelAttribute LocalAgentDto localDto
+			) throws ParserConfigurationException, TransformerException {
+			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
+			
+						
+		return "main";
+>>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
 	}
 	
 	
