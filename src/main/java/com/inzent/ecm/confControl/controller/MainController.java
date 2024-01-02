@@ -37,6 +37,7 @@ import com.inzent.ecm.confControl.service.Delete;
 import com.inzent.ecm.confControl.service.LocalAgentService;
 import com.inzent.ecm.confControl.service.ServerService;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -82,7 +83,7 @@ public class MainController {
 			throws ParserConfigurationException, SAXException, IOException {
 
 		CommAgentDto comm = null;
-		ArchiveAgentDto archive = null;
+		ArchiveAgentDto archive = new ArchiveAgentDto();
 		DataAgentDto data = null;
 		List<ArchiveAgentDto> archiveList = new ArrayList<>();
 
@@ -129,9 +130,11 @@ public class MainController {
 
 								break;
 							case "ARCHIVE":
-								archive = archiveService.getAttribute(ele2);
-								archiveList.add(archive);
-								model.addAttribute("archiveList", archiveList);
+								ArchiveAgentDto dto = archiveService.getAttribute(ele2);
+								archiveList.add(dto);
+								archive.setArchiveAgentDtoList(archiveList);
+							
+								model.addAttribute("archive",archive);
 								break;
 							case "DATA":
 								data = dataService.getAttribute(ele2);
