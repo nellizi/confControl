@@ -28,8 +28,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateXML {
 
-	public void createXML(ServerDto serverDto, ArchiveAgentDto arcAgentDto, CommAgentDto commDto, DataAgentDto dataDto,
-			LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
+	public void createXML(ServerDto serverDto, ArchiveAgentDto arcAgentDto, CommAgentDto commDto, DataAgentDto dataDto, LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
+
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
@@ -115,6 +115,7 @@ public class CreateXML {
 		// data
 
 		Element Dagent = document.createElement("agent");
+
 		Dagent.setAttribute("name", dataDto.getDag_Name());
 		Dagent.setAttribute("type", dataDto.getDag_Type());
 		Dagent.setAttribute("class", dataDto.getDag_Class());

@@ -22,7 +22,7 @@
                             <form action="parse" style="width: 100%;" method="post" enctype="multipart/form-data">
                             
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="inputGroupFile02" name="file" required>
+                                    <input type="file" class="form-control" id="inputGroupFile02" name="file" onchange="checkFile(this)" required>
                                   </div>
                                   <br>
                                 <button type="submit" class="btn btn-danger custom-btn" value="test">등록</button>
@@ -40,6 +40,28 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- 확장자 제한 스크립트 -->
+	<script>
+            function checkFile(f){
+
+            	// files 로 해당 파일 정보 얻기.
+            	var file = f.files;
+
+            	// file[0].name 은 파일명 입니다.
+            	// 정규식으로 확장자 체크
+            	if(!/\.(xml)$/i.test(file[0].name)) alert('xml 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
+
+            	// 체크를 통과했다면 종료.
+            	else return;
+
+            	// 체크에 걸리면 선택된  내용 취소 처리를 해야함.
+            	// 파일선택 폼의 내용은 스크립트로 컨트롤 할 수 없습니다.
+            	// 그래서 그냥 새로 폼을 새로 써주는 방식으로 초기화 합니다.
+            	f.outerHTML = f.outerHTML;
+            }
+            </script>
+    
+    
 </body>
 </html>
 
