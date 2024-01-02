@@ -93,24 +93,27 @@
 
 <body>
       <button type="button" class="btn btn-secondary"  onclick="history.back();">이전으로</button>
-   <form action="create">
+   <form action="create" >
       
    <div style="width: 1300px;">
+ 	  <tr th:each="server, loop : ${agentDtoLists.serverDtos}">
       <div>
          <strong>
             <p style="font-size: 25px;">Server</p>
          </strong>
+         
          <div class="row" id="data_con">
+			  <tr th:each="server, loop : ${agentDtoLists.serverDtos}">
             <div class="col-auto">
                <label class="col-form-label">keepperfstats</label>
             </div>
-            <div class="col-auto">
+            <div class="col-auto">             
                <select class="form-control custom-control" th:value="${server.se_keepperfstats}" name="se_keepperfstats">
                   <option th:selected="${server.se_keepperfstats}=='false'" th:text="false" th:value="false">false
                   </option>
                   <option th:selected="${server.se_keepperfstats}=='true'" th:text="true" th:value="true">true
                   </option>
-               </select>
+               </select>				 
             </div>
             <div class="col-auto">
                <label for="inputPassword6" class="col-form-label">basemsg</label>
@@ -118,7 +121,10 @@
             <div class="col-auto">
                <input type="text" class="form-control custom-control" name="se_basemsg" th:value="${server.se_basemsg}">
             </div>
+			  </tr>
+			  
          </div>
+            
          <br>
          <!--
               Logwriter
@@ -126,6 +132,7 @@
          <strong>
             <p style="font-size: 25px;">Logwriter</p>
          </strong>
+         <tr th:each="server, loop : ${agentDtoLists.serverDtos}">
          <div class="row" id="data_con">
             <div class="col-auto">
                <label class="col-form-label">class</label>
@@ -148,6 +155,7 @@
 
 
          </div>
+         </tr>
 
          <!--
               property
@@ -156,6 +164,7 @@
             <p style="font-size: 25px;">property</p>
          </strong>
          <div class="row" id="data_con">
+			 <tr th:each="server, loop : ${agentDtoLists.serverDtos}">
             <div class="col-auto">
                <label class="col-form-label">name</label>
             </div>
@@ -168,15 +177,25 @@
             <div class="col-auto">
                <input type="text" class="form-control custom-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Section" th:value="${server.po_Section}">
             </div>
+			 </tr>
 
          </div>
 
+     
       </div>
+      
       <br>
+
+
+
+
+
 
       <!--
           LocalAgent
         -->
+
+
 
       <strong>
          <p style="font-size: 25px;">LocalAgent</p>
@@ -186,14 +205,16 @@
             <label class="col-form-label">machineid</label>
          </div>
          <div class="col-auto">
-            <select class="form-control custom-control" th:value="${local.machineId}" name="machineId">
-               <option th:selected="${local.machineId}=='0'" th:text="0" th:value="0">0</option>
-               <option th:selected="${local.machineId}=='1'" th:text="1" th:value="1">1</option>
-               <option th:selected="${local.machineId}=='2'" th:text="2" th:value="2">2</option>
-               <option th:selected="${local.machineId}=='3'" th:text="3" th:value="3">3</option>
-               <option th:selected="${local.machineId}=='4'" th:text="4" th:value="4">4</option>
-               <option th:selected="${local.machineId}=='5'" th:text="5" th:value="5">5</option>
+			  <tr th:each="localAgent, loop : ${agentDtoLists.localAgentDtos}">
+            <select class="form-control custom-control" th:value="${localAgent.machineId}" name="machineId">
+               <option th:selected="${localAgent.machineId}=='0'" th:text="0" th:value="0">0</option>
+               <option th:selected="${localAgent.machineId}=='1'" th:text="1" th:value="1">1</option>
+               <option th:selected="${localAgent.machineId}=='2'" th:text="2" th:value="2">2</option>
+               <option th:selected="${localAgent.machineId}=='3'" th:text="3" th:value="3">3</option>
+               <option th:selected="${localAgent.machineId}=='4'" th:text="4" th:value="4">4</option>
+               <option th:selected="${localAgent.machineId}=='5'" th:text="5" th:value="5">5</option>
             </select>
+			  </tr>
          </div>
 
 
@@ -230,39 +251,39 @@
             <div class="end-box">
                
                   <div class="accordion">
+					<tr th:each="commAgent, loop : ${agentDtoLists.commAgentDtos}">
                      <strong>
                         <p style="margin-top: 30px;font-size: 25px;">agent</p>
                      </strong>
                         <div class="row" id="com_div">
+								
                            <div class="col-md-3">
                               <label for="arch-name" class="form-label">name</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Name"
-                                 th:value="${comm.Cag_Name}" id="arch-name">
-                           </div>
+                                 th:value="${commAgent.Cag_Name}" id="arch-name">
+                           </div>                           
                            <div class="col-md-3">
                               <label for="arch-type" class="form-label">type</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Type"
-                                 th:value="${comm.Cag_Type}" id="arch-type">
-                           </div>
-                           
+                                 th:value="${commAgent.Cag_Type}" id="arch-type">
+                           </div>                           
                            <div class="col-md-6">
                               <label for="arch-age-class" class="form-label">class</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Class"
-                                 th:value="${comm.Cag_Class}" id="arch-age-class">
+                                 th:value="${commAgent.Cag_Class}" id="arch-age-class">
                            </div>
                         </div>
-                        
-                                  
+                                                         
                         <div class="row" id="com_div">
                            <div class="col-md-6">
                               <label for="arch-name" class="form-label">opclass</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Opclss"
-                                 th:value="${comm.Cag_Opclss}" id="arch-name">
+                                 th:value="${commAgent.Cag_Opclss}" id="arch-name">
                            </div>
                            <div class="col-md-6">
                               <label for="arch-type" class="form-label">msgfile</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Msgfile"
-                                 th:value="${comm.Cag_Msgfile}" id="arch-type">
+                                 th:value="${commAgent.Cag_Msgfile}" id="arch-type">
                            </div>
                         </div>
                         <br>
@@ -276,23 +297,23 @@
                            <div class="col-md-3">
                               <label for="arch-name" class="form-label">hostname</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="so_Hostname"
-                                 th:value="${comm.so_Hostname}" id="arch-name">
+                                 th:value="${commAgent.so_Hostname}" id="arch-name">
                            </div>
                            <div class="col-md-3">
                               <label for="arch-type" class="form-label">port</label>
                               <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="so_Port"
-                                 th:value="${comm.so_Port}" id="arch-type">
+                                 th:value="${commAgent.so_Port}" id="arch-type">
                            </div>
                            <div class="col-md-6">
                               <label for="arch-age-class" class="form-label">clienttimeout</label>
                               <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="so_ClientTimeOut"
-                                 th:value="${comm.so_ClientTimeOut}" id="arch-age-class">
+                                 th:value="${commAgent.so_ClientTimeOut}" id="arch-age-class">
                            </div>
                         </div>
                         
-                        
-
+                      
                      </div>
+                     </tr>
                   </div>
                </div>
             
@@ -306,8 +327,8 @@
                <div id="box">
 
                   <section>
-                     <tr th:each="archive, loop : ${archive.archiveAgentDtoList}">
-                        <div class="accordion">
+                     <tr th:each="archive, loop : ${agentDtoLists.archiveAgentDtos}">
+                       	 <div class="accordion">
                            <ul>
                               <li class="off">
                                  <div class="title"><span th:text="${archive.Aag_Name}">Archive</span></div>
@@ -426,6 +447,7 @@
                               </li>
                            </ul>
                         </div>
+                        
                      </tr>
                      
                   </section>
@@ -446,6 +468,7 @@
             <div class="end-box">
                <div id="farm-box">
                   <div class="accordion">
+					    <tr th:each="dataAgent, loop : ${agentDtoLists.dataAgentDtoas}">
                      <strong>
                         <p style="font-size: 25px;">agent</p>
                      </strong>
@@ -455,22 +478,22 @@
                            <div class="col-md-3">
                               <label class="form-label">name</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Name"
-                                 th:value="${data.Dag_Name}">
+                                 th:value="${dataAgent.Dag_Name}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">type</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Type"
-                                 th:value="${data.Dag_Type}">
+                                 th:value="${dataAgent.Dag_Type}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">class</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Class"
-                                 th:value="${data.Dag_Class}">
+                                 th:value="${dataAgent.Dag_Class}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">msgfile</label>
                               <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Msgfile"
-                                 th:value="${data.Dag_Msgfile}">
+                                 th:value="${dataAgent.Dag_Msgfile}">
                            </div>
                         </div>
                         
@@ -483,17 +506,17 @@
                         <div class="col-md-4">
                            <label class="form-label">name</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="DPo_Name"
-                              th:value="${data.DPo_Name}">
+                              th:value="${dataAgent.DPo_Name}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">driver</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Driver" id="driver"
-                              th:value="${data.po_Driver}">
+                              th:value="${dataAgent.po_Driver}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">connect</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Connect"
-                              th:value="${data.po_Connect}">
+                              th:value="${dataAgent.po_Connect}">
                         </div>
                      </div>
                            
@@ -501,33 +524,33 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">dbtype</label>
-                           <select class="form-control custom-control" id="dbtype" th:value="${data.po_Dbtype}" name="po_Dbtype"
+                           <select class="form-control custom-control" id="dbtype" th:value="${dataAgent.po_Dbtype}" name="po_Dbtype"
                               onchange="valueChange()">
-                              <option th:selected="${data.po_Dbtype}=='1'" th:text="1"
+                              <option th:selected="${dataAgent.po_Dbtype}=='1'" th:text="1"
                                  value="1">1</option>
-                              <option th:selected="${data.po_Dbtype}=='2'" th:text="2"
+                              <option th:selected="${dataAgent.po_Dbtype}=='2'" th:text="2"
                                  value="2">2</option>
-                              <option th:selected="${data.po_Dbtype}=='3'" th:text="3"
+                              <option th:selected="${dataAgent.po_Dbtype}=='3'" th:text="3"
                                  value="3">3</option>
-                              <option th:selected="${data.po_Dbtype}=='5'" th:text="5"
+                              <option th:selected="${dataAgent.po_Dbtype}=='5'" th:text="5"
                                  value="5">5</option>
-                              <option th:selected="${data.po_Dbtype}=='5'" th:text="5"
+                              <option th:selected="${dataAgent.po_Dbtype}=='5'" th:text="5"
                                  value="5">5</option>
-                              <option th:selected="${data.po_Dbtype}=='8'" th:text="8"
+                              <option th:selected="${dataAgent.po_Dbtype}=='8'" th:text="8"
                                  value="8">8</option>
-                              <option th:selected="${data.po_Dbtype}=='9'" th:text="9"
+                              <option th:selected="${dataAgent.po_Dbtype}=='9'" th:text="9"
                                  value="9">9</option>
                            </select>
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">user</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_User"
-                              th:value="${data.po_User}">
+                              th:value="${dataAgent.po_User}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">pswd</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)"  name="po_Pswd"
-                              th:value="${data.po_Pswd}">
+                              th:value="${dataAgent.po_Pswd}">
                         </div>
                      </div>
                      
@@ -535,23 +558,23 @@
                         <div class="col-md-4">
                            <label class="form-label">count</label>
                            <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="po_Count"
-                              th:value="${data.po_Count}">
+                              th:value="${dataAgent.po_Count}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">connect</label>
-                           <select class="form-control custom-control" th:value="${data.po_Preconnect}" name="po_Preconnect">
-                              <option th:selected="${data.po_Preconnect}=='FALSE'" th:text="FALSE"
+                           <select class="form-control custom-control" th:value="${dataAgent.po_Preconnect}" name="po_Preconnect">
+                              <option th:selected="${dataAgent.po_Preconnect}=='FALSE'" th:text="FALSE"
                                  th:value="FALSE">FALSE</option>
-                              <option th:selected="${data.po_Preconnect}=='TRUE'" th:text="TRUE"
+                              <option th:selected="${dataAgent.po_Preconnect}=='TRUE'" th:text="TRUE"
                                  th:value="TRUE">TRUE</option>
                            </select>
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">unicode</label>
-                           <select class="form-control custom-control" th:value="${data.po_Unicode}" name="po_Unicode">
-                              <option th:selected="${data.po_Unicode}=='FALSE'" th:text="FALSE"
+                           <select class="form-control custom-control" th:value="${dataAgent.po_Unicode}" name="po_Unicode">
+                              <option th:selected="${dataAgent.po_Unicode}=='FALSE'" th:text="FALSE"
                                  th:value="FALSE">FALSE</option>
-                              <option th:selected="${data.po_Unicode}=='TRUE'" th:text="TRUE" th:value="TRUE">
+                              <option th:selected="${dataAgent.po_Unicode}=='TRUE'" th:text="TRUE" th:value="TRUE">
                                  TRUE</option>
                            </select>
                         </div>
@@ -568,17 +591,17 @@
                         <div class="col-md-4">
                            <label class="form-label">mainpool</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="st_MainpoolString"
-                              th:value="${data.st_MainpoolString}">
+                              th:value="${dataAgent.st_MainpoolString}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">locasysime</label>
                            <input type="text" class="form-control" name="st_Locasysime"
-                              th:value="${data.st_Locasysime}">
+                              th:value="${dataAgent.st_Locasysime}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">retentionignore</label>
                            <input type="text" class="form-control" name="st_retentionignore"
-                              th:value="${data.st_retentionignore}">
+                              th:value="${dataAgent.st_retentionignore}">
                         </div>
                      </div>
                         
@@ -591,17 +614,17 @@
                         <div class="col-md-4">
                            <label class="form-label">listdir</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="li_Listdir"
-                              th:value="${data.li_Listdir}">
+                              th:value="${dataAgent.li_Listdir}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">memcache</label>
                            <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="li_Memcache"
-                              th:value="${data.li_Memcache}">
+                              th:value="${dataAgent.li_Memcache}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">timeout</label>
                            <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="li_Timeout"
-                              th:value="${data.li_Timeout}">
+                              th:value="${dataAgent.li_Timeout}">
                         </div>
                      </div>
                      
@@ -613,12 +636,12 @@
                         <div class="col-md-6">
                            <label class="form-label">iteration</label>
                            <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ph_Iteration"
-                              th:value="${data.ph_Iteration}">
+                              th:value="${dataAgent.ph_Iteration}">
                         </div>
                         <div class="col-md-6">
                            <label class="form-label">OnErrorReadOnly</label>
                            <input type="text" class="form-control" name="ph_OnErrorReadOnly"
-                              th:value="${data.ph_OnErrorReadOnly}">
+                              th:value="${dataAgent.ph_OnErrorReadOnly}">
                      </div>
 
                      
@@ -629,7 +652,7 @@
                         <div class="col-md-4">
                            <label class="form-label">iteration</label>
                            <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ac_Iteration"
-                              th:value="${data.ac_Iteration}">
+                              th:value="${dataAgent.ac_Iteration}">
                         </div>
                         </div>
 
@@ -643,17 +666,17 @@
                         <div class="col-md-4">
                            <label class="form-label">checkqueryenable</label>
                            <input type="text" class="form-control" name="ch_CheckQueryEnable"
-                              th:value="${data.ch_CheckQueryEnable}">
+                              th:value="${dataAgent.ch_CheckQueryEnable}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">checkquerytimeout</label>
                            <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ch_SheckQueryTimeout"
-                              th:value="${data.ch_SheckQueryTimeout}">
+                              th:value="${dataAgent.ch_SheckQueryTimeout}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">validationinterval</label>
                            <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ch_Validationinterval"
-                              th:value="${data.ch_Validationinterval}">
+                              th:value="${dataAgent.ch_Validationinterval}">
                         </div>
                      </div>
 
@@ -667,12 +690,12 @@
                         <div class="col-md-6">
                            <label class="form-label">agentserver</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_Agentserver"
-                              th:value="${data.de_Agentserver}">
+                              th:value="${dataAgent.de_Agentserver}">
                         </div>
                         <div class="col-md-6">
                            <label class="form-label">agentname</label>
                            <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_AgentName"
-                              th:value="${data.de_AgentName}">
+                              th:value="${dataAgent.de_AgentName}">
                         </div>
                      </div>
 

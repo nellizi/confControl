@@ -11,12 +11,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.springframework.boot.context.properties.bind.Nested;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -24,6 +26,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.inzent.ecm.confControl.model.AgentDtoList;
 import com.inzent.ecm.confControl.model.ArchiveAgentDto;
 import com.inzent.ecm.confControl.model.CommAgentDto;
 import com.inzent.ecm.confControl.model.DataAgentDto;
@@ -86,6 +89,7 @@ public class MainController {
 		ArchiveAgentDto archive = new ArchiveAgentDto();
 		DataAgentDto data = null;
 		List<ArchiveAgentDto> archiveList = new ArrayList<>();
+		AgentDtoList agentDtoLists = new AgentDtoList();
 
 		// XML 문서 파싱
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -110,11 +114,13 @@ public class MainController {
 				String nodeName = ele.getNodeName(); // element 노드 이름 구하기 (첫번째 태그 값) 1.server, 2.localagents
 				if (nodeName.equals("server")) {
 					ServerDto server = serverService.getAttribute(ele);
-					model.addAttribute("server", server);
+					agentDtoLists.getServerDtos().add(server);
+//					model.addAttribute("server", server);
 
 				} else if (nodeName.equals("localagents")) { // localAgent 시작, localAgent는 type별로 구분 필요
 					LocalAgentDto local = localService.getAttribute(ele);
-					model.addAttribute("local", local);
+//					model.addAttribute("local", local);
+					agentDtoLists.getLocalAgentDtos().add(local);
 					NodeList childeren2 = ele.getChildNodes(); // localAgent 자식 element 구하기
 					for (int a = 0; a < childeren2.getLength(); a++) {
 						Node node2 = childeren2.item(a); // childeren2 -> { 1. comm, 2. archive, 3. data }
@@ -125,21 +131,24 @@ public class MainController {
 							switch (type) {
 							case "COMM":
 								comm = commService.getAttribute(ele2);
+								agentDtoLists.getCommAgentDtos().add(comm);
 
-								model.addAttribute("comm", comm);
+//								model.addAttribute("comm", comm);
 
 								break;
 							case "ARCHIVE":
 								ArchiveAgentDto dto = archiveService.getAttribute(ele2);
-								archiveList.add(dto);
-								archive.setArchiveAgentDtoList(archiveList);
+//								archiveList.add(dto);
+//								archive.setArchiveAgentDtoList(archiveList);
+								agentDtoLists.getArchiveAgentDtos().add(dto);
 							
-								model.addAttribute("archive",archive);
+//								model.addAttribute("archive",archive);
 								break;
 							case "DATA":
 								data = dataService.getAttribute(ele2);
+								agentDtoLists.getDataAgentDtoas().add(data);
 
-								model.addAttribute("data", data);
+//								model.addAttribute("data", data);
 								break;
 							}
 
@@ -162,16 +171,31 @@ public class MainController {
 		}
 
 		delete.DeleteFile(requestFile);
+		model.addAttribute("agentDtoLists",agentDtoLists);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(agentDtoLists.getServerDtos().get(0).getSe_basemsg());
+		
+			
 
 		return "newTest2";
 
 	}
 
 	@GetMapping("/create")
+	@ResponseBody
 	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
 			@ModelAttribute LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
-		createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
+		
+		System.out.println("=======//////////============/////////////==============");
+		System.out.println("listSize : " + arcAgentDto.getArchiveAgentDtoList().size());
+		
+		for(int i=0; i<arcAgentDto.getArchiveAgentDtoList().size(); i++) {
+			System.out.println(arcAgentDto.getArchiveAgentDtoList().get(i).getAag_Name());
+		}	
+		
+	
+	//	createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
 
 		return "main";
 	}
