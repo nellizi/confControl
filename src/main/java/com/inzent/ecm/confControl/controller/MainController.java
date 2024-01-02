@@ -11,13 +11,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import org.springframework.context.weaving.DefaultContextLoadTimeWeaver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
@@ -27,7 +25,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.inzent.ecm.confControl.model.ArchiveAgentDto;
-import com.inzent.ecm.confControl.model.ArchiveAgentDtoList;
 import com.inzent.ecm.confControl.model.CommAgentDto;
 import com.inzent.ecm.confControl.model.DataAgentDto;
 import com.inzent.ecm.confControl.model.LocalAgentDto;
@@ -54,7 +51,7 @@ public class MainController {
 	private final CreateXML createXML;
 	/* private final Delete delete; */
 
-    private final Delete delete; 
+	private final Delete delete;
 
 	public MainController(ArchiveService archiveService, CommService commService, DataService dataService,
 			ServerService serverService, LocalAgentService localService, CreateXML createXML, Delete delete) {
@@ -73,24 +70,21 @@ public class MainController {
 
 		return "/main";
 	}
-	
+
 //	@GetMapping("/parse")
 //	public String test_3() {
 //
 //		return "/newTest2";
 //	}
 
-	
 	@PostMapping("/parse")
 	public String domPaser(Model model, @RequestParam MultipartFile file)
 			throws ParserConfigurationException, SAXException, IOException {
-		
 
 		CommAgentDto comm = null;
 		ArchiveAgentDto archive = null;
 		DataAgentDto data = null;
-		//List<ArchiveAgentDto> archiveList = new ArrayList<>();
-		ArchiveAgentDtoList archiveList =  new ArchiveAgentDtoList();
+		List<ArchiveAgentDto> archiveList = new ArrayList<>();
 
 		// XML 문서 파싱
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -106,8 +100,6 @@ public class MainController {
 
 		NodeList childeren = root.getChildNodes(); // 자식 노드 목록 get
 
-		 
-		
 		for (int i = 0; i < childeren.getLength(); i++) {
 			Node node = childeren.item(i); // 1. server, 2. localagents
 
@@ -118,7 +110,7 @@ public class MainController {
 				if (nodeName.equals("server")) {
 					ServerDto server = serverService.getAttribute(ele);
 					model.addAttribute("server", server);
-					
+
 				} else if (nodeName.equals("localagents")) { // localAgent 시작, localAgent는 type별로 구분 필요
 					LocalAgentDto local = localService.getAttribute(ele);
 					model.addAttribute("local", local);
@@ -132,31 +124,28 @@ public class MainController {
 							switch (type) {
 							case "COMM":
 								comm = commService.getAttribute(ele2);
+
 								model.addAttribute("comm", comm);
+
 								break;
 							case "ARCHIVE":
 								archive = archiveService.getAttribute(ele2);
-//								System.out.println("1.archive.getAag_class() ======================");
-//								System.out.println(archive.getAag_class());
-								archiveList.archiveAgentDtos.add(archive);
+								archiveList.add(archive);
 								model.addAttribute("archiveList", archiveList);
-								//model.addAttribute("archiveList", archiveList.archiveAgentDtos);
-//								System.out.println(archiveList.archiveAgentDtos.size());
 								break;
 							case "DATA":
 								data = dataService.getAttribute(ele2);
+
 								model.addAttribute("data", data);
 								break;
 							}
-<<<<<<< .merge_file_HurIVL
 
-							
 						}
-						
+
 					}
 				}
 			}
-			
+
 		}
 
 		if (requestFile.exists()) {
@@ -167,84 +156,21 @@ public class MainController {
 			}
 		} else {
 			System.out.println("파일이 존재하지 않습니다.");
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
-							
-						}
-						
-					}
-				}
-			}
-			
->>>>>>> .merge_file_PFwtHV
 		}
-		
-		
 
-<<<<<<< HEAD
-		
-		
-=======
-		if (requestFile.exists()) {
-			if (requestFile.delete()) {
-				System.out.println("삭제성공");
-			} else {
-				System.out.println("삭제실패");
-			}
-		} else {
-			System.out.println("파일이 존재하지 않습니다.");
-		}
-		
-		
-
->>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
-		  delete.DeleteFile(requestFile);
-		 
-
+		delete.DeleteFile(requestFile);
 
 		return "newTest2";
-		
+
 	}
-	
-	
+
 	@GetMapping("/create")
-<<<<<<< .merge_file_HurIVL
 	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
-			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
-=======
-<<<<<<< HEAD
-	public String createXml(@ModelAttribute ServerDto serverDto,@ModelAttribute(value="ArchiveAgentDtoList") ArchiveAgentDtoList archiveList,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
 			@ModelAttribute LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
-		
-			
-		System.out.println("===================================");
-		System.out.println("===================================");
-		System.out.println("===================================");
+		createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
 
-		List<ArchiveAgentDto> archiveDtoList = archiveList.getArchiveAgentDtos();
-			System.out.println("create archive size(): "+ archiveDtoList.size());
-		//createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
-		
-
-		return "/main";
-=======
-	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
-			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
->>>>>>> .merge_file_PFwtHV
-			@ModelAttribute LocalAgentDto localDto
-			) throws ParserConfigurationException, TransformerException {
-			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
-			
-						
 		return "main";
-<<<<<<< .merge_file_HurIVL
-=======
->>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
->>>>>>> .merge_file_PFwtHV
 	}
-	
+
 }
