@@ -89,7 +89,8 @@ public class MainController {
 		CommAgentDto comm = null;
 		ArchiveAgentDto archive = null;
 		DataAgentDto data = null;
-		List<ArchiveAgentDto> archiveList = new ArrayList<>();
+		//List<ArchiveAgentDto> archiveList = new ArrayList<>();
+		ArchiveAgentDtoList archiveList =  new ArchiveAgentDtoList();
 
 		// XML 문서 파싱
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -131,21 +132,23 @@ public class MainController {
 							switch (type) {
 							case "COMM":
 								comm = commService.getAttribute(ele2);
-
 								model.addAttribute("comm", comm);
-
 								break;
 							case "ARCHIVE":
 								archive = archiveService.getAttribute(ele2);
-								archiveList.add(archive);
+//								System.out.println("1.archive.getAag_class() ======================");
+//								System.out.println(archive.getAag_class());
+								archiveList.archiveAgentDtos.add(archive);
 								model.addAttribute("archiveList", archiveList);
+								//model.addAttribute("archiveList", archiveList.archiveAgentDtos);
+//								System.out.println(archiveList.archiveAgentDtos.size());
 								break;
 							case "DATA":
 								data = dataService.getAttribute(ele2);
-								
 								model.addAttribute("data", data);
 								break;
 							}
+<<<<<<< .merge_file_HurIVL
 
 							
 						}
@@ -164,10 +167,40 @@ public class MainController {
 			}
 		} else {
 			System.out.println("파일이 존재하지 않습니다.");
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
+							
+						}
+						
+					}
+				}
+			}
+			
+>>>>>>> .merge_file_PFwtHV
 		}
 		
 		
 
+<<<<<<< HEAD
+		
+		
+=======
+		if (requestFile.exists()) {
+			if (requestFile.delete()) {
+				System.out.println("삭제성공");
+			} else {
+				System.out.println("삭제실패");
+			}
+		} else {
+			System.out.println("파일이 존재하지 않습니다.");
+		}
+		
+		
+
+>>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
 		  delete.DeleteFile(requestFile);
 		 
 
@@ -178,14 +211,40 @@ public class MainController {
 	
 	
 	@GetMapping("/create")
+<<<<<<< .merge_file_HurIVL
 	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
+=======
+<<<<<<< HEAD
+	public String createXml(@ModelAttribute ServerDto serverDto,@ModelAttribute(value="ArchiveAgentDtoList") ArchiveAgentDtoList archiveList,
+			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
+			@ModelAttribute LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
+		
+			
+		System.out.println("===================================");
+		System.out.println("===================================");
+		System.out.println("===================================");
+
+		List<ArchiveAgentDto> archiveDtoList = archiveList.getArchiveAgentDtos();
+			System.out.println("create archive size(): "+ archiveDtoList.size());
+		//createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
+		
+
+		return "/main";
+=======
+	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
+			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
+>>>>>>> .merge_file_PFwtHV
 			@ModelAttribute LocalAgentDto localDto
 			) throws ParserConfigurationException, TransformerException {
 			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
 			
 						
 		return "main";
+<<<<<<< .merge_file_HurIVL
+=======
+>>>>>>> 96f1308e93fa1432d6f35f34bad984be010e4227
+>>>>>>> .merge_file_PFwtHV
 	}
 	
 }
