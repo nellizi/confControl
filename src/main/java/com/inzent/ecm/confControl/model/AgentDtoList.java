@@ -3,6 +3,16 @@ package com.inzent.ecm.confControl.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
+@ToString
+@NoArgsConstructor
+@Setter
+@Getter
 public class AgentDtoList {
 	
 	private List<ArchiveAgentDto> archiveAgentDtos = new ArrayList<>();
