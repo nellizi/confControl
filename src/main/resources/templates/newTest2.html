@@ -205,15 +205,15 @@
         -->
          <div class="list-content">
             <div class="list-a">
-               <button class="con" type="button" onclick="show_btn(this);change_btn(event);" id="Comm_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this); " id="Comm_con" name="show"
                   value="">
                   <span class="r_Comm">Comm</span>
                </button>
-               <button class="con" type="button" onclick="show_btn(this);change_btn(event);" id="Arc_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this);" id="Arc_con" name="show"
                   value="">
                   <span class="r_Arc">Archive</span>
                </button>
-               <button class="con" type="button" onclick="show_btn(this); change_btn(event);" id="Data_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this);" id="Data_con" name="show"
                   value="">
                   <span class="r_Data">Data</span>
                </button>
@@ -236,18 +236,18 @@
                         <div class="row" id="com_div">
                            <div class="col-md-3">
                               <label for="arch-name" class="form-label">name</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Name"
+                              <input type="text" class="form-control" onclick="logValueOnClick(0, this)" oninput="validateNumberInput(this);" onchange="myFunction(0, this)" name="Cag_Name"
                                  th:value="${comm.Cag_Name}" id="arch-name">
                            </div>
                            <div class="col-md-3">
                               <label for="arch-type" class="form-label">type</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Type"
+                              <input type="text" class="form-control" onclick="logValueOnClick(1, this)" oninput="validateNumberInput(this);" onchange="myFunction(1, this)" name="Cag_Type"
                                  th:value="${comm.Cag_Type}" id="arch-type">
                            </div>
                            
                            <div class="col-md-6">
                               <label for="arch-age-class" class="form-label">class</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Class"
+                              <input type="text" class="form-control" onclick="logValueOnClick(2, this)" oninput="validateNumberInput(this);" onchange="myFunction(2, this)" name="Cag_Class"
                                  th:value="${comm.Cag_Class}" id="arch-age-class">
                            </div>
                         </div>
@@ -256,12 +256,12 @@
                         <div class="row" id="com_div">
                            <div class="col-md-6">
                               <label for="arch-name" class="form-label">opclass</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Opclss"
+                              <input type="text" class="form-control" onclick="logValueOnClick(3, this)" oninput="validateNumberInput(this);" onchange="myFunction(3, this)" name="Cag_Opclss"
                                  th:value="${comm.Cag_Opclss}" id="arch-name">
                            </div>
                            <div class="col-md-6">
                               <label for="arch-type" class="form-label">msgfile</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Cag_Msgfile"
+                              <input type="text" class="form-control" onclick="logValueOnClick(4, this)" oninput="validateNumberInput(this);" onchange="myFunction(4, this)" name="Cag_Msgfile"
                                  th:value="${comm.Cag_Msgfile}" id="arch-type">
                            </div>
                         </div>
@@ -275,17 +275,17 @@
                         <div class="row" id="com_div">
                            <div class="col-md-3">
                               <label for="arch-name" class="form-label">hostname</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="so_Hostname"
+                              <input type="text" class="form-control" onclick="logValueOnClick(5, this)" oninput="validateNumberInput(this);" onchange="myFunction(5, this)" name="so_Hostname"
                                  th:value="${comm.so_Hostname}" id="arch-name">
                            </div>
                            <div class="col-md-3">
                               <label for="arch-type" class="form-label">port</label>
-                              <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="so_Port"
+                              <input type="text" class="form-control" onclick="logValueOnClick(6, this)" oninput="validateCharInput(this);" onchange="myFunction(6, this)" name="so_Port"
                                  th:value="${comm.so_Port}" id="arch-type">
                            </div>
                            <div class="col-md-6">
                               <label for="arch-age-class" class="form-label">clienttimeout</label>
-                              <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="so_ClientTimeOut"
+                              <input type="text" class="form-control" onclick="logValueOnClick(7, this)" oninput="validateCharInput(this);" onchange="myFunction(7, this)" name="so_ClientTimeOut"
                                  th:value="${comm.so_ClientTimeOut}" id="arch-age-class">
                            </div>
                         </div>
@@ -317,17 +317,17 @@
                                  <div class="row" id="hello">
                                     <div class="col-md-4">
                                        <label for="arch-name" class="form-label">name</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Aag_Name"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(8, this)" oninput="validateNumberInput(this);" onchange="myFunction(8, this)" name="Aag_Name"
                                           th:value="${archive.Aag_Name}" id="arch-name">
                                     </div>
                                     <div class="col-md-4">
                                        <label for="arch-type" class="form-label">type</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Aag_Type"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(9, this)" oninput="validateNumberInput(this);" onchange="myFunction(9, this)" name="Aag_Type"
                                           th:value="${archive.Aag_Type}" id="arch-type">
                                     </div>
                                     <div class="col-md-4">
                                        <label for="arch-age-class" class="form-label">desc</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Aag_Desc"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(10, this)" oninput="validateNumberInput(this);" onchange="myFunction(10, this)" name="Aag_Desc"
                                           th:value="${archive.Aag_Desc}" id="arch-age-class">
                                     </div>
                                     
@@ -335,17 +335,17 @@
                                  <div class="row" id="hello">
                             <div class="col-md-4">
                                        <label for="arch-age-class" class="form-label">class</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Aag_class"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(11, this)" oninput="validateNumberInput(this);" onchange="myFunction(11, this)" name="Aag_class"
                                           th:value="${archive.Aag_class}" id="arch-age-class">
                                     </div>
                                     <div class="col-md-4">
                                        <label for="arch-opclass" class="form-label">opclass</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Aag_Opclass"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(12, this)" oninput="validateNumberInput(this);" onchange="myFunction(12, this)" name="Aag_Opclass"
                                           th:value="${archive.Aag_Opclass}" id="arch-opclass">
                                     </div>
                                     <div class="col-md-4">
                                        <label for="arch-msgfile" class="form-label">msgfile</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Aag_Msgfile"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(13, this)" oninput="validateNumberInput(this);" onchange="myFunction(13, this)" name="Aag_Msgfile"
                                           th:value="${archive.Aag_Msgfile}" id="arch-msgfile">
                                     </div>
                                  </div>
@@ -356,7 +356,7 @@
                                  <div class="row">
                                     <div class="col-md-12">
                                        <label for="arch-shc-class" class="form-label">class</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="sc_class"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(14, this)" oninput="validateNumberInput(this);" onchange="myFunction(14, this)" name="sc_class"
                                           th:value="${archive.sc_class}" id="arch-sc-class">
                                     </div>
                                  </div>
@@ -367,30 +367,30 @@
                                  <div class="row" id="hello">
                                     <div class="col-md-4">
                                        <label for="arch-dev-class" class="form-label">class</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_class"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(15, this)" oninput="validateNumberInput(this);" onchange="myFunction(15, this)" name="de_class"
                                           th:value="${archive.de_class}" id="arch-dev-class">
                                     </div>
                                     <div class="col-md-4">
                                        <label for="arch-basedir" class="form-label">basedir</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_Basedir"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(16, this)" oninput="validateNumberInput(this);" onchange="myFunction(16, this)" name="de_Basedir"
                                           th:value="${archive.de_Basedir}" id="arch-basedir">
                                     </div>
                                     <div class="col-md-4">
                                        <label for="arch-hashdirs" class="form-label">hashdirs</label>
-                                       <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="de_Hashdirs"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(17, this)" oninput="validateCharInput(this);" onchange="myFunction(17, this)" name="de_Hashdirs"
                                           th:value="${archive.de_Hashdirs}" id="arch-hashdirs">
                                     </div>
                                  </div>
                                  <div class="row">
                                     <div class="col-md-4">
                                        <label for="arch-dateformat" class="form-label">dateformat</label>
-                                       <input type="text" class="form-control" oninput="validateEngInput(this);" onchange="myFunction(this)" name="de_Dateformat"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(18, this)" oninput="validateEngInput(this);" onchange="myFunction(18, this)" name="de_Dateformat"
                                           th:value="${archive.de_Dateformat}" id="arch-dateformat">
                                     </div>
                                     <div class="col-md-4">
                                        <label for="arch-filesystemclass"
                                           class="form-label">filesystemclass</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_filesystemclass"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(19, this)" oninput="validateNumberInput(this);" onchange="myFunction(19, this)" name="de_filesystemclass"
                                           th:value="${archive.de_filesystemclass}"
                                           id="arch-filesystemclass">
                                     </div>
@@ -398,7 +398,7 @@
                                        <label for="arch-filesystemkb"
                                           class="form-label">filesystemkb</label>
                                        <select class="form-control custom-control"
-                                          th:value="${archive.de_filesystemkb}" name="de_filesystemkb">
+                                          th:value="${archive.de_filesystemkb}" onclick="logValueOnClick(25, this)" onchange="myFunction(25, this)" name="de_filesystemkb">
                                           <option th:selected="${archive.de_filesystemkb}=='false'"
                                              th:text="false" th:value="false">false</option>
                                           <option th:selected="${archive.de_filesystemkb}=='true'"
@@ -414,12 +414,12 @@
                                  <div class="row" id="hello">
                                     <div class="col-md-6">
                                        <label for="arch-ops" class="form-label">ops</label>
-                                       <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="th_Ops"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(20, this)" oninput="validateNumberInput(this);" onchange="myFunction(20, this)" name="th_Ops"
                                           th:value="${archive.th_Ops}" id="arch-ops">
                                     </div>
                                     <div class="col-md-6">
                                        <label for="arch-count" class="form-label">count</label>
-                                       <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="th_Count"
+                                       <input type="text" class="form-control" onclick="logValueOnClick(21, this)" oninput="validateCharInput(this);" onchange="myFunction(21, this)" name="th_Count"
                                           th:value="${archive.th_Count}" id="count">
                                     </div>
                                  </div>
@@ -454,22 +454,22 @@
                         <div class="row" id="data_con">
                            <div class="col-md-3">
                               <label class="form-label">name</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Name"
+                              <input type="text" class="form-control" onclick="logValueOnClick(22, this)" oninput="validateNumberInput(this);" onchange="myFunction(22, this)" name="Dag_Name"
                                  th:value="${data.Dag_Name}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">type</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Type"
+                              <input type="text" class="form-control" onclick="logValueOnClick(23, this)" oninput="validateNumberInput(this);" onchange="myFunction(23, this)" name="Dag_Type"
                                  th:value="${data.Dag_Type}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">class</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Class"
+                              <input type="text" class="form-control" onclick="logValueOnClick(24, this)" oninput="validateNumberInput(this);" onchange="myFunction(24, this)" name="Dag_Class"
                                  th:value="${data.Dag_Class}">
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">msgfile</label>
-                              <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Msgfile"
+                              <input type="text" class="form-control" onclick="logValueOnClick(26, this)" oninput="validateNumberInput(this);" onchange="myFunction(26, this)" name="Dag_Msgfile"
                                  th:value="${data.Dag_Msgfile}">
                            </div>
                         </div>
@@ -482,17 +482,17 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">name</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="DPo_Name"
+                           <input type="text" class="form-control" onclick="logValueOnClick(27, this)" oninput="validateNumberInput(this);" onchange="myFunction(27, this)" name="DPo_Name"
                               th:value="${data.DPo_Name}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">driver</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Driver" id="driver"
+                           <input type="text" class="form-control" onclick="logValueOnClick(28, this)" oninput="validateNumberInput(this);" onchange="myFunction(28, this)" name="po_Driver" id="driver"
                               th:value="${data.po_Driver}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">connect</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Connect"
+                           <input type="text" class="form-control" onclick="logValueOnClick(29, this)" oninput="validateNumberInput(this);" onchange="myFunction(29, this)" name="po_Connect"
                               th:value="${data.po_Connect}">
                         </div>
                      </div>
@@ -501,8 +501,8 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">dbtype</label>
-                           <select class="form-control custom-control" id="dbtype" th:value="${data.po_Dbtype}" name="po_Dbtype"
-                              onchange="valueChange()">
+                           <select class="form-control custom-control" id="dbtype" th:value="${data.po_Dbtype}" onclick="logValueOnClick(30, this)" name="po_Dbtype" 
+                              onchange="valueChange(); myFunction(30, this);">
                               <option th:selected="${data.po_Dbtype}=='1'" th:text="1"
                                  value="1">1</option>
                               <option th:selected="${data.po_Dbtype}=='2'" th:text="2"
@@ -521,12 +521,12 @@
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">user</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_User"
+                           <input type="text" class="form-control" onclick="logValueOnClick(31, this)" oninput="validateNumberInput(this);" onchange="myFunction(31, this)" name="po_User"
                               th:value="${data.po_User}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">pswd</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)"  name="po_Pswd"
+                           <input type="text" class="form-control" onclick="logValueOnClick(32, this)" oninput="validateNumberInput(this);" onchange="myFunction(32, this)"  name="po_Pswd"
                               th:value="${data.po_Pswd}">
                         </div>
                      </div>
@@ -534,12 +534,12 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">count</label>
-                           <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="po_Count"
+                           <input type="text" class="form-control" onclick="logValueOnClick(33, this)" oninput="validateCharInput(this);" onchange="myFunction(33, this)" name="po_Count"
                               th:value="${data.po_Count}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">connect</label>
-                           <select class="form-control custom-control" th:value="${data.po_Preconnect}" name="po_Preconnect">
+                           <select class="form-control custom-control" th:value="${data.po_Preconnect}" onclick="logValueOnClick(34, this)" onchange="myFunction(34, this)" name="po_Preconnect">
                               <option th:selected="${data.po_Preconnect}=='FALSE'" th:text="FALSE"
                                  th:value="FALSE">FALSE</option>
                               <option th:selected="${data.po_Preconnect}=='TRUE'" th:text="TRUE"
@@ -548,7 +548,7 @@
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">unicode</label>
-                           <select class="form-control custom-control" th:value="${data.po_Unicode}" name="po_Unicode">
+                           <select class="form-control custom-control" th:value="${data.po_Unicode}" onclick="logValueOnClick(35, this)" onchange="myFunction(35, this)" name="po_Unicode">
                               <option th:selected="${data.po_Unicode}=='FALSE'" th:text="FALSE"
                                  th:value="FALSE">FALSE</option>
                               <option th:selected="${data.po_Unicode}=='TRUE'" th:text="TRUE" th:value="TRUE">
@@ -567,7 +567,7 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">mainpool</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="st_MainpoolString"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="st_MainpoolString"
                               th:value="${data.st_MainpoolString}">
                         </div>
                         <div class="col-md-4">
@@ -577,7 +577,7 @@
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">retentionignore</label>
-                           <input type="text" class="form-control" name="st_retentionignore"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" onchange="myFunction(this)" name="st_retentionignore"
                               th:value="${data.st_retentionignore}">
                         </div>
                      </div>
@@ -590,17 +590,17 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">listdir</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="li_Listdir"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="li_Listdir"
                               th:value="${data.li_Listdir}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">memcache</label>
-                           <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="li_Memcache"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="li_Memcache"
                               th:value="${data.li_Memcache}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">timeout</label>
-                           <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="li_Timeout"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="li_Timeout"
                               th:value="${data.li_Timeout}">
                         </div>
                      </div>
@@ -612,7 +612,7 @@
                     <div class="row" id="data_con">
                         <div class="col-md-6">
                            <label class="form-label">iteration</label>
-                           <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ph_Iteration"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ph_Iteration"
                               th:value="${data.ph_Iteration}">
                         </div>
                         <div class="col-md-6">
@@ -628,7 +628,7 @@
                         <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">iteration</label>
-                           <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ac_Iteration"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ac_Iteration"
                               th:value="${data.ac_Iteration}">
                         </div>
                         </div>
@@ -647,12 +647,12 @@
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">checkquerytimeout</label>
-                           <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ch_SheckQueryTimeout"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ch_SheckQueryTimeout"
                               th:value="${data.ch_SheckQueryTimeout}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">validationinterval</label>
-                           <input type="text" class="form-control" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ch_Validationinterval"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ch_Validationinterval"
                               th:value="${data.ch_Validationinterval}">
                         </div>
                      </div>
@@ -666,12 +666,12 @@
                     <div class="row" id="data_con">
                         <div class="col-md-6">
                            <label class="form-label">agentserver</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_Agentserver"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_Agentserver"
                               th:value="${data.de_Agentserver}">
                         </div>
                         <div class="col-md-6">
                            <label class="form-label">agentname</label>
-                           <input type="text" class="form-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_AgentName"
+                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_AgentName"
                               th:value="${data.de_AgentName}">
                         </div>
                      </div>
@@ -864,7 +864,7 @@
    	<script>
 	function validateNumberInput(inputField) {
 	  // 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
-	  inputField.value = inputField.value.replace(/[^a-zA-Z가-힣./]/g, '');
+	  inputField.value = inputField.value.replace(/[^a-zA-Z가-힣./_\s]/g, '');
 	}
 	</script>
 	
@@ -876,18 +876,43 @@
 	}
 	</script>
 	
+	<script>
+	
 	function validateEngInput(inputField) {
 	  // 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
 	  inputField.value = inputField.value.replace(/[^a-zA-Z]/g, '');
 	}
 	</script>
 	
-	<script>
-	  function myFunction(inputField){
-	      let value4 = inputField.value;
-	      console.log(value4);
-	  }
-	</script>
+  <script>
+      // 배열로 변경
+      let values = [];
+
+      function logValueOnClick(index, inputField) {
+          // value2가 이미 초기화되어 있다면 초기화하지 않도록 확인
+          if (typeof values[index] === 'undefined') {
+              values[index] = inputField.value;
+              console.log(`Initial value ${index}: ` + values[index]);
+          }
+      }
+
+      function myFunction(index, inputField) {
+          let value = inputField.value;
+          console.log(`Changed value ${index}: ` + value);
+
+          console.log(value !== values[index]);
+
+          if (value !== values[index]) {
+              inputField.style.color = "red";
+          } else {
+              inputField.style.color = "black";
+          }
+      }
+  </script>
+	
+
+	
+	
 </body>
 
 </html>
