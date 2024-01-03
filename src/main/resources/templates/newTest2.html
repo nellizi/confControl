@@ -7,6 +7,10 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
    <title>Document</title>
    <style>
+      .body {
+      margin: 0 auto;
+      }
+      
       .end-box {
          width: 80%;
          margin: 0 auto;
@@ -95,7 +99,7 @@
       <button type="button" class="btn btn-secondary"  onclick="history.back();">이전으로</button>
    <form action="create">
       
-   <div style="width: 1300px;">
+   <div style="width: 1300px; margin: 0 auto;">
       <div>
          <strong>
             <p style="font-size: 25px;">Server</p>
@@ -205,7 +209,7 @@
         -->
          <div class="list-content">
             <div class="list-a">
-               <button class="con" type="button" onclick="show_btn(this); " id="Comm_con" name="show"
+               <button class="con" type="button" onclick="show_btn(this);" id="Comm_con" name="show"
                   value="">
                   <span class="r_Comm">Comm</span>
                </button>
@@ -275,7 +279,7 @@
                         <div class="row" id="com_div">
                            <div class="col-md-3">
                               <label for="arch-name" class="form-label">hostname</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(5, this)" oninput="validateNumberInput(this);" onchange="myFunction(5, this)" name="so_Hostname"
+                              <input type="text" class="form-control" onclick="logValueOnClick(5, this)" oninput="validateCharInput(this);" onchange="myFunction(5, this)" name="so_Port"
                                  th:value="${comm.so_Hostname}" id="arch-name">
                            </div>
                            <div class="col-md-3">
@@ -398,7 +402,7 @@
                                        <label for="arch-filesystemkb"
                                           class="form-label">filesystemkb</label>
                                        <select class="form-control custom-control"
-                                          th:value="${archive.de_filesystemkb}" name="de_filesystemkb">
+                                          th:value="${archive.de_filesystemkb}" onclick="logValueOnClick(25, this)" onchange="myFunction(25, this)" name="de_filesystemkb">
                                           <option th:selected="${archive.de_filesystemkb}=='false'"
                                              th:text="false" th:value="false">false</option>
                                           <option th:selected="${archive.de_filesystemkb}=='true'"
@@ -469,7 +473,7 @@
                            </div>
                            <div class="col-md-3">
                               <label class="form-label">msgfile</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="Dag_Msgfile"
+                              <input type="text" class="form-control" onclick="logValueOnClick(26, this)" oninput="validateNumberInput(this);" onchange="myFunction(26, this)" name="Dag_Msgfile"
                                  th:value="${data.Dag_Msgfile}">
                            </div>
                         </div>
@@ -482,17 +486,17 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">name</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="DPo_Name"
+                           <input type="text" class="form-control" onclick="logValueOnClick(27, this)" oninput="validateNumberInput(this);" onchange="myFunction(27, this)" name="DPo_Name"
                               th:value="${data.DPo_Name}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">driver</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Driver" id="driver"
+                           <input type="text" class="form-control changeColor" onclick="logValueOnClick(28, this)" oninput="validateNumberInput(this);" onchange="myFunction(28, this)" name="po_Driver" id="driver"
                               th:value="${data.po_Driver}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">connect</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Connect"
+                           <input type="text" class="form-control" onclick="logValueOnClick(29, this)" onchange="myFunction(29, this)" name="po_Connect" 
                               th:value="${data.po_Connect}">
                         </div>
                      </div>
@@ -501,8 +505,8 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">dbtype</label>
-                           <select class="form-control custom-control" id="dbtype" th:value="${data.po_Dbtype}" name="po_Dbtype"
-                              onchange="valueChange()">
+                           <select class="form-control custom-control" id="dbtype" th:value="${data.po_Dbtype}" onclick="logValueOnClick(30, this)" name="po_Dbtype"
+                              onchange="valueChange(); myFunction(30, this);">
                               <option th:selected="${data.po_Dbtype}=='1'" th:text="1"
                                  value="1">1</option>
                               <option th:selected="${data.po_Dbtype}=='2'" th:text="2"
@@ -521,12 +525,12 @@
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">user</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_User"
+                           <input type="text" class="form-control" onclick="logValueOnClick(31, this)" oninput="validateNumberInput(this);" onchange="myFunction(31, this)" name="po_User"
                               th:value="${data.po_User}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">pswd</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)"  name="po_Pswd"
+                           <input type="text" class="form-control" onclick="logValueOnClick(32, this)" oninput="validateNumberInput(this);" onchange="myFunction(32, this)"  name="po_Pswd"
                               th:value="${data.po_Pswd}">
                         </div>
                      </div>
@@ -534,12 +538,12 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">count</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="po_Count"
+                           <input type="text" class="form-control" onclick="logValueOnClick(33, this)" oninput="validateCharInput(this);" onchange="myFunction(33, this)" name="po_Count"
                               th:value="${data.po_Count}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">connect</label>
-                           <select class="form-control custom-control" th:value="${data.po_Preconnect}" name="po_Preconnect">
+                           <select class="form-control custom-control" th:value="${data.po_Preconnect}" onclick="logValueOnClick(34, this)" onchange="myFunction(34, this)" name="po_Preconnect">
                               <option th:selected="${data.po_Preconnect}=='FALSE'" th:text="FALSE"
                                  th:value="FALSE">FALSE</option>
                               <option th:selected="${data.po_Preconnect}=='TRUE'" th:text="TRUE"
@@ -548,7 +552,7 @@
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">unicode</label>
-                           <select class="form-control custom-control" th:value="${data.po_Unicode}" name="po_Unicode">
+                           <select class="form-control custom-control" th:value="${data.po_Unicode}" onclick="logValueOnClick(35, this)" onchange="myFunction(35, this)" name="po_Unicode">
                               <option th:selected="${data.po_Unicode}=='FALSE'" th:text="FALSE"
                                  th:value="FALSE">FALSE</option>
                               <option th:selected="${data.po_Unicode}=='TRUE'" th:text="TRUE" th:value="TRUE">
@@ -567,7 +571,7 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">mainpool</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="st_MainpoolString"
+                           <input type="text" class="form-control" onclick="logValueOnClick(36, this)" oninput="validateNumberInput(this);" onchange="myFunction(36, this)" name="st_MainpoolString"
                               th:value="${data.st_MainpoolString}">
                         </div>
                         <div class="col-md-4">
@@ -577,7 +581,7 @@
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">retentionignore</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" onchange="myFunction(this)" name="st_retentionignore"
+                           <input type="text" class="form-control" onclick="logValueOnClick(37, this)" oninput="validateNumberInput(this);" onchange="myFunction(37, this)" name="st_retentionignore"
                               th:value="${data.st_retentionignore}">
                         </div>
                      </div>
@@ -590,17 +594,17 @@
                     <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">listdir</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="li_Listdir"
+                           <input type="text" class="form-control" onclick="logValueOnClick(38, this)" oninput="validateNumberInput(this);" onchange="myFunction(38, this)" name="li_Listdir"
                               th:value="${data.li_Listdir}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">memcache</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="li_Memcache"
+                           <input type="text" class="form-control" onclick="logValueOnClick(39, this)" oninput="validateCharInput(this);" onchange="myFunction(39, this)" name="li_Memcache"
                               th:value="${data.li_Memcache}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">timeout</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="li_Timeout"
+                           <input type="text" class="form-control" onclick="logValueOnClick(40, this)" oninput="validateCharInput(this);" onchange="myFunction(40, this)" name="li_Timeout"
                               th:value="${data.li_Timeout}">
                         </div>
                      </div>
@@ -612,12 +616,12 @@
                     <div class="row" id="data_con">
                         <div class="col-md-6">
                            <label class="form-label">iteration</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ph_Iteration"
+                           <input type="text" class="form-control" onclick="logValueOnClick(41, this)" oninput="validateCharInput(this);" onchange="myFunction(41, this)" name="ph_Iteration"
                               th:value="${data.ph_Iteration}">
                         </div>
                         <div class="col-md-6">
                            <label class="form-label">OnErrorReadOnly</label>
-                           <input type="text" class="form-control" name="ph_OnErrorReadOnly"
+                           <input type="text" class="form-control" onclick="logValueOnClick(46, this)" onchange="myFunction(46, this)" name="ph_OnErrorReadOnly"
                               th:value="${data.ph_OnErrorReadOnly}">
                      </div>
 
@@ -628,7 +632,7 @@
                         <div class="row" id="data_con">
                         <div class="col-md-4">
                            <label class="form-label">iteration</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ac_Iteration"
+                           <input type="text" class="form-control" onclick="logValueOnClick(42, this)" oninput="validateCharInput(this);" onchange="myFunction(42, this)" name="ac_Iteration"
                               th:value="${data.ac_Iteration}">
                         </div>
                         </div>
@@ -647,12 +651,12 @@
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">checkquerytimeout</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ch_SheckQueryTimeout"
+                           <input type="text" class="form-control" onclick="logValueOnClick(43, this)" oninput="validateCharInput(this);" onchange="myFunction(43, this)" name="ch_SheckQueryTimeout"
                               th:value="${data.ch_SheckQueryTimeout}">
                         </div>
                         <div class="col-md-4">
                            <label class="form-label">validationinterval</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateCharInput(this);" onchange="myFunction(this)" name="ch_Validationinterval"
+                           <input type="text" class="form-control" onclick="logValueOnClick(44, this)" oninput="validateCharInput(this);" onchange="myFunction(44, this)" name="ch_Validationinterval"
                               th:value="${data.ch_Validationinterval}">
                         </div>
                      </div>
@@ -666,12 +670,12 @@
                     <div class="row" id="data_con">
                         <div class="col-md-6">
                            <label class="form-label">agentserver</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_Agentserver"
+                           <input type="text" class="form-control" onclick="logValueOnClick(45, this)" oninput="validateNumberInput(this);" onchange="myFunction(45, this)" name="de_Agentserver"
                               th:value="${data.de_Agentserver}">
                         </div>
                         <div class="col-md-6">
                            <label class="form-label">agentname</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(this)" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="de_AgentName"
+                           <input type="text" class="form-control" onclick="logValueOnClick(45, this)" oninput="validateNumberInput(this);" onchange="myFunction(45, this)" name="de_AgentName"
                               th:value="${data.de_AgentName}">
                         </div>
                      </div>
@@ -864,7 +868,7 @@
    	<script>
 	function validateNumberInput(inputField) {
 	  // 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
-	  inputField.value = inputField.value.replace(/[^a-zA-Z가-힣./_\s]/g, '');
+	  inputField.value = inputField.value.replace(/[^a-zA-Z가-힣./_:@\s]/g, '');
 	}
 	</script>
 	
@@ -887,12 +891,12 @@
   <script>
       // 배열로 변경
       let values = [];
+      var element = document.querySelector('.changeColor');
 
       function logValueOnClick(index, inputField) {
           // value2가 이미 초기화되어 있다면 초기화하지 않도록 확인
           if (typeof values[index] === 'undefined') {
               values[index] = inputField.value;
-              console.log(`Initial value ${index}: ` + values[index]);
           }
       }
 
@@ -900,12 +904,18 @@
           let value = inputField.value;
           console.log(`Changed value ${index}: ` + value);
 
-          console.log(value !== values[index]);
 
           if (value !== values[index]) {
-              inputField.style.color = "red";
+              inputField.style.color = "red";      
+              if ([index] == 30) {
+              element.style.color = "red";
+              }
+              
           } else {
               inputField.style.color = "black";
+              if ([index] == 30) {
+            	element.style.color = "black";
+			}
           }
       }
   </script>
