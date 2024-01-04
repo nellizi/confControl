@@ -1,5 +1,8 @@
 package com.inzent.ecm.confControl.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -46,7 +49,13 @@ public class ArchiveAgentDto {
 	
 	private String th_Count;
 
+	private List<ArchiveAgentDto> archiveAgentDtoList ;
 	
+	public ArchiveAgentDto() {
+		this.archiveAgentDtoList = new ArrayList<>();
+	}
+
+
 
 	public String getAag_Name() {
 		return Aag_Name;
@@ -166,6 +175,14 @@ public class ArchiveAgentDto {
 
 	public void setTh_Count(String th_Count) {
 		this.th_Count = th_Count;
+	}
+
+	public List<ArchiveAgentDto> getArchiveAgentDtoList() {
+		return archiveAgentDtoList;
+	}
+
+	public void setArchiveAgentDtoList(List<ArchiveAgentDto> archiveAgentDtoList) {
+		this.archiveAgentDtoList = archiveAgentDtoList;
 	}
 	
 	

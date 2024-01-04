@@ -11,7 +11,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class ServerDto {
 	
-	@Setter
+	
 	private String se_keepperfstats;
 	
 	private String se_basemsg;
