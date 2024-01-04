@@ -192,7 +192,7 @@ public class CreateXML {
 			System.out.println("폴더가 이미 존재합니다..");
 			
 		}
-		File file = new File(dir, foldName);
+		File file = new File(dir, foldName+".xml");
 		
 	
 		StreamResult result = new StreamResult(file);
