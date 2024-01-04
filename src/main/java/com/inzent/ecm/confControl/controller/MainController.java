@@ -35,6 +35,7 @@ import com.inzent.ecm.confControl.service.CreateXML;
 import com.inzent.ecm.confControl.service.DataService;
 import com.inzent.ecm.confControl.service.Delete;
 import com.inzent.ecm.confControl.service.LocalAgentService;
+import com.inzent.ecm.confControl.service.MakeDir;
 import com.inzent.ecm.confControl.service.ServerService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -50,12 +51,12 @@ public class MainController {
 	private final ServerService serverService;
 	private final LocalAgentService localService;
 	private final CreateXML createXML;
-	/* private final Delete delete; */
-
 	private final Delete delete;
+	private final MakeDir makeDir;
 
 	public MainController(ArchiveService archiveService, CommService commService, DataService dataService,
-						  ServerService serverService, LocalAgentService localService, CreateXML createXML, Delete delete) {
+			ServerService serverService, LocalAgentService localService, CreateXML createXML, Delete delete,
+			MakeDir makeDir) {
 		this.archiveService = archiveService;
 		this.commService = commService;
 		this.dataService = dataService;
@@ -63,6 +64,7 @@ public class MainController {
 		this.localService = localService;
 		this.createXML = createXML;
 		this.delete = delete;
+		this.makeDir = makeDir;
 
 	}
 
@@ -80,11 +82,13 @@ public class MainController {
 		ArchiveAgentDto archive = null;
 		DataAgentDto data = null;
 		List<ArchiveAgentDto> archiveList = new ArrayList<>();
+		File path = makeDir.makeDir();
 
 		// XML 문서 파싱
+
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-		File requestFile = new File("C://TEST/" + UUID.randomUUID().toString());// 임시로 파일 생성
+		File requestFile = new File(path + "/" + UUID.randomUUID().toString());// 임시로 파일 생성
 		file.transferTo(requestFile);// 파일로 변환
 		System.out.println(file);
 		Document document = documentBuilder.parse(requestFile.getAbsoluteFile());
@@ -104,7 +108,7 @@ public class MainController {
 			Node node = childeren.item(i); // 1. server, 2. localagents
 
 			if (node.getNodeType() == Node.ELEMENT_NODE) { // 해당 노드의 종류 판정(Element일 때) *XVARM은 root, 하위 태그들이 element ->
-				// XVARM 태그 걸러내기
+															// XVARM 태그 걸러내기
 				Element ele = (Element) node;
 				String nodeName = ele.getNodeName(); // element 노드 이름 구하기 (첫번째 태그 값) 1.server, 2.localagents
 				if (nodeName.equals("server")) {
@@ -122,22 +126,22 @@ public class MainController {
 							String type = ele2.getAttribute("type");
 
 							switch (type) {
-								case "COMM":
-									comm = commService.getAttribute(ele2);
+							case "COMM":
+								comm = commService.getAttribute(ele2);
 
-									model.addAttribute("comm", comm);
+								model.addAttribute("comm", comm);
 
-									break;
-								case "ARCHIVE":
-									archive = archiveService.getAttribute(ele2);
-									archiveList.add(archive);
-									model.addAttribute("archiveList", archiveList);
-									break;
-								case "DATA":
-									data = dataService.getAttribute(ele2);
+								break;
+							case "ARCHIVE":
+								archive = archiveService.getAttribute(ele2);
+								archiveList.add(archive);
+								model.addAttribute("archiveList", archiveList);
+								break;
+							case "DATA":
+								data = dataService.getAttribute(ele2);
 
-									model.addAttribute("data", data);
-									break;
+								model.addAttribute("data", data);
+								break;
 							}
 
 						}
@@ -149,6 +153,7 @@ public class MainController {
 		}
 
 		delete.DeleteFile(requestFile);
+		delete.DeleteFile(path);
 
 		return "newTest2";
 
@@ -156,16 +161,16 @@ public class MainController {
 
 	@GetMapping("/create")
 	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
-					 @ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
-					 @ModelAttribute LocalAgentDto localDto,HttpServletResponse response) throws ParserConfigurationException, TransformerException, IOException {
+			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
+			@ModelAttribute LocalAgentDto localDto, HttpServletResponse response, @RequestParam String dirName,
+			@RequestParam String foldName) throws ParserConfigurationException, TransformerException, IOException {
 
 		List<ArchiveAgentDto> archiveAgentDtoList = archiveService.splitAgentDto(arcAgentDto);
 
-		createXML.createXML(serverDto, archiveAgentDtoList, CommDto, dataDto, localDto);
+		createXML.createXML(serverDto, archiveAgentDtoList, CommDto, dataDto, localDto, dirName, foldName);
 
 		response.setContentType("text/html; charset=utf-8");
 		response.getWriter().print("<script>alert('저장되었습니다.'); location.href = \"/main\";</script>");
-
 
 		return "main";
 	}
