@@ -151,7 +151,7 @@ public class MainController {
 		}
 		
 		  delete.DeleteFile(requestFile);
-//		  delete.DeleteFile(path);
+		  delete.DeleteFile(path);
 		 
 
 
