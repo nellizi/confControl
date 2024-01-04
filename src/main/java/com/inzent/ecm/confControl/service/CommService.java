@@ -11,9 +11,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CommService {
 
+	public void test() {
+		// TODO Auto-generated method stub
+		System.out.println("comm");
+	}
+
 	public CommAgentDto getAttribute(Element ele) { // ele.getNodeName = agent
 		
 		CommAgentDto comm = new CommAgentDto();
+		// TODO Auto-generated method stub
 		System.out.println("============1." + ele.getNodeName());
 		
 		comm.setCag_Name(ele.getAttribute("name"));

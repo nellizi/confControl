@@ -17,12 +17,13 @@ public class DataService {
 	}
 
 	public DataAgentDto getAttribute(Element ele) { // ele.getNodeName = agent
-
+		
 		DataAgentDto data = new DataAgentDto();
-		System.out.println("============3." + ele.getNodeName()); // agent
-
+		// TODO Auto-generated method stub
+		System.out.println("============3." + ele.getNodeName());   //agent
+		
 		data.setDag_Name(ele.getAttribute("name"));
-		data.setDag_Type(ele.getAttribute("type"));
+		data.setDag_Type(ele.getAttribute("type"));		
 		data.setDag_Class(ele.getAttribute("class"));
 		data.setDag_Msgfile(ele.getAttribute("msgfile"));
 
@@ -36,7 +37,7 @@ public class DataService {
 				System.out.println("--------node name2: " + nodeName2); // sockets
 
 				switch (nodeName2) {
-				case "dbpools":
+				case "dbpools":	
 					NodeList childeren2 = node2.getChildNodes();
 					for (int i = 0; i < childeren2.getLength(); i++) {
 						Node node3 = childeren2.item(i);
@@ -44,12 +45,12 @@ public class DataService {
 							Element ele3 = (Element) node3;
 							String nodeName3 = ele3.getNodeName();
 							System.out.println("node name3: " + nodeName3); // pool
-
+						
 							data.setDPo_Name(ele3.getAttribute("name"));
 							data.setPo_Driver(ele3.getAttribute("driver"));
 							data.setPo_Connect(ele3.getAttribute("connect"));
 							data.setPo_Dbtype(ele3.getAttribute("dbtype"));
-
+							
 							data.setPo_User(ele3.getAttribute("user"));
 							data.setPo_Pswd(ele3.getAttribute("pswd"));
 							data.setPo_Count(ele3.getAttribute("count"));
@@ -79,9 +80,9 @@ public class DataService {
 					data.setAc_Iteration(ele2.getAttribute("iteration"));
 					break;
 				case "checkquery":
-					data.setCh_CheckQueryEnable(ele2.getAttribute("CHECKQUERYENABLE"));
-					data.setCh_SheckQueryTimeout(ele2.getAttribute("CHECKQUERYTIMEOUT"));
-					data.setCh_Validationinterval(ele2.getAttribute("VALIDATIONINTERVAL"));
+					data.setCh_CheckQueryEnable( ele2.getAttribute("CHECKQUERYENABLE"));
+					data.setCh_SheckQueryTimeout( ele2.getAttribute("CHECKQUERYTIMEOUT"));
+					data.setCh_Validationinterval( ele2.getAttribute("VALIDATIONINTERVAL"));
 					break;
 				case "defaultaudit":
 					data.setDe_Agentserver(ele2.getAttribute("agentserver"));
@@ -91,10 +92,12 @@ public class DataService {
 				}
 			}
 
+			
+
 		}
-
+		
 		return data;
-
+		
 	}
 
 }

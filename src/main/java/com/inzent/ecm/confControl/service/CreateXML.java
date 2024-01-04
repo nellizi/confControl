@@ -1,6 +1,7 @@
 package com.inzent.ecm.confControl.service;
 
 import java.io.File;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,8 +15,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import com.inzent.ecm.confControl.model.ArchiveAgentDto;
 import com.inzent.ecm.confControl.model.CommAgentDto;
@@ -28,8 +27,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateXML {
 
-	public void createXML(ServerDto serverDto, ArchiveAgentDto arcAgentDto, CommAgentDto commDto, DataAgentDto dataDto, LocalAgentDto localDto, String dirName, String foldName) throws ParserConfigurationException, TransformerException {
-
+	public void createXML(ServerDto serverDto, List<ArchiveAgentDto> archiveAgentDtoList, CommAgentDto commDto,
+						  DataAgentDto dataDto, LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
@@ -82,35 +81,40 @@ public class CreateXML {
 
 		// archive
 
-		Element Aagent = document.createElement("agent");
-		Aagent.setAttribute("name", arcAgentDto.getAag_Name());
-		Aagent.setAttribute("type", arcAgentDto.getAag_Type());
-		Aagent.setAttribute("desc", arcAgentDto.getAag_Desc());
-		Aagent.setAttribute("class", arcAgentDto.getAag_class());
-		Aagent.setAttribute("opclass", arcAgentDto.getAag_Opclass());
-		Aagent.setAttribute("msgfile", arcAgentDto.getAag_Msgfile());
+		for (int i = 0; i < archiveAgentDtoList.size(); i++) {
 
-		Element sche = document.createElement("scheduler");
-		sche.setAttribute("class", arcAgentDto.getSc_class());
+			Element Aagent = document.createElement("agent");
 
-		Element devIf = document.createElement("deviceIF");
-		devIf.setAttribute("class", arcAgentDto.getDe_class());
-		devIf.setAttribute("basedir", arcAgentDto.getDe_Basedir());
-		devIf.setAttribute("hashdirs", arcAgentDto.getDe_Hashdirs());
-		devIf.setAttribute("dateformat", arcAgentDto.getDe_Dateformat());
-		devIf.setAttribute("filesystemclass", arcAgentDto.getDe_filesystemclass());
-		devIf.setAttribute("filesystemkb", arcAgentDto.getDe_filesystemkb());
+			Aagent.setAttribute("name", archiveAgentDtoList.get(i).getAag_Name());
+			Aagent.setAttribute("type", archiveAgentDtoList.get(i).getAag_Type());
+			Aagent.setAttribute("desc", archiveAgentDtoList.get(i).getAag_Desc());
+			Aagent.setAttribute("class", archiveAgentDtoList.get(i).getAag_class());
+			Aagent.setAttribute("opclass", archiveAgentDtoList.get(i).getAag_Opclass());
+			Aagent.setAttribute("msgfile", archiveAgentDtoList.get(i).getAag_Msgfile());
 
-		Element thrPool = document.createElement("threadpool");
-		thrPool.setAttribute("ops", arcAgentDto.getTh_Ops());
-		thrPool.setAttribute("count", arcAgentDto.getTh_Count());
+			Element sche = document.createElement("scheduler");
+			sche.setAttribute("class", archiveAgentDtoList.get(i).getSc_class());
 
-		// archive append
+			Element devIf = document.createElement("deviceIF");
+			devIf.setAttribute("class", archiveAgentDtoList.get(i).getDe_class());
+			devIf.setAttribute("basedir", archiveAgentDtoList.get(i).getDe_Basedir());
+			devIf.setAttribute("hashdirs", archiveAgentDtoList.get(i).getDe_Hashdirs());
+			devIf.setAttribute("dateformat", archiveAgentDtoList.get(i).getDe_Dateformat());
+			devIf.setAttribute("filesystemclass", archiveAgentDtoList.get(i).getDe_filesystemclass());
+			devIf.setAttribute("filesystemkb", archiveAgentDtoList.get(i).getDe_filesystemkb());
 
-		localAgent.appendChild(Aagent);
-		Aagent.appendChild(sche);
-		sche.appendChild(devIf);
-		sche.appendChild(thrPool);
+			Element thrPool = document.createElement("threadpool");
+			thrPool.setAttribute("ops", archiveAgentDtoList.get(i).getTh_Ops());
+			thrPool.setAttribute("count", archiveAgentDtoList.get(i).getTh_Count());
+
+			// archive append
+
+			localAgent.appendChild(Aagent);
+			Aagent.appendChild(sche);
+			sche.appendChild(devIf);
+			sche.appendChild(thrPool);
+
+		}
 
 		// data
 
@@ -180,23 +184,12 @@ public class CreateXML {
 		transformer.setOutputProperty("doctype-public", "yes"); // document.setXmlStandalone(true); 하면 개행이 안 되기 때문에 추가
 
 		Source source = new DOMSource(document);
-		File dir = new File(dirName);
-		if (!dir.exists()) {
-			try {
-				dir.mkdir();
-				
-			} catch (Exception e) {
-				e.getStackTrace();
-			}
-		} else {
-			System.out.println("폴더가 이미 존재합니다..");
-			
-		}
-		File file = new File(dir, foldName+".xml");
-		
-	
+		File file = new File("C:\\test", "conf.xml");
 		StreamResult result = new StreamResult(file);
+
 		transformer.transform(source, result);
+
 	}
+
 
 }

@@ -19,15 +19,6 @@ import lombok.ToString;
 @ToString
 public class ArchiveAgentDto {
 	
-	@Override
-	public String toString() {
-		return "ArchiveAgentDto [Aag_Name=" + Aag_Name + ", Aag_Type=" + Aag_Type + ", Aag_Desc=" + Aag_Desc
-				+ ", Aag_class=" + Aag_class + ", Aag_Opclass=" + Aag_Opclass + ", Aag_Msgfile=" + Aag_Msgfile
-				+ ", sc_class=" + sc_class + ", de_class=" + de_class + ", de_Basedir=" + de_Basedir + ", de_Hashdirs="
-				+ de_Hashdirs + ", de_Dateformat=" + de_Dateformat + ", de_filesystemclass=" + de_filesystemclass
-				+ ", de_filesystemkb=" + de_filesystemkb + ", th_Ops=" + th_Ops + ", th_Count=" + th_Count + "]";
-	}
-
 	private String Aag_Name;
 	
 	private String Aag_Type;
@@ -57,6 +48,13 @@ public class ArchiveAgentDto {
 	private String th_Ops;
 	
 	private String th_Count;
+
+	private List<ArchiveAgentDto> archiveAgentDtoList ;
+	
+	public ArchiveAgentDto() {
+		this.archiveAgentDtoList = new ArrayList<>();
+	}
+
 
 
 	public String getAag_Name() {
@@ -178,6 +176,17 @@ public class ArchiveAgentDto {
 	public void setTh_Count(String th_Count) {
 		this.th_Count = th_Count;
 	}
+
+	public List<ArchiveAgentDto> getArchiveAgentDtoList() {
+		return archiveAgentDtoList;
+	}
+
+	public void setArchiveAgentDtoList(List<ArchiveAgentDto> archiveAgentDtoList) {
+		this.archiveAgentDtoList = archiveAgentDtoList;
+	}
+	
+	
+	
 	
 
 }

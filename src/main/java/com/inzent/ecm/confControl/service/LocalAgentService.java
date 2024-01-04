@@ -11,6 +11,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LocalAgentService {
 
+	public void test() {
+		// TODO Auto-generated method stub
+		System.out.println("LocalAgent");
+	}
+
 	public LocalAgentDto getAttribute(Element ele) {
 
 		LocalAgentDto local = new LocalAgentDto();
