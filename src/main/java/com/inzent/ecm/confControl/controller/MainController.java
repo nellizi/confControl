@@ -34,7 +34,6 @@ import com.inzent.ecm.confControl.service.CommService;
 import com.inzent.ecm.confControl.service.CreateXML;
 import com.inzent.ecm.confControl.service.DataService;
 import com.inzent.ecm.confControl.service.Delete;
-import com.inzent.ecm.confControl.service.FileService;
 import com.inzent.ecm.confControl.service.LocalAgentService;
 import com.inzent.ecm.confControl.service.MakeDir;
 import com.inzent.ecm.confControl.service.ServerService;
@@ -55,7 +54,7 @@ public class MainController {
 	private final MakeDir makeDir;
 
 	public MainController(ArchiveService archiveService, CommService commService, DataService dataService,
-			ServerService serverService, LocalAgentService localService, CreateXML createXML, Delete delete, FileService fileService, MakeDir makeDir) {
+			ServerService serverService, LocalAgentService localService, CreateXML createXML, Delete delete, MakeDir makeDir) {
 		this.archiveService = archiveService;
 		this.commService = commService;
 		this.dataService = dataService;
@@ -152,7 +151,7 @@ public class MainController {
 		}
 		
 		  delete.DeleteFile(requestFile);
-		  delete.DeleteFile(path);
+//		  delete.DeleteFile(path);
 		 
 
 
@@ -164,9 +163,9 @@ public class MainController {
 	@GetMapping("/create")
 	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
-			@ModelAttribute LocalAgentDto localDto
+			@ModelAttribute LocalAgentDto localDto, @RequestParam String dirName, @RequestParam String foldName
 			) throws ParserConfigurationException, TransformerException {
-			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
+			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto, dirName, foldName);
 			
 						
 		return "main";
