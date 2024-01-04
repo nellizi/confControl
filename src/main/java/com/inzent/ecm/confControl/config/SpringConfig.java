@@ -9,6 +9,7 @@ import com.inzent.ecm.confControl.service.CreateXML;
 import com.inzent.ecm.confControl.service.DataService;
 import com.inzent.ecm.confControl.service.Delete;
 import com.inzent.ecm.confControl.service.LocalAgentService;
+import com.inzent.ecm.confControl.service.MakeDir;
 import com.inzent.ecm.confControl.service.ServerService;
 
 @Configuration
@@ -48,6 +49,12 @@ public class SpringConfig {
 	@Bean
 	public Delete delete() {
 		return new Delete();
+	}
+	
+	
+	@Bean
+	public MakeDir makeDir() {
+		return new MakeDir();
 	}
 	
 	

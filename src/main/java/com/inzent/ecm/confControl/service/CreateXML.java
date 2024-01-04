@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateXML {
 
-	public void createXML(ServerDto serverDto, ArchiveAgentDto arcAgentDto, CommAgentDto commDto, DataAgentDto dataDto, LocalAgentDto localDto) throws ParserConfigurationException, TransformerException {
+	public void createXML(ServerDto serverDto, ArchiveAgentDto arcAgentDto, CommAgentDto commDto, DataAgentDto dataDto, LocalAgentDto localDto, String dirName, String foldName) throws ParserConfigurationException, TransformerException {
 
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -180,11 +180,23 @@ public class CreateXML {
 		transformer.setOutputProperty("doctype-public", "yes"); // document.setXmlStandalone(true); 하면 개행이 안 되기 때문에 추가
 
 		Source source = new DOMSource(document);
-		File file = new File("C:\\test", "conf.xml");
-		StreamResult result = new StreamResult(file);
+		File dir = new File(dirName);
+		if (!dir.exists()) {
+			try {
+				dir.mkdir();
+				
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+		} else {
+			System.out.println("폴더가 이미 존재합니다..");
+			
+		}
+		File file = new File(dir, foldName);
 		
+	
+		StreamResult result = new StreamResult(file);
 		transformer.transform(source, result);
-
 	}
 
 }

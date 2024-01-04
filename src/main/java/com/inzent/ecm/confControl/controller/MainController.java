@@ -35,6 +35,7 @@ import com.inzent.ecm.confControl.service.CreateXML;
 import com.inzent.ecm.confControl.service.DataService;
 import com.inzent.ecm.confControl.service.Delete;
 import com.inzent.ecm.confControl.service.LocalAgentService;
+import com.inzent.ecm.confControl.service.MakeDir;
 import com.inzent.ecm.confControl.service.ServerService;
 
 import lombok.RequiredArgsConstructor;
@@ -49,12 +50,11 @@ public class MainController {
 	private final ServerService serverService;
 	private final LocalAgentService localService;
 	private final CreateXML createXML;
-	/* private final Delete delete; */
-
-    private final Delete delete; 
+	private final Delete delete; 
+	private final MakeDir makeDir;
 
 	public MainController(ArchiveService archiveService, CommService commService, DataService dataService,
-			ServerService serverService, LocalAgentService localService, CreateXML createXML, Delete delete) {
+			ServerService serverService, LocalAgentService localService, CreateXML createXML, Delete delete, MakeDir makeDir) {
 		this.archiveService = archiveService;
 		this.commService = commService;
 		this.dataService = dataService;
@@ -62,6 +62,7 @@ public class MainController {
 		this.localService = localService;
 		this.createXML = createXML;
 		this.delete = delete;
+		this.makeDir = makeDir;
 
 	}
 
@@ -71,11 +72,6 @@ public class MainController {
 		return "/main";
 	}
 	
-//	@GetMapping("/parse")
-//	public String test_3() {
-//
-//		return "/newTest2";
-//	}
 
 	
 	@PostMapping("/parse")
@@ -87,11 +83,12 @@ public class MainController {
 		ArchiveAgentDto archive = null;
 		DataAgentDto data = null;
 		List<ArchiveAgentDto> archiveList = new ArrayList<>();
+		File path = makeDir.makeDir();
 
 		// XML 문서 파싱
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-		File requestFile = new File("C://TEST/" + UUID.randomUUID().toString());// 임시로 파일 생성
+		File requestFile = new File(path+"/" + UUID.randomUUID().toString());// 임시로 파일 생성
 		file.transferTo(requestFile);// 파일로 변환
 		System.out.println(file);
 		Document document = documentBuilder.parse(requestFile.getAbsoluteFile());
@@ -152,20 +149,9 @@ public class MainController {
 			}
 			
 		}
-
-		if (requestFile.exists()) {
-			if (requestFile.delete()) {
-				System.out.println("삭제성공");
-			} else {
-				System.out.println("삭제실패");
-			}
-		} else {
-			System.out.println("파일이 존재하지 않습니다.");
-		}
 		
-		
-
 		  delete.DeleteFile(requestFile);
+//		  delete.DeleteFile(path);
 		 
 
 
@@ -177,9 +163,9 @@ public class MainController {
 	@GetMapping("/create")
 	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
-			@ModelAttribute LocalAgentDto localDto
+			@ModelAttribute LocalAgentDto localDto, @RequestParam String dirName, @RequestParam String foldName
 			) throws ParserConfigurationException, TransformerException {
-			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto);
+			createXML.createXML(serverDto, arcAgentDto, CommDto, dataDto, localDto, dirName, foldName);
 			
 						
 		return "main";
