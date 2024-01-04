@@ -876,6 +876,7 @@
 	
 	function validateCharInput(inputField) {
 	  // 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
+	  inputField.value = inputField.value.replace(/[^0-9.]/g, '');
 	}
 	</script>
 	
