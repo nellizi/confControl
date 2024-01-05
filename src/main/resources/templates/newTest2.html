@@ -6,93 +6,9 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
    <title>Document</title>
-   <style>
-      .body {
-      margin: 0 auto;
-      }
-      
-      .end-box {
-         width: 80%;
-         margin: 0 auto;
-
-      }
-
-      .accordion {
-         margin: 0 auto;
-         
-      }
-
-      .accordion ul>li {
-         overflow: hidden;
-         max-height: 40px;
-         transition: 0.3s;
-         width: 95%;
-         margin: 0 auto;
-      }
-
-      .accordion ul>li.on {
-         max-height: 800px;
-      }
-
-      .accordion ul>li {}
-
-      p {
-         margin-top: 10px;
-      }
-
-
-
-      .accordion ul>li .title {
-         background-color: antiquewhite;
-         height: 40px;
-         display: flex;
-         align-items: center;
-         padding-left: 0.5rem;
-      }
-
-
-      .accordion ul>li .desc {
-         padding: 0.5rem;
-      }
-
-
-      .list-a {
-         display: flex;
-         height: 50px;
-         text-align: center;
-      }
-
-      .list-content button {
-         flex: 1 1 0%;
-         align-items: center;
-         justify-content: center;
-         display: flex;
-         border: 1px solid black;
-         background: white;
-         border-radius: 15px;
-         font-size: 17px;
-         font-weight: 800;
-
-      }
-
-      .con:hover{
-         background-color: orange;
-      }
-      .con.active {
-         background-color: orange;
-      }
-      .con:focus {
-         background-color: orange;
-      }
-
-      .con:visited {
-
-         color: white;
-      }
-   </style>
-
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <link rel="stylesheet" href="parse.css">
 </head>
 
 <body>
@@ -101,96 +17,88 @@
       
    <div style="width: 1300px; margin: 0 auto;">
       <div>
+      	<div class="row">
+      	<div class="col-md-6">
          <strong>
             <p style="font-size: 25px;">Server</p>
          </strong>
-         <div class="row" id="data_con">
-            <div class="col-auto">
-               <label class="col-form-label">keepperfstats</label>
-            </div>
-            <div class="col-auto">
+         </div>
+         <div class="col-md-6">
+         <strong>
+            <p style="font-size: 25px;">Logwriter</p>
+         </strong>
+         </div>
+         </div>
+         
+
+         
+         
+           <div class="row" id="data_con">
+           <div class="col-md-3">
+              <label for="arch-name" class="form-label">keepperfstats</label>
                <select class="form-control custom-control" th:value="${server.se_keepperfstats}" name="se_keepperfstats">
                   <option th:selected="${server.se_keepperfstats}=='false'" th:text="false" th:value="false">false
                   </option>
                   <option th:selected="${server.se_keepperfstats}=='true'" th:text="true" th:value="true">true
                   </option>
                </select>
-            </div>
-            <div class="col-auto">
-               <label for="inputPassword6" class="col-form-label">basemsg</label>
-            </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" name="se_basemsg" th:value="${server.se_basemsg}">
-            </div>
-         </div>
-         <br>
-         <!--
-              Logwriter
-            -->
-         <strong>
-            <p style="font-size: 25px;">Logwriter</p>
-         </strong>
-         <div class="row" id="data_con">
-            <div class="col-auto">
-               <label class="col-form-label">class</label>
-            </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="lo_Class" th:value="${server.lo_Class}">
-            </div>
-            <div class="col-auto">
-               <label for="inputPassword6" class="col-form-label">level</label>
-            </div>
-           <div class="col-auto">
-            <select class="form-control custom-control" th:value="${server.lo_Level}" name="lo_Level">
+           </div>
+           <div class="col-md-3">
+              <label for="arch-type" class="form-label">basemsg</label>
+              <input type="text" class="form-control" onclick="logValueOnClick(37, this)" oninput="validateNumberInput(this);" onchange="myFunction(37, this)"
+                 th:value="${server.se_basemsg}" name="se_basemsg">
+           </div>
+           
+           <div class="col-md-3">
+              <label for="arch-age-class" class="form-label">class</label>
+              <input type="text" class="form-control" onclick="logValueOnClick(38, this)" oninput="validateNumberInput(this);" onchange="myFunction(38, this)" name="lo_Class"
+                 th:value="${server.lo_Class}" id="arch-age-class">
+           </div>
+           <div class="col-md-3">
+              <label for="arch-age-class" class="form-label">level</label>
+              <select class="form-control custom-control" th:value="${server.lo_Level}" name="lo_Level">
                <option th:selected="${server.lo_Level}=='1'" th:text="1" th:value="1">1</option>
                <option th:selected="${server.lo_Level}=='2'" th:text="2" th:value="2">2</option>
                <option th:selected="${server.lo_Level}=='3'" th:text="3" th:value="3">3</option>
                <option th:selected="${server.lo_Level}=='3'" th:text="4" th:value="4">4</option>
                <option th:selected="${server.lo_Level}=='5'" th:text="5" th:value="5">5</option>
             </select>
-         </div>
+           </div>
+        </div>
+        
+         <br>
 
-
-         </div>
 
          <!--
               property
             -->
+      	<div class="row">
+      	<div class="col-md-6">
          <strong>
             <p style="font-size: 25px;">property</p>
          </strong>
+         </div>
+         <div class="col-md-6">
+         <strong>
+            <p style="font-size: 25px;">Local Agent</p>
+         </strong>
+         </div>
+         </div>
+         
          <div class="row" id="data_con">
-            <div class="col-auto">
-               <label class="col-form-label">name</label>
-            </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Name" th:value="${server.po_Name}">
-            </div>
-            <div class="col-auto">
-               <label for="inputPassword6" class="col-form-label">section</label>
-            </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Section" th:value="${server.po_Section}">
-            </div>
-
-         </div>
-
-      </div>
-      <br>
-
-      <!--
-          LocalAgent
-        -->
-
-      <strong>
-         <p style="font-size: 25px;">LocalAgent</p>
-      </strong>
-      <div class="row" id="data_con">
-         <div class="col-auto">
-            <label class="col-form-label">machineid</label>
-         </div>
-         <div class="col-auto">
-            <select class="form-control custom-control" th:value="${local.machineId}" name="machineId">
+            <div class="col-md-3">
+              <label for="arch-type" class="form-label">name</label>
+              <input type="text" class="form-control custom-control" onclick="logValueOnClick(39, this)" oninput="validateNumberInput(this);" onchange="myFunction(39, this)"
+                 th:value="${server.po_Name}" name="po_Name">
+           </div>
+           <div class="col-md-3">
+              <label for="arch-type" class="form-label">section</label>
+              <input type="text" class="form-control custom-control" onclick="logValueOnClick(40, this)" oninput="validateNumberInput(this);" onchange="myFunction(40, this)"
+                 th:value="${server.po_Section}" name="po_Section">
+           </div>
+          <div class="col-auto">
+              <label for="arch-type" class="form-label">section</label>
+           <select class="form-control custom-control" th:value="${local.machineId}" name="machineId">
                <option th:selected="${local.machineId}=='0'" th:text="0" th:value="0">0</option>
                <option th:selected="${local.machineId}=='1'" th:text="1" th:value="1">1</option>
                <option th:selected="${local.machineId}=='2'" th:text="2" th:value="2">2</option>
@@ -198,10 +106,10 @@
                <option th:selected="${local.machineId}=='4'" th:text="4" th:value="4">4</option>
                <option th:selected="${local.machineId}=='5'" th:text="5" th:value="5">5</option>
             </select>
-         </div>
-
-
-      </div>
+           </div>
+           </div>
+          
+  
       <br>
       <div>
          <!--
@@ -800,7 +708,7 @@
 
          const newP = document.createElement('div');
          newP.innerHTML = '<div class="accordion"><ul><li class="on"><div class="title"><span>New Archive</span></div><strong><p style="font-size: 23px;">Agent</p></strong>'
-            + '<div class="row" id="hello"><div class="col-md-3"><label for="arch-name" class="form-label">name</label><input type="text" class="form-control" oninput="validateNumberInput(this);" name="Aag_Name" th:value="${archive.Aag_Name}" id="arch-name"></div><div class="col-md-3"><label for="arch-type" class="form-label">type</label><input type="text" class="form-control" name="" th:value="${archive.ag_Type}" id="arch-type"></div>'
+            + '<div class="row" id="hello"><div class="col-md-3"><label for="arch-name" class="form-label">name</label><input type="text" class="form-control" name="" th:value="${archive.ag_Name}" id="arch-name"></div><div class="col-md-3"><label for="arch-type" class="form-label">type</label><input type="text" class="form-control" name="" th:value="${archive.ag_Type}" id="arch-type"></div>'
             + '<div class="col-6"><label for="arch-age-class" class="form-label">class</label><input type="text" class="form-control" name="" th:value="${archive.ag_class}" id="arch-age-class"></div></div><div class="row"><div class="col-md-6"><label for="arch-opclass" class="form-label">opclass</label><input type="text" class="form-control" name="" th:value="${archive.ag_Opclass}" id="arch-opclass"></div>'
             + '<div class="col-md-6"><label for="arch-msgfile" class="form-label">msgfile</label><input type="text" class="form-control" name="" th:value="${archive.ag_Msgfile}" id="arch-msgfile"></div></div><strong><p style="font-size: 23px;">scheduler</p></strong><div class="row" id="hello"><div class="col-md-12"><label for="arch-shc-class" class="form-label">class</label><input type="text" class="form-control" name="" value="" id="arch-shc-class"></div></div>'
             + '<strong><p style="font-size: 23px;">device-if</p></strong><div class="row" id="hello"><div class="col-md-4"><label for="arch-shc-class" class="form-label">class</label><input type="text" class="form-control" name="" value="" id="arch-shc-class"></div><div class="col-md-4"><label for="arch-basedir" class="form-label">basedir</label><input type="text" class="form-control" name="" value="" id="arch-basedir"></div><div class="col-md-4"><label for="arch-hashdirs" class="form-label">hashdirs</label><input type="text" class="form-control" name="" value="" id="arch-hashdirs"></div></div>'

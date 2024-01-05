@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateXML {
 
-
 	public void createXML(ServerDto serverDto, List<ArchiveAgentDto> archiveAgentDtoList, CommAgentDto commDto,
 			DataAgentDto dataDto, LocalAgentDto localDto, String dirName, String foldName) throws ParserConfigurationException, TransformerException {
 
