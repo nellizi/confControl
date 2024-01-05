@@ -5,6 +5,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
    <title>Document</title>
    <style>
       .body {
@@ -97,7 +98,7 @@
 
 <body>
       <button type="button" class="btn btn-secondary"  onclick="history.back();">이전으로</button>
-   <form action="create">
+   <form action="create" id ="xmlForm">
       
    <div style="width: 1300px; margin: 0 auto;">
       <div>
@@ -435,9 +436,10 @@
                   </section>
 
                </div>
+               <!--
                <div>
                       <input type="button" class="btn btn-primary" id="btn" value="추가" onclick="add_textbox()">    
-                   </div>
+                </div>   -->
             </div>
             
          </div>
@@ -756,7 +758,7 @@
 
    
    <button type="submit" class="btn btn-secondary" style="background-color: red; margin-left: 1146px;" onclick="call_confirm();">저장</button>
-   <button type="button" class="btn btn-secondary" style="background-color: black; margin-left: 1146px;" onclick="middle_check();">중간저장</button>
+   <button type="button" class="btn btn-secondary" style="background-color: black; margin-left: 1146px;" onclick="makeTemp();">중간저장</button>
       </form>
       
       
@@ -768,7 +770,29 @@
       
 
    <script>
+	   
+	   
+	   function makeTemp(){
+	console.log("woek");
 
+        var formData = $('#xmlForm').serialize(); // 폼 데이터를 직렬화합니다.
+        
+        $.ajax({
+            type: 'POST',
+            url: '/create', // 서버의 처리 URL을 입력합니다.
+            data: formData,
+            success: function(response) {
+                // 서버에서의 응답 처리
+                console.log('Success:', response);
+                alert("저장되었습니다.")
+            },
+            error: function(error) {
+                // 오류 처리
+                console.log('Error:', error);
+            }
+        });
+    }
+	   
 
       function toggleAccordion() {
          const clickedItem = this.closest("li");
@@ -782,6 +806,10 @@
             }
          });
       }
+
+
+
+
 
       document.addEventListener("DOMContentLoaded", function () {
          const accordions = document.querySelectorAll(".accordion");
