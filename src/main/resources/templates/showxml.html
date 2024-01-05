@@ -1,198 +1,110 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-   <script src="/script.js"></script>
-   <title>Document</title>
-   <style>
-      .body {
-      margin: 0 auto;
-      }
-      
-      .end-box {
-         width: 80%;
-         margin: 0 auto;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/script.js"></script>
+<title>Document</title>
 
-      }
-
-      .accordion {
-         margin: 0 auto;
-         
-      }
-
-      .accordion ul>li {
-         overflow: hidden;
-         max-height: 40px;
-         transition: 0.3s;
-         width: 95%;
-         margin: 0 auto;
-      }
-
-      .accordion ul>li.on {
-         max-height: 800px;
-      }
-
-      .accordion ul>li {}
-
-      p {
-         margin-top: 10px;
-      }
-
-
-
-      .accordion ul>li .title {
-         background-color: antiquewhite;
-         height: 40px;
-         display: flex;
-         align-items: center;
-         padding-left: 0.5rem;
-      }
-
-
-      .accordion ul>li .desc {
-         padding: 0.5rem;
-      }
-
-
-      .list-a {
-         display: flex;
-         height: 50px;
-         text-align: center;
-      }
-
-      .list-content button {
-         flex: 1 1 0%;
-         align-items: center;
-         justify-content: center;
-         display: flex;
-         border: 1px solid black;
-         background: white;
-         border-radius: 15px;
-         font-size: 17px;
-         font-weight: 800;
-
-      }
-
-      .con:hover{
-         background-color: orange;
-      }
-      .con.active {
-         background-color: orange;
-      }
-      .con:focus {
-         background-color: orange;
-      }
-
-      .con:visited {
-
-         color: white;
-      }
-   </style>
-
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   <link rel="stylesheet" href="parse.css">
 </head>
 
 <body>
-      <button type="button" class="btn btn-secondary"  onclick="history.back();">이전으로</button>
-   <form action="create" id ="xmlForm">
-      
-   <div style="width: 1300px; margin: 0 auto;">
-      <div>
+<div style="width: 1300px; margin: 0 auto; ">
+	<button type="button" class="btn btn-secondary" onclick="history.back();" style=" margin-top:10px">이전으로</button>
+	<div class="info" style="margin-left: 1100px;">
+      <a href="conf_2102_sample.xml" download >conf_sample 다운로드</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	  <a href="XTORM 환경 구성 가이드.pdf" download >conf 상세정보 다운로드</a>
+	  </div>
+	<form action="create" id="xmlForm">
+		
+		
+		
+		
+		
+		<!--서버 -->
+		<div class="row">
+      	<div class="col-md-6">
          <strong>
             <p style="font-size: 25px;">Server</p>
          </strong>
-         <div class="row" id="data_con">
-            <div class="col-auto">
-               <label class="col-form-label">keepperfstats</label>
-            </div>
-            <div class="col-auto">
-               <select class="form-control custom-control" th:value="${server.se_keepperfstats}" name="se_keepperfstats">
+         </div>
+         <div class="col-md-6">
+         <strong>
+            <p style="font-size: 25px;">Logwriter</p>
+         </strong>
+         </div>
+         </div>
+         
+
+         
+         
+           <div class="row" id="data_con">
+           <div class="col-md-3">
+              <label for="arch-name" class="form-label">keepperfstats</label>
+                <select class="form-control custom-control" th:value="${server.se_keepperfstats}" name="se_keepperfstats" onchange="myFunction(50,this)" onclick="logValueOnClick(50, this)">
                   <option th:selected="${server.se_keepperfstats}=='false'" th:text="false" th:value="false">false
                   </option>
                   <option th:selected="${server.se_keepperfstats}=='true'" th:text="true" th:value="true">true
                   </option>
                </select>
-            </div>
-            <div class="col-auto">
-               <label for="inputPassword6" class="col-form-label">basemsg</label>
-            </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" name="se_basemsg" th:value="${server.se_basemsg}">
-            </div>
-         </div>
-         <br>
-         <!--
-              Logwriter
-            -->
-         <strong>
-            <p style="font-size: 25px;">Logwriter</p>
-         </strong>
-         <div class="row" id="data_con">
-            <div class="col-auto">
-               <label class="col-form-label">class</label>
-            </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="lo_Class" th:value="${server.lo_Class}">
-            </div>
-            <div class="col-auto">
-               <label for="inputPassword6" class="col-form-label">level</label>
-            </div>
-           <div class="col-auto">
-            <select class="form-control custom-control" th:value="${server.lo_Level}" name="lo_Level">
+           </div>
+           <div class="col-md-3">
+              <label for="arch-type" class="form-label">basemsg</label>
+              <input type="text" class="form-control" onclick="logValueOnClick(37, this)" oninput="validateNumberInput(this);" onchange="myFunction(37, this)"
+                 th:value="${server.se_basemsg}" name="se_basemsg">
+           </div>
+           
+           <div class="col-md-3">
+              <label for="arch-age-class" class="form-label">class</label>
+               <input type="text" class="form-control custom-control" name="se_basemsg" th:value="${server.se_basemsg}" onchange="myFunction(51,this)" onclick="logValueOnClick(51, this)" oninput="validateNumberInput(this);">
+           </div>
+           <div class="col-md-3">
+              <label for="arch-age-class" class="form-label">level</label>
+              <select class="form-control custom-control" th:value="${server.lo_Level}" name="lo_Level" onchange="myFunction(48,this)" onclick="logValueOnClick(48, this)">
                <option th:selected="${server.lo_Level}=='1'" th:text="1" th:value="1">1</option>
                <option th:selected="${server.lo_Level}=='2'" th:text="2" th:value="2">2</option>
                <option th:selected="${server.lo_Level}=='3'" th:text="3" th:value="3">3</option>
                <option th:selected="${server.lo_Level}=='3'" th:text="4" th:value="4">4</option>
                <option th:selected="${server.lo_Level}=='5'" th:text="5" th:value="5">5</option>
             </select>
-         </div>
+           </div>
+        </div>
+        
+         <br>
 
-
-         </div>
 
          <!--
               property
             -->
+      	<div class="row">
+      	<div class="col-md-6">
          <strong>
             <p style="font-size: 25px;">property</p>
          </strong>
+         </div>
+         <div class="col-md-6">
+         <strong>
+            <p style="font-size: 25px;">Local Agent</p>
+         </strong>
+         </div>
+         </div>
+         
          <div class="row" id="data_con">
-            <div class="col-auto">
-               <label class="col-form-label">name</label>
-            </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Name" th:value="${server.po_Name}">
-            </div>
-            <div class="col-auto">
-               <label for="inputPassword6" class="col-form-label">section</label>
-            </div>
-            <div class="col-auto">
-               <input type="text" class="form-control custom-control" oninput="validateNumberInput(this);" onchange="myFunction(this)" name="po_Section" th:value="${server.po_Section}">
-            </div>
-
-         </div>
-
-      </div>
-      <br>
-
-      <!--
-          LocalAgent
-        -->
-
-      <strong>
-         <p style="font-size: 25px;">LocalAgent</p>
-      </strong>
-      <div class="row" id="data_con">
-         <div class="col-auto">
-            <label class="col-form-label">machineid</label>
-         </div>
-         <div class="col-auto">
-            <select class="form-control custom-control" th:value="${local.machineId}" name="machineId">
+            <div class="col-md-3">
+              <label for="arch-type" class="form-label">name</label>
+              <input type="text" class="form-control custom-control" oninput="validateNumberInputProName(52,this);" onchange="myFunction(52, this)" name="po_Name" th:value="${server.po_Name}">
+           </div>
+           <div class="col-md-3">
+              <label for="arch-type" class="form-label">section</label>
+              <input type="text" class="form-control custom-control" oninput="validateEngInput(53, this);" onchange="myFunction(53, this)" name="po_Section" th:value="${server.po_Section}" >
+           </div>
+          <div class="col-auto">
+              <label for="arch-type" class="form-label">machineId</label>
+           <select class="form-control custom-control" th:value="${local.machineId}" name="machineId" onchange="myFunction(49,this)" onclick="logValueOnClick(49, this)">
                <option th:selected="${local.machineId}=='0'" th:text="0" th:value="0">0</option>
                <option th:selected="${local.machineId}=='1'" th:text="1" th:value="1">1</option>
                <option th:selected="${local.machineId}=='2'" th:text="2" th:value="2">2</option>
@@ -200,567 +112,516 @@
                <option th:selected="${local.machineId}=='4'" th:text="4" th:value="4">4</option>
                <option th:selected="${local.machineId}=='5'" th:text="5" th:value="5">5</option>
             </select>
-         </div>
-
-
-      </div>
-      <br>
-      <div>
-         <!--
+           </div>
+           </div>
+		<br>
+		
+		
+		
+		
+		
+		
+		<!--
           Agent별 버튼
         -->
-         <div class="list-content">
-            <div class="list-a">
-               <button class="con" type="button" onclick="show_btn(this);" id="Comm_con" name="show"
-                  value="">
-                  <span class="r_Comm">Comm</span>
-               </button>
-               <button class="con" type="button" onclick="show_btn(this);" id="Arc_con" name="show"
-                  value="">
-                  <span class="r_Arc">Archive</span>
-               </button>
-               <button class="con" type="button" onclick="show_btn(this);" id="Data_con" name="show"
-                  value="">
-                  <span class="r_Data">Data</span>
-               </button>
-
-
-            </div>
-            
-
-         </div>
-         <!--
+		<div class="list-content" style="margin-top: 20px;">
+			<div class="list-a">
+				<button class="con" type="button" onclick="show_btn(this);" id="Comm_con" name="show" value="">
+				<span class="r_Comm">Comm</span>
+				</button>
+				<button class="con" type="button" onclick="show_btn(this);" id="Arc_con" name="show" value="">
+				<span class="r_Arc">Archive</span>
+				</button>
+				<button class="con" type="button" onclick="show_btn(this);" id="Data_con" name="show" value="">
+				<span class="r_Data">Data</span>
+				</button>
+			</div>
+		</div>
+		<!--
               Comm Agent
             -->
-         <div id="Comm_conshow" class="box">
-            <div class="end-box">
-               
-                  <div class="accordion">
-                     <strong>
-                        <p style="margin-top: 30px;font-size: 25px;">agent</p>
-                     </strong>
-                        <div class="row" id="com_div">
-                           <div class="col-md-3">
-                              <label for="arch-name" class="form-label">name</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(0, this)" oninput="validateNumberInput(this);" onchange="myFunction(0, this)" name="Cag_Name"
-                                 th:value="${comm.Cag_Name}" id="arch-name">
-                           </div>
-                           <div class="col-md-3">
-                              <label for="arch-type" class="form-label">type</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(1, this)" oninput="validateNumberInput(this);" onchange="myFunction(1, this)" name="Cag_Type"
-                                 th:value="${comm.Cag_Type}" id="arch-type">
-                           </div>
-                           
-                           <div class="col-md-6">
-                              <label for="arch-age-class" class="form-label">class</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(2, this)" oninput="validateNumberInput(this);" onchange="myFunction(2, this)" name="Cag_Class"
-                                 th:value="${comm.Cag_Class}" id="arch-age-class">
-                           </div>
-                        </div>
-                        
-                                  
-                        <div class="row" id="com_div">
-                           <div class="col-md-6">
-                              <label for="arch-name" class="form-label">opclass</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(3, this)" oninput="validateNumberInput(this);" onchange="myFunction(3, this)" name="Cag_Opclss"
-                                 th:value="${comm.Cag_Opclss}" id="arch-name">
-                           </div>
-                           <div class="col-md-6">
-                              <label for="arch-type" class="form-label">msgfile</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(4, this)" oninput="validateNumberInput(this);" onchange="myFunction(4, this)" name="Cag_Msgfile"
-                                 th:value="${comm.Cag_Msgfile}" id="arch-type">
-                           </div>
-                        </div>
-                        <br>
-
-
-                        <strong>
-                           <p style="margin-top: 30px; font-size: 25px;">Socket</p>
-                        </strong>
-                              
-                        <div class="row" id="com_div">
-                           <div class="col-md-3">
-                              <label for="arch-name" class="form-label">hostname</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(5, this)" oninput="validateCharInput(this);" onchange="myFunction(5, this)" name="so_Port"
-                                 th:value="${comm.so_Hostname}" id="arch-name">
-                           </div>
-                           <div class="col-md-3">
-                              <label for="arch-type" class="form-label">port</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(6, this)" oninput="validateCharInput(this);" onchange="myFunction(6, this)" name="so_Port"
+		<div id="Comm_conshow" class="box">
+			<div class="end-box">
+				<div class="accordion">
+					
+					<strong>
+					<p style="margin-top: 30px;font-size: 25px;">
+						 agent
+					</p>
+					</strong>
+					<div class="row" id="com_div">
+						<div class="col-md-3">
+							<label for="arch-name" class="form-label">name</label>
+							<input type="text" class="form-control" onclick="logValueOnClick(0, this)" oninput="validateNumberInput(this);" onchange="myFunction(0, this)" name="Cag_Name" th:value="${comm.Cag_Name}" id="arch-name">
+						</div>
+						<div class="col-md-3">
+							<label for="arch-type" class="form-label">type</label>
+							<input type="text" class="form-control" onclick="logValueOnClick(1, this)" oninput="validateNumberInput(this);" onchange="myFunction(1, this)" name="Cag_Type" th:value="${comm.Cag_Type}" id="arch-type">
+						</div>
+						<div class="col-md-6">
+							<label for="arch-age-class" class="form-label">class</label>
+							<input type="text" class="form-control" onclick="logValueOnClick(2, this)" oninput="validateNumberInput(this);" onchange="myFunction(2, this)" name="Cag_Class" th:value="${comm.Cag_Class}" id="arch-age-class">
+						</div>
+					</div>
+					<div class="row" id="com_div">
+						<div class="col-md-6">
+							<label for="arch-name" class="form-label">opclass</label>
+							<input type="text" class="form-control" onclick="logValueOnClick(3, this)" oninput="validateNumberInput(this);" onchange="myFunction(3, this)" name="Cag_Opclss" th:value="${comm.Cag_Opclss}" id="arch-name">
+						</div>
+						<div class="col-md-6">
+							<label for="arch-type" class="form-label">msgfile</label>
+							<input type="text" class="form-control" onclick="logValueOnClick(4, this)" oninput="validateNumberInput(this);" onchange="myFunction(4, this)" name="Cag_Msgfile" th:value="${comm.Cag_Msgfile}" id="arch-type">
+						</div>
+					</div>
+					<br>
+					<strong>
+					<p style="margin-top: 30px; font-size: 25px;">
+						 Socket
+					</p>
+					</strong>
+					<div class="row" id="com_div">
+						<div class="col-md-3">
+							<label for="arch-name" class="form-label">hostname</label>
+							<input type="text" class="form-control" onclick="logValueOnClick(5, this)" 
+							oninput="validateCharInput(this);" onchange="myFunction(5, this)" 
+							name="so_Port" th:value="${comm.so_Hostname}" id="arch-name">
+						</div>
+						<div class="col-md-3">
+							<label for="arch-type" class="form-label">port</label>
+							<input type="text" class="form-control" onclick="logValueOnClick(6, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(6, this)" name="so_Port"
                                  th:value="${comm.so_Port}" id="arch-type">
-                           </div>
-                           <div class="col-md-6">
-                              <label for="arch-age-class" class="form-label">clienttimeout</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(7, this)" oninput="validateCharInput(this);" onchange="myFunction(7, this)" name="so_ClientTimeOut"
+						</div>
+						<div class="col-md-6">
+							<label for="arch-age-class" class="form-label">clienttimeout</label>
+							<input type="text" class="form-control" onclick="logValueOnClick(7, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(7, this)" name="so_ClientTimeOut"
                                  th:value="${comm.so_ClientTimeOut}" id="arch-age-class">
-                           </div>
-                        </div>
-                        
-                        
-
-                     </div>
-                  </div>
-               </div>
-            
-         </div>
-         <br>
-
-
-         <div style="display: none;" class="box box2" id="Arc_conshow">
-            <div class="end-box">
-            
-               <div id="box">
-
-                  <section>
-                     <tr th:each="archive, loop : ${archiveList}">
-                        <div class="accordion">
-                           <ul>
-                              <li class="off">
-                                 <div class="title"><span th:text="${archive.Aag_Name}">Archive</span></div>
-                                 <strong>
-                                    <p style="font-size: 23px;">Agent</p>
-                                 </strong>
-                                 <div class="row" id="hello">
-                                    <div class="col-md-4">
-                                       <label for="arch-name" class="form-label">name</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(8, this)" oninput="validateNumberInput(this);" onchange="myFunction(8, this)" name="Aag_Name"
-                                          th:value="${archive.Aag_Name}" id="arch-name">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <label for="arch-type" class="form-label">type</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(9, this)" oninput="validateNumberInput(this);" onchange="myFunction(9, this)" name="Aag_Type"
-                                          th:value="${archive.Aag_Type}" id="arch-type">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <label for="arch-age-class" class="form-label">desc</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(10, this)" oninput="validateNumberInput(this);" onchange="myFunction(10, this)" name="Aag_Desc"
-                                          th:value="${archive.Aag_Desc}" id="arch-age-class">
-                                    </div>
-                                    
-                                 </div>
-                                 <div class="row" id="hello">
-                            <div class="col-md-4">
-                                       <label for="arch-age-class" class="form-label">class</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(11, this)" oninput="validateNumberInput(this);" onchange="myFunction(11, this)" name="Aag_class"
-                                          th:value="${archive.Aag_class}" id="arch-age-class">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <label for="arch-opclass" class="form-label">opclass</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(12, this)" oninput="validateNumberInput(this);" onchange="myFunction(12, this)" name="Aag_Opclass"
-                                          th:value="${archive.Aag_Opclass}" id="arch-opclass">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <label for="arch-msgfile" class="form-label">msgfile</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(13, this)" oninput="validateNumberInput(this);" onchange="myFunction(13, this)" name="Aag_Msgfile"
-                                          th:value="${archive.Aag_Msgfile}" id="arch-msgfile">
-                                    </div>
-                                 </div>
-
-                                 <strong>
-                                    <p style="font-size: 23px;">scheduler</p>
-                                 </strong>
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <label for="arch-shc-class" class="form-label">class</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(14, this)" oninput="validateNumberInput(this);" onchange="myFunction(14, this)" name="sc_class"
-                                          th:value="${archive.sc_class}" id="arch-sc-class">
-                                    </div>
-                                 </div>
-
-                                 <strong>
-                                    <p style="font-size: 23px;">device-if</p>
-                                 </strong>
-                                 <div class="row" id="hello">
-                                    <div class="col-md-4">
-                                       <label for="arch-dev-class" class="form-label">class</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(15, this)" oninput="validateNumberInput(this);" onchange="myFunction(15, this)" name="de_class"
-                                          th:value="${archive.de_class}" id="arch-dev-class">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <label for="arch-basedir" class="form-label">basedir</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(16, this)" oninput="validateNumberInput(this);" onchange="myFunction(16, this)" name="de_Basedir"
-                                          th:value="${archive.de_Basedir}" id="arch-basedir">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <label for="arch-hashdirs" class="form-label">hashdirs</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(17, this)" oninput="validateCharInput(this);" onchange="myFunction(17, this)" name="de_Hashdirs"
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<br>
+		<!--
+	Archive Agent
+-->
+		<div style="display: none;" class="box box2" id="Arc_conshow">
+			<div class="end-box">
+				<div id="box">
+					<section>
+					<tr th:each="archive, loop : ${archiveList}">
+						<div class="accordion">
+							<ul>
+								<li class="off">
+								<div class="title">
+									<span th:text="${archive.Aag_Name}">Archive</span>
+								</div>
+								<strong>
+								<p style="font-size: 23px;">
+									 Agent
+								</p>
+								</strong>
+								<div class="row" id="hello">
+									<div class="col-md-4">
+										<label for="arch-name" class="form-label">name</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(8, this)" oninput="validateNumberInput(this);" onchange="myFunction(8, this)" name="Aag_Name" th:value="${archive.Aag_Name}" id="arch-name">
+									</div>
+									<div class="col-md-4">
+										<label for="arch-type" class="form-label">type</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(9, this)" oninput="validateNumberInput(this);" onchange="myFunction(9, this)" name="Aag_Type" th:value="${archive.Aag_Type}" id="arch-type">
+									</div>
+									<div class="col-md-4">
+										<label for="arch-age-class" class="form-label">desc</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(10, this)" oninput="validateNumberInput(this);" onchange="myFunction(10, this)" name="Aag_Desc" th:value="${archive.Aag_Desc}" id="arch-age-class">
+									</div>
+								</div>
+								<div class="row" id="hello">
+									<div class="col-md-4">
+										<label for="arch-age-class" class="form-label">class</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(11, this)" oninput="validateNumberInput(this);" onchange="myFunction(11, this)" name="Aag_class" th:value="${archive.Aag_class}" id="arch-age-class">
+									</div>
+									<div class="col-md-4">
+										<label for="arch-opclass" class="form-label">opclass</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(12, this)" oninput="validateNumberInput(this);" onchange="myFunction(12, this)" name="Aag_Opclass" th:value="${archive.Aag_Opclass}" id="arch-opclass">
+									</div>
+									<div class="col-md-4">
+										<label for="arch-msgfile" class="form-label">msgfile</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(13, this)" oninput="validateNumberInput(this);" onchange="myFunction(13, this)" name="Aag_Msgfile" th:value="${archive.Aag_Msgfile}" id="arch-msgfile">
+									</div>
+								</div>
+								<strong>
+								<p style="font-size: 23px;">
+									 scheduler
+								</p>
+								</strong>
+								<div class="row">
+									<div class="col-md-12">
+										<label for="arch-shc-class" class="form-label">class</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(14, this)" oninput="validateNumberInput(this);" onchange="myFunction(14, this)" name="sc_class" th:value="${archive.sc_class}" id="arch-sc-class">
+									</div>
+								</div>
+								<strong>
+								<p style="font-size: 23px;">
+									 device-if
+								</p>
+								</strong>
+								<div class="row" id="hello">
+									<div class="col-md-4">
+										<label for="arch-dev-class" class="form-label">class</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(15, this)" oninput="validateNumberInput(this);" onchange="myFunction(15, this)" name="de_class" th:value="${archive.de_class}" id="arch-dev-class">
+									</div>
+									<div class="col-md-4">
+										<label for="arch-basedir" class="form-label">basedir</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(16, this)" oninput="validateNumberInput(this);" onchange="myFunction(16, this)" name="de_Basedir" th:value="${archive.de_Basedir}" id="arch-basedir">
+									</div>
+									<div class="col-md-4">
+										<label for="arch-hashdirs" class="form-label">hashdirs</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(17, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(17, this)" name="de_Hashdirs"
                                           th:value="${archive.de_Hashdirs}" id="arch-hashdirs">
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-md-4">
-                                       <label for="arch-dateformat" class="form-label">dateformat</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(18, this)" oninput="validateEngInput(this);" onchange="myFunction(18, this)" name="de_Dateformat"
-                                          th:value="${archive.de_Dateformat}" id="arch-dateformat">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <label for="arch-filesystemclass"
-                                          class="form-label">filesystemclass</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(19, this)" oninput="validateNumberInput(this);" onchange="myFunction(19, this)" name="de_filesystemclass"
-                                          th:value="${archive.de_filesystemclass}"
-                                          id="arch-filesystemclass">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <label for="arch-filesystemkb"
-                                          class="form-label">filesystemkb</label>
-                                       <select class="form-control custom-control"
-                                          th:value="${archive.de_filesystemkb}" onclick="logValueOnClick(25, this)" onchange="myFunction(25, this)" name="de_filesystemkb">
-                                          <option th:selected="${archive.de_filesystemkb}=='false'"
-                                             th:text="false" th:value="false">false</option>
-                                          <option th:selected="${archive.de_filesystemkb}=='true'"
-                                             th:text="true" th:value="true">true</option>
-
-                                       </select>
-                                    </div>
-                                 </div>
-
-                                 <strong>
-                                    <p style="font-size: 23px;">threadpool</p>
-                                 </strong>
-                                 <div class="row" id="hello">
-                                    <div class="col-md-6">
-                                       <label for="arch-ops" class="form-label">ops</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(20, this)" oninput="validateNumberInput(this);" onchange="myFunction(20, this)" name="th_Ops"
-                                          th:value="${archive.th_Ops}" id="arch-ops">
-                                    </div>
-                                    <div class="col-md-6">
-                                       <label for="arch-count" class="form-label">count</label>
-                                       <input type="text" class="form-control" onclick="logValueOnClick(21, this)" oninput="validateCharInput(this);" onchange="myFunction(21, this)" name="th_Count"
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<label for="arch-dateformat" class="form-label">dateformat</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(18, this)" oninput="validateEngInput(this);" onchange="myFunction(18, this)" name="de_Dateformat" th:value="${archive.de_Dateformat}" id="arch-dateformat">
+									</div>
+									<div class="col-md-4">
+										<label for="arch-filesystemclass" class="form-label">filesystemclass</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(19, this)" oninput="validateNumberInput(this);" onchange="myFunction(19, this)" name="de_filesystemclass" th:value="${archive.de_filesystemclass}" id="arch-filesystemclass">
+									</div>
+									<div class="col-md-4">
+										<label for="arch-filesystemkb" class="form-label">filesystemkb</label>
+										<select class="form-control custom-control" th:value="${archive.de_filesystemkb}" onclick="logValueOnClick(25, this)" onchange="myFunction(25, this)" name="de_filesystemkb">
+											<option th:selected="${archive.de_filesystemkb}=='false'" th:text="false" th:value="false">false</option>
+											<option th:selected="${archive.de_filesystemkb}=='true'" th:text="true" th:value="true">true</option>
+										</select>
+									</div>
+								</div>
+								<strong>
+								<p style="font-size: 23px;">
+									 threadpool
+								</p>
+								</strong>
+								<div class="row" id="hello">
+									<div class="col-md-6">
+										<label for="arch-ops" class="form-label">ops</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(20, this)" oninput="validateNumberInput(this);" onchange="myFunction(20, this)" name="th_Ops" th:value="${archive.th_Ops}" id="arch-ops">
+									</div>
+									<div class="col-md-6">
+										<label for="arch-count" class="form-label">count</label>
+										<input type="text" class="form-control" onclick="logValueOnClick(21, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(21, this)" name="th_Count"
                                           th:value="${archive.th_Count}" id="count">
-                                    </div>
-                                 </div>
-                              </li>
-                           </ul>
-                        </div>
-                     </tr>
-                     
-                  </section>
-
-               </div>
-               <!--
+									</div>
+								</div>
+								</li>
+							</ul>
+						</div>
+					</tr>
+					</section>
+				</div>
+				<!--
                <div>
                       <input type="button" class="btn btn-primary" id="btn" value="추가" onclick="add_textbox()">    
                 </div>   -->
-            </div>
-            
-         </div>
-
-         <!--
+			</div>
+		</div>
+		<!--
                   Data agent
                 -->
-
-         <div style="display: none; " class="box box3" id="Data_conshow">
-            <div class="end-box">
-               <div id="farm-box">
-                  <div class="accordion">
-                     <strong>
-                        <p style="font-size: 25px;">agent</p>
-                     </strong>
-
-                     
-                        <div class="row" id="data_con">
-                           <div class="col-md-3">
-                              <label class="form-label">name</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(22, this)" oninput="validateNumberInput(this);" onchange="myFunction(22, this)" name="Dag_Name"
-                                 th:value="${data.Dag_Name}">
-                           </div>
-                           <div class="col-md-3">
-                              <label class="form-label">type</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(23, this)" oninput="validateNumberInput(this);" onchange="myFunction(23, this)" name="Dag_Type"
-                                 th:value="${data.Dag_Type}">
-                           </div>
-                           <div class="col-md-3">
-                              <label class="form-label">class</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(24, this)" oninput="validateNumberInput(this);" onchange="myFunction(24, this)" name="Dag_Class"
-                                 th:value="${data.Dag_Class}">
-                           </div>
-                           <div class="col-md-3">
-                              <label class="form-label">msgfile</label>
-                              <input type="text" class="form-control" onclick="logValueOnClick(26, this)" oninput="validateNumberInput(this);" onchange="myFunction(26, this)" name="Dag_Msgfile"
-                                 th:value="${data.Dag_Msgfile}">
-                           </div>
-                        </div>
-                        
-                        
-                     <strong>
-                        <p style="margin-top: 30px; font-size: 25px;">dbpools</p>
-                     </strong>
-
-                    <div class="row" id="data_con">
-                        <div class="col-md-4">
-                           <label class="form-label">name</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(27, this)" oninput="validateNumberInput(this);" onchange="myFunction(27, this)" name="DPo_Name"
-                              th:value="${data.DPo_Name}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">driver</label>
-                           <input type="text" class="form-control changeColor" onclick="logValueOnClick(28, this)" oninput="validateNumberInput(this);" onchange="myFunction(28, this)" name="po_Driver" id="driver"
-                              th:value="${data.po_Driver}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">connect</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(29, this)" onchange="myFunction(29, this)" name="po_Connect" 
-                              th:value="${data.po_Connect}">
-                        </div>
-                     </div>
-                           
-
-                    <div class="row" id="data_con">
-                        <div class="col-md-4">
-                           <label class="form-label">dbtype</label>
-                           <select class="form-control custom-control" id="dbtype" th:value="${data.po_Dbtype}" onclick="logValueOnClick(30, this)" name="po_Dbtype"
+		<div style="display: none; " class="box box3" id="Data_conshow">
+			<div class="end-box">
+				<div id="farm-box">
+					<div class="accordion">
+						<strong>
+						<p style="font-size: 25px;">
+							 agent
+						</p>
+						</strong>
+						<div class="row" id="data_con">
+							<div class="col-md-3">
+								<label class="form-label">name</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(22, this)" oninput="validateNumberInput(this);" onchange="myFunction(22, this)" name="Dag_Name" th:value="${data.Dag_Name}">
+							</div>
+							<div class="col-md-3">
+								<label class="form-label">type</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(23, this)" oninput="validateNumberInput(this);" onchange="myFunction(23, this)" name="Dag_Type" th:value="${data.Dag_Type}">
+							</div>
+							<div class="col-md-3">
+								<label class="form-label">class</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(24, this)" oninput="validateNumberInput(this);" onchange="myFunction(24, this)" name="Dag_Class" th:value="${data.Dag_Class}">
+							</div>
+							<div class="col-md-3">
+								<label class="form-label">msgfile</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(26, this)" oninput="validateNumberInput(this);" onchange="myFunction(26, this)" name="Dag_Msgfile" th:value="${data.Dag_Msgfile}">
+							</div>
+						</div>
+						<strong>
+						<p style="margin-top: 30px; font-size: 25px;">
+							 dbpools
+						</p>
+						</strong>
+						<div class="row" id="data_con">
+							<div class="col-md-4">
+								<label class="form-label">name</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(27, this)" oninput="validateNumberInput(this);" onchange="myFunction(27, this)" name="DPo_Name" th:value="${data.DPo_Name}">
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">driver</label>
+								<input type="text" class="form-control changeColor" onclick="logValueOnClick(28, this)" oninput="validateNumberInput(this);" readonly onchange="myFunction(28, this)" name="po_Driver" id="driver"
+                             	 th:value="${data.po_Driver}">
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">connect</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(29, this)" onchange="myFunction(29, this)" name="po_Connect" th:value="${data.po_Connect}">
+							</div>
+						</div>
+						<div class="row" id="data_con">
+							<div class="col-md-4">
+								<label class="form-label">dbtype</label>
+								<select class="form-control custom-control" id="dbtype" th:value="${data.po_Dbtype}" onclick="logValueOnClick(30, this)" name="po_Dbtype" 
                               onchange="valueChange(); myFunction(30, this);">
-                              <option th:selected="${data.po_Dbtype}=='1'" th:text="1"
-                                 value="1">1</option>
-                              <option th:selected="${data.po_Dbtype}=='2'" th:text="2"
-                                 value="2">2</option>
-                              <option th:selected="${data.po_Dbtype}=='3'" th:text="3"
-                                 value="3">3</option>
-                              <option th:selected="${data.po_Dbtype}=='5'" th:text="5"
-                                 value="5">5</option>
-                              <option th:selected="${data.po_Dbtype}=='5'" th:text="5"
-                                 value="5">5</option>
-                              <option th:selected="${data.po_Dbtype}=='8'" th:text="8"
-                                 value="8">8</option>
-                              <option th:selected="${data.po_Dbtype}=='9'" th:text="9"
-                                 value="9">9</option>
-                           </select>
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">user</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(31, this)" oninput="validateNumberInput(this);" onchange="myFunction(31, this)" name="po_User"
-                              th:value="${data.po_User}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">pswd</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(32, this)" oninput="validateNumberInput(this);" onchange="myFunction(32, this)"  name="po_Pswd"
-                              th:value="${data.po_Pswd}">
-                        </div>
-                     </div>
-                     
-                    <div class="row" id="data_con">
-                        <div class="col-md-4">
-                           <label class="form-label">count</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(33, this)" oninput="validateCharInput(this);" onchange="myFunction(33, this)" name="po_Count"
+									<option th:selected="${data.po_Dbtype}=='1'" th:text="1" value="1">1</option>
+									<option th:selected="${data.po_Dbtype}=='2'" th:text="2" value="2">2</option>
+									<option th:selected="${data.po_Dbtype}=='3'" th:text="3" value="3">3</option>
+									<option th:selected="${data.po_Dbtype}=='5'" th:text="5" value="5">5</option>
+									<option th:selected="${data.po_Dbtype}=='5'" th:text="5" value="5">5</option>
+									<option th:selected="${data.po_Dbtype}=='8'" th:text="8" value="8">8</option>
+									<option th:selected="${data.po_Dbtype}=='9'" th:text="9" value="9">9</option>
+								</select>
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">user</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(31, this)" oninput="validateNumberInput(this);" onchange="myFunction(31, this)" name="po_User" th:value="${data.po_User}">
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">pswd</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(32, this)" oninput="validateNumberInput(this);" onchange="myFunction(32, this)" name="po_Pswd" th:value="${data.po_Pswd}">
+							</div>
+						</div>
+						<div class="row" id="data_con">
+							<div class="col-md-4">
+								<label class="form-label">count</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(33, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(33, this)" name="po_Count"
                               th:value="${data.po_Count}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">connect</label>
-                           <select class="form-control custom-control" th:value="${data.po_Preconnect}" onclick="logValueOnClick(34, this)" onchange="myFunction(34, this)" name="po_Preconnect">
-                              <option th:selected="${data.po_Preconnect}=='FALSE'" th:text="FALSE"
-                                 th:value="FALSE">FALSE</option>
-                              <option th:selected="${data.po_Preconnect}=='TRUE'" th:text="TRUE"
-                                 th:value="TRUE">TRUE</option>
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">connect</label>
+								<select class="form-control custom-control" th:value="${data.po_Preconnect}" onclick="logValueOnClick(34, this)" onchange="myFunction(34, this)" name="po_Preconnect">
+									<option th:selected="${data.po_Preconnect}=='FALSE'" th:text="FALSE" th:value="FALSE">FALSE</option>
+									<option th:selected="${data.po_Preconnect}=='TRUE'" th:text="TRUE" th:value="TRUE">TRUE</option>
+								</select>
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">unicode</label>
+								<select class="form-control custom-control" th:value="${data.po_Unicode}" onclick="logValueOnClick(35, this)" onchange="myFunction(35, this)" name="po_Unicode">
+									<option th:selected="${data.po_Unicode}=='FALSE'" th:text="FALSE" th:value="FALSE">FALSE</option>
+									<option th:selected="${data.po_Unicode}=='TRUE'" th:text="TRUE" th:value="TRUE">TRUE</option>
+								</select>
+							</div>
+						</div>
+						<strong>
+						<p style="margin-top: 30px; font-size: 25px;">
+							 startup
+						</p>
+						</strong>
+						<div class="row" id="data_con">
+							<div class="col-md-4">
+								<label class="form-label">mainpool</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(36, this)" oninput="validateNumberInput(this);" onchange="myFunction(36, this)" name="st_MainpoolString" th:value="${data.st_MainpoolString}">
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">locasysime</label>
+								<input type="text" class="form-control" name="st_Locasysime" th:value="${data.st_Locasysime}">
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">retentionignore</label>
+								<select class="form-control custom-control" th:value="${data.ph_OnErrorReadOnly}" onclick="logValueOnClick(37, this)" onchange="myFunction(37, this)" name="st_retentionignore">
+                              <option th:selected="${data.st_retentionignore}=='NO'" th:text="NO"
+                                 th:value="NO">NO</option>
+                              <option th:selected="${data.st_retentionignore}=='YES'" th:text="YES"
+                                 th:value="YES">YES</option>
                            </select>
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">unicode</label>
-                           <select class="form-control custom-control" th:value="${data.po_Unicode}" onclick="logValueOnClick(35, this)" onchange="myFunction(35, this)" name="po_Unicode">
-                              <option th:selected="${data.po_Unicode}=='FALSE'" th:text="FALSE"
-                                 th:value="FALSE">FALSE</option>
-                              <option th:selected="${data.po_Unicode}=='TRUE'" th:text="TRUE" th:value="TRUE">
-                                 TRUE</option>
-                           </select>
-                        </div>
-                     </div>
-                     
-         
-
-                        <strong>
-                           <p style="margin-top: 30px; font-size: 25px;">startup</p>
-                        </strong>
-
-
-                    <div class="row" id="data_con">
-                        <div class="col-md-4">
-                           <label class="form-label">mainpool</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(36, this)" oninput="validateNumberInput(this);" onchange="myFunction(36, this)" name="st_MainpoolString"
-                              th:value="${data.st_MainpoolString}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">locasysime</label>
-                           <input type="text" class="form-control" name="st_Locasysime"
-                              th:value="${data.st_Locasysime}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">retentionignore</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(37, this)" oninput="validateNumberInput(this);" onchange="myFunction(37, this)" name="st_retentionignore"
-                              th:value="${data.st_retentionignore}">
-                        </div>
-                     </div>
-                        
-                        
-                        <strong>
-                           <p style="margin-top: 30px; font-size: 25px;">listpooler</p>
-                        </strong>
-
-                    <div class="row" id="data_con">
-                        <div class="col-md-4">
-                           <label class="form-label">listdir</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(38, this)" oninput="validateNumberInput(this);" onchange="myFunction(38, this)" name="li_Listdir"
-                              th:value="${data.li_Listdir}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">memcache</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(39, this)" oninput="validateCharInput(this);" onchange="myFunction(39, this)" name="li_Memcache"
+							</div>
+						</div>
+						<strong>
+						<p style="margin-top: 30px; font-size: 25px;">
+							 listpooler
+						</p>
+						</strong>
+						<div class="row" id="data_con">
+							<div class="col-md-4">
+								<label class="form-label">listdir</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(38, this)" oninput="validateNumberInput(this);" onchange="myFunction(38, this)" name="li_Listdir" th:value="${data.li_Listdir}">
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">memcache</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(39, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(39, this)" name="li_Memcache"
                               th:value="${data.li_Memcache}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">timeout</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(40, this)" oninput="validateCharInput(this);" onchange="myFunction(40, this)" name="li_Timeout"
+							</div>
+							<div class="col-md-4">
+								<label class="form-label">timeout</label>
+								<input type="text" class="form-control" onclick="logValueOnClick(40, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(40, this)" name="li_Timeout"
                               th:value="${data.li_Timeout}">
-                        </div>
-                     </div>
-                     
-                        <strong>
-                           <p style="margin-top: 30px; font-size: 25px;">physical volume manager</p>
-                        </strong>
-                                   
-                    <div class="row" id="data_con">
-                        <div class="col-md-6">
-                           <label class="form-label">iteration</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(41, this)" oninput="validateCharInput(this);" onchange="myFunction(41, this)" name="ph_Iteration"
+							</div>
+						</div>
+						<strong>
+						<p style="margin-top: 30px; font-size: 25px;">
+							 physical volume manager
+						</p>
+						</strong>
+						<div class="row" id="data_con">
+							<div class="col-md-6">
+								<label class="form-label">iteration</label>
+								 <input type="text" class="form-control" onclick="logValueOnClick(41, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(41, this)" name="ph_Iteration"
                               th:value="${data.ph_Iteration}">
-                        </div>
-                        <div class="col-md-6">
-                           <label class="form-label">OnErrorReadOnly</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(46, this)" onchange="myFunction(46, this)" name="ph_OnErrorReadOnly"
-                              th:value="${data.ph_OnErrorReadOnly}">
-                     </div>
-
-                     
-                        <strong>
-                           <p style="margin-top: 30px; font-size: 25px;">activemanager</p>
-                        </strong>
-                        <div class="row" id="data_con">
-                        <div class="col-md-4">
-                           <label class="form-label">iteration</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(42, this)" oninput="validateCharInput(this);" onchange="myFunction(42, this)" name="ac_Iteration"
+							</div>
+							<div class="col-md-6">
+								<label class="form-label">OnErrorReadOnly</label>
+								 <select class="form-control custom-control" th:value="${data.ph_OnErrorReadOnly}" onclick="logValueOnClick(46, this)" onchange="myFunction(46, this)" name="ph_OnErrorReadOnly">
+                              <option th:selected="${data.ph_OnErrorReadOnly}=='no'" th:text="no"
+                                 th:value="no">no</option>
+                              <option th:selected="${data.ph_OnErrorReadOnly}=='yes'" th:text="yes"
+                                 th:value="yes">yes</option>
+                           </select>
+							</div>
+							<strong>
+							<p style="margin-top: 30px; font-size: 25px;">
+								 activemanager
+							</p>
+							</strong>
+							<div class="row" id="data_con">
+								<div class="col-md-4">
+									<label class="form-label">iteration</label>
+									<input type="text" class="form-control" onclick="logValueOnClick(42, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(42, this)" name="ac_Iteration"
                               th:value="${data.ac_Iteration}">
-                        </div>
-                        </div>
-
-                        <strong>
-                           <p style="margin-top: 30px; font-size: 25px;">checkquery</p>
-                        </strong>
-                        
-
-                        
-                    <div class="row" id="data_con">
-                        <div class="col-md-4">
-                           <label class="form-label">checkqueryenable</label>
-                           <input type="text" class="form-control" name="ch_CheckQueryEnable"
-                              th:value="${data.ch_CheckQueryEnable}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">checkquerytimeout</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(43, this)" oninput="validateCharInput(this);" onchange="myFunction(43, this)" name="ch_SheckQueryTimeout"
+								</div>
+							</div>
+							<strong>
+							<p style="margin-top: 30px; font-size: 25px;">
+								 checkquery
+							</p>
+							</strong>
+							<div class="row" id="data_con">
+								<div class="col-md-4">
+									<label class="form-label">checkqueryenable</label>
+									 <input type="text" class="form-control" onclick="logValueOnClick(44, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(44, this)" name="ch_SheckQueryTimeout"
                               th:value="${data.ch_SheckQueryTimeout}">
-                        </div>
-                        <div class="col-md-4">
-                           <label class="form-label">validationinterval</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(44, this)" oninput="validateCharInput(this);" onchange="myFunction(44, this)" name="ch_Validationinterval"
+								</div>
+								<div class="col-md-4">
+									<label class="form-label">checkquerytimeout</label>
+									<input type="text" class="form-control" onclick="logValueOnClick(43, this)" oninput="validateCharInput(this);" onchange="myFunction(43, this)" name="ch_SheckQueryTimeout" th:value="${data.ch_SheckQueryTimeout}">
+								</div>
+								<div class="col-md-4">
+									<label class="form-label">validationinterval</label>
+									<input type="text" class="form-control" onclick="logValueOnClick(45, this)" oninput="validateOnlyNumber(this);" onchange="myFunction(45, this)" name="ch_Validationinterval"
                               th:value="${data.ch_Validationinterval}">
-                        </div>
-                     </div>
+								</div>
+							</div>
+							<strong>
+							<p style="margin-top: 30px; font-size: 25px;">
+								 defaultaudit
+							</p>
+							</strong>
+							<div class="row" id="data_con">
+								<div class="col-md-6">
+									<label class="form-label">agentserver</label>
+									<input type="text" class="form-control" onclick="logValueOnClick(45, this)" oninput="validateNumberInput(this);" onchange="myFunction(45, this)" name="de_Agentserver" th:value="${data.de_Agentserver}">
+								</div>
+								<div class="col-md-6">
+									<label class="form-label">agentname</label>
+									<input type="text" class="form-control" onclick="logValueOnClick(45, this)" oninput="validateNumberInput(this);" onchange="myFunction(45, this)" name="de_AgentName" th:value="${data.de_AgentName}">
+								</div>
+							</div>
+							<div id="farmContent" style="display: none;">
+								<strong>
+								<p style="margin-top: 30px; font-size: 25px;">
+									 farm
+								</p>
+								</strong>
+								<div class="row" id="hello">
+									<div class="col-auto">
+										<label class="col-form-label">enabled</label>
+									</div>
+									<div class="col-auto">
+										<input type="text" class="form-control" name="" value="">
+									</div>
+									<div class="col-auto">
+										<label class="col-form-label">ucode</label>
+									</div>
+									<div class="col-auto">
+										<input type="text" class="form-control" name="" value="">
+									</div>
+									<div class="col-auto">
+										<label class="col-form-label">farmeid</label>
+									</div>
+									<div class="col-auto">
+										<input type="text" class="form-control" name="" value="">
+									</div>
+								</div>
+								<strong>
+								<p style="margin-top: 30px; font-size: 25px;">
+									 dserver
+								</p>
+								</strong>
+								<div class="row" id="hello">
+									<div class="col-auto">
+										<label class="col-form-label">ucode</label>
+									</div>
+									<div class="col-auto">
+										<input type="text" class="form-control" name="" value="">
+									</div>
+									<div class="col-auto">
+										<label class="col-form-label">address</label>
+									</div>
+									<div class="col-auto">
+										<input type="text" class="form-control" name="" value="">
+									</div>
+									<div class="col-auto">
+										<label class="col-form-label">port</label>
+									</div>
+									<div class="col-auto">
+										<input type="text" class="form-control" name="" value="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+		
+		
+		
+		
+		</div>
+		
+		
+		<div class="row" style="padding: 0 10%; margin-top: 15px; text-align: center;">
+			<div class="col-md-1">
+				<label class="form-label" style="">경로</label>
+			</div>
+			<div class="col-md-5">
+				<input type="text" class="form-control" placeholder="경로를 입력해 주세요" name="dirName" required>
+			</div>
+			<div class="col-md-1">
+				<label class="form-label">파일명</label>
+			</div>
+			<div class="col-md-5">
+				<input type="text" class="form-control" placeholder="파일명을 입력해 주세요(확장자는 빼고 작성해주세요)" name="foldName" required>
+			</div>
+		</div>
+		
+		
 
-                        
-                        <strong>
-                           <p style="margin-top: 30px; font-size: 25px;">defaultaudit</p>
-                        </strong>
-                        
-                        
-                    <div class="row" id="data_con">
-                        <div class="col-md-6">
-                           <label class="form-label">agentserver</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(45, this)" oninput="validateNumberInput(this);" onchange="myFunction(45, this)" name="de_Agentserver"
-                              th:value="${data.de_Agentserver}">
-                        </div>
-                        <div class="col-md-6">
-                           <label class="form-label">agentname</label>
-                           <input type="text" class="form-control" onclick="logValueOnClick(45, this)" oninput="validateNumberInput(this);" onchange="myFunction(45, this)" name="de_AgentName"
-                              th:value="${data.de_AgentName}">
-                        </div>
-                     </div>
+		<div class="button-container">
+			<button type="button" class="btn btn-secondary" style="background-color: black; " onclick="makeTemp();">중간저장</button>
+			<button type="submit" class="btn btn-secondary" style="background-color: red; " onclick="call_confirm();">저장</button>
+		</div>
+	
 
-                        <div id="farmContent" style="display: none;">
-                           <strong>
-                              <p style="margin-top: 30px; font-size: 25px;">farm</p>
-                           </strong>
-                           <div class="row" id="hello">
-                              <div class="col-auto">
-                                 <label class="col-form-label">enabled</label>
-                              </div>
-                              <div class="col-auto">
-                                 <input type="text" class="form-control" name="" value="">
-                              </div>
-                              <div class="col-auto">
-                                 <label class="col-form-label">ucode</label>
-                              </div>
-                              <div class="col-auto">
-                                 <input type="text" class="form-control" name="" value="">
-                              </div>
-                              <div class="col-auto">
-                                 <label class="col-form-label">farmeid</label>
-                              </div>
-                              <div class="col-auto">
-                                 <input type="text" class="form-control" name="" value="">
-                              </div>
-                           </div>
+	</form>
+</div>
 
-                           <strong>
-                              <p style="margin-top: 30px; font-size: 25px;">dserver</p>
-                           </strong>
-                           <div class="row" id="hello">
-                              <div class="col-auto">
-                                 <label class="col-form-label">ucode</label>
-                              </div>
-                              <div class="col-auto">
-                                 <input type="text" class="form-control" name="" value="">
-                              </div>
-                              <div class="col-auto">
-                                 <label class="col-form-label">address</label>
-                              </div>
-                              <div class="col-auto">
-                                 <input type="text" class="form-control" name="" value="">
-                              </div>
-                              <div class="col-auto">
-                                 <label class="col-form-label">port</label>
-                              </div>
-                              <div class="col-auto">
-                                 <input type="text" class="form-control" name="" value="">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-            </div>
-            <br><br>
-         </div>
-         <div class="row" style="margin: 0 auto; text-align: center;">
-            <div class="col-md-2">
-              <label class="form-label">경로</label>
-              </div>
-            <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="경로를 입력해 주세요" name="dirName" required>
-            </div>
-            <div class="col-md-2">
-               <label class="form-label">폴더명</label>
-               </div>
-               <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="폴더명을 입력해 주세요(확장자는 빼고 작성해주세요)" name="foldName" required>
-            </div>
-            </div>
-      </div>
-   </div>
-   
-   <button type="submit" class="btn btn-secondary" style="background-color: red; margin-left: 1146px;" onclick="call_confirm();">저장</button>
-   <button type="button" class="btn btn-secondary" style="background-color: black; margin-left: 1146px;" onclick="makeTemp();">중간저장</button>
-      </form>
-      
-      
 </body>
-
 </html>

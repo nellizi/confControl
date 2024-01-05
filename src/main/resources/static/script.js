@@ -132,7 +132,7 @@ function valueChange() {
 
 function validateNumberInput(inputField) {
 	// 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
-	inputField.value = inputField.value.replace(/[^a-zA-Z가-힣./_:@\s]/g, '');
+	 inputField.value = inputField.value.replace(/[^a-zA-Z가-힣./_:@\s\\]/g, '');
 }
 
 
@@ -146,6 +146,15 @@ function validateEngInput(inputField) {
 	inputField.value = inputField.value.replace(/[^a-zA-Z]/g, '');
 }
 
+function validateNumberInputProName(inputField) {
+	  // 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
+	  inputField.value = inputField.value.replace(/[^a-zA-Z.0-9]/g, '');
+	}
+
+function validateOnlyNumber(inputField) {
+	  // 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
+	  inputField.value = inputField.value.replace(/[^0-9]/g, '');
+	}
 // 배열로 변경
 let values = [];
 var element = document.querySelector('.changeColor');
