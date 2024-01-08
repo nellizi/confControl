@@ -19,6 +19,8 @@ import lombok.ToString;
 @ToString
 public class ArchiveAgentDto {
 	
+	private List<String> AagNames;
+	
 	
 	private String Aag_Name;
 	
@@ -170,6 +172,14 @@ public class ArchiveAgentDto {
 
 	public void setTh_Count(String th_Count) {
 		this.th_Count = th_Count;
+	}
+
+	public List<String> getAagNames() {
+		return AagNames;
+	}
+
+	public void setAagNames(List<String> aagNames) {
+		AagNames = aagNames;
 	}
 
 
