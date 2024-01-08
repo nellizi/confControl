@@ -1,0 +1,85 @@
+        .body {
+            margin: 0 auto;
+        }
+        .end-box {
+            margin: 0 auto;
+        }
+        .accordion {
+            margin: 0 auto;
+        }
+        .accordion ul>li {
+            overflow: hidden;
+            max-height: 40px;
+            transition: 0.3s;
+            margin: 0 auto;
+        }
+        .accordion ul>li.on {
+            max-height: 800px;
+        }
+         ul {
+			margin-bottom: 20px;
+		}
+        p {
+            margin-top: 10px;
+        }
+        .accordion ul>li .title {
+            background-color: antiquewhite;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding-left: 0.5rem;
+        }
+        .accordion ul>li .desc {
+            padding: 0.5rem;
+        }
+        .list-a {
+            display: flex;
+            height: 50px;
+            text-align: center;
+        }
+		.list-content{
+			display: flex;
+            justify-content: space-between; /* 수평으로 간격을 벌리기 */
+		}
+        .list-content button {
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            background: white;
+            border-radius: 15px;
+            font-size: 17px;
+            font-weight: 800;
+            width: 120px;
+            height: 50px;
+            margin-right: 5px;
+        }
+        .con:hover {
+            background-color: orange;
+        }
+        .con.active {
+            background-color: orange;
+        }
+        .con:focus {
+            background-color: orange;
+        }
+        .con:visited {
+            color: white;
+        }
+        .button-container {
+             float: right;
+             margin-top: 20px;
+             margin-bottom: 20px;
+        }
+        .button-container button {
+            margin-right: 10px; /* 각 버튼 사이의 간격 조정 */
+        }
+        
+        
+        div>a{
+			  text-decoration-line: none;
+			  color: black;
+			 
+		}
+		div>a:hover{
+			color: blue;
+		}

@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
@@ -155,11 +156,11 @@ public class MainController {
 		delete.DeleteFile(requestFile);
 		delete.DeleteFile(path);
 
-		return "newTest2";
+		return "showxml";
 
 	}
 
-	@GetMapping("/create")
+	@RequestMapping("/create")
 	String createXml(@ModelAttribute ServerDto serverDto, @ModelAttribute ArchiveAgentDto arcAgentDto,
 			@ModelAttribute CommAgentDto CommDto, @ModelAttribute DataAgentDto dataDto,
 			@ModelAttribute LocalAgentDto localDto, HttpServletResponse response, @RequestParam String dirName,
