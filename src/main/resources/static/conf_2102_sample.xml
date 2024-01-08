@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<XVARM>
+	<server keepperfstats="false" basemsg="../../msg/base.mc">
+		<logwriter class="com.windfire.agents.asysLogWriterLog4j" level="5">
+			<property name="log4j2.xml" section="main" />
+		</logwriter>
+		
+		<!--
+		<logwriter class="com.windfire.agents.asysLogWriterFile" level="5">
+			<file name="../../log/xtorm.log" truncate="false" encoding="UTF-8" dateformat="yyyy-MM-dd 'at' HH:mm:ss" tmode="2" tparam="daily"/>
+		</logwriter>
+		<logwriter class="com.windfire.agents.asysLogWriterConsole"/>
+		-->
+	</server>
+	<localagents machineid="0">
+		<agent name="COMM" type="COMM" class="com.windfire.agents.comm.asysAgentComm" opclass="/servlet/asyservlets.asysOperComm" msgfile="../../msg/comm.mc">
+			<sockets hostname="127.0.0.1" port="2102" clienttimeout="0" />
+			<!--
+			<sockets virtualhost="VIP" virtualip="VIP" virtualport="2102" hostname="127.0.0.1" port="2102" clienttimeout="0" />
+			-->
+		</agent>
+		
+		<!-- ArchiveAgentBegin -->
+		
+		<agent name="MAIN_ARC" type="ARCHIVE" desc="Main Archive" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc">
+			<scheduler class="com.windfire.agents.archive.asysAgentArSchedFifo">
+				<deviceIF class="com.windfire.agents.archive.asysAgentArMediaFilesys" basedir="" hashdirs="100" dateformat="yyyyMMdd" filesystemclass="com.windfire.agents.archive.asysFileSystemShell" filesystemkb="true" />
+				<threadpool ops="read,write,delete" count="20" />
+			</scheduler>
+		</agent>
+
+		<!-- OS HP-UX Use 'filesystemkb' option 'false'
+		<agent name="MAIN_ARC" type="ARCHIVE" desc="FileSystem Disk in HP-UX" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc">
+			<scheduler class="com.windfire.agents.archive.asysAgentArSchedFifo">
+				<deviceIF class="com.windfire.agents.archive.asysAgentArMediaFilesys" basedir="" hashdirs="100" dateformat="yyyyMMdd" filesystemclass="com.windfire.agents.archive.asysFileSystemShell" filesystemkb="false" />
+				<threadpool ops="read,write,delete" count="20" />
+			</scheduler>
+		</agent>
+		-->
+		
+		<!-- CAS Data Single
+		<agent name="CAS_SG_ARC" type="ARCHIVE" desc="CAS Archive(Single)" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc">
+			<scheduler class="com.windfire.agents.archive.asysAgentArSchedFifo" qtimeout="60" iterationop="600" rstime="60">
+				<deviceIF class="com.windfire.agents.archive.asysAgentArMediaEMCCenteraBatchCacheShred" basedir="/temp/ecs"
+					pooladdrlist="127.0.0.1,127.0.0.2,127.0.0.3,127.0.0.4?/usr/ecs/ecsprofile.pea" tempdel="true" poolbuffersize="16"
+					timeout="120" retention="0" FILESYSTEMKB="true" IgnoreClipName="true" blobpartialread="true" EMBEDDBLOB="true" />
+				<threadpool ops="read,write,delete" count="50" />
+			</scheduler>
+		</agent>z
+		-->
+		
+		<!-- CAS Data Bundle
+		<agent name="CAS_BD_ARC" type="ARCHIVE" desc="CAS Archive(bundle)" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc">
+			<scheduler class="com.windfire.agents.archive.asysAgentArSchedFifo" qtimeout="60" iterationop="600" rstime="60">
+				<deviceIF class="com.windfire.agents.archive.asysAgentArMediaEMCCenteraBatchCacheDirect" basedir="/temp/ecs"
+					pooladdrlist="127.0.0.1,127.0.0.2,127.0.0.3,127.0.0.4?/usr/ecs/ecsprofile.pea" tempdel="true" poolbuffersize="16"
+					timeout="120" retention="0" FILESYSTEMKB="true" IgnoreClipName="true" blobpartialread="true" />
+				<threadpool ops="read,write,delete" count="50" />
+			</scheduler>
+		</agent>
+		-->
+		
+		<!-- HCP Single
+		<agent name="HCP_SG_ARC" type="ARCHIVE" desc="HCP Archive" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc" minhealth="1">
+			<scheduler class="com.windfire.agents.archive.asysAgentArSchedFifo">
+				<deviceIF class="com.windfire.agents.archive.asysAgentArMediaHCP"
+					baseurl="http://127.0.0.1;http://127.0.0.2;http://127.0.0.3;http://127.0.0.4;" basedir="fcfs_data"
+					hashdirs="100" dateformat="yyyyMMdd" deleteage="60" securetype="1" secureuser="" securepswd=""
+					securedomain="" secureserver="" tempdir="/temp" TIMEOUT="10000" retries="3" retrywait="500"
+					retention="" MAXTOTALCONNECTIONS="30" MAXHOSTCONNECTIONS="30" FILESYSTEMKB="true" />
+				<threadpool ops="read,write,delete" count="50" />
+			</scheduler>
+		</agent>
+		-->
+		
+		<!-- HCP Multi tenancy
+		<agent name="HCP_MT_ARC" type="ARCHIVE" desc="HCP Archive(Multi tenancy)" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc" minhealth="1">
+			<scheduler class="com.windfire.agents.archive.asysAgentArSchedFifo">
+				<deviceIF class="com.windfire.agents.archive.asysAgentArMediaHCP"
+					baseurl="https://exvarmtest.xvarmTest.hisbmt.hcp.com" basedir="rest"
+					hashdirs="100" dateformat="yyyyMMdd" deleteage="60" securetype="2" secureuser="admin" securepswd="admin"
+					securedomain="exvarmtest.xvarmTest.hisbmt.hcp.com" secureserver="" tempdir="/temp" TIMEOUT="10000" retries="3" retrywait="500"
+					retention="" MAXTOTALCONNECTIONS="30" MAXHOSTCONNECTIONS="30" FILESYSTEMKB="true" />
+				<threadpool ops="read,write,delete" count="50" />
+			</scheduler>
+		</agent>
+		-->
+		
+		<!-- S3 Storage
+		<agent name="S3_ARC" type="ARCHIVE" desc="S3 Archive" class="com.windfire.agents.archive.asysAgentArchive" opclass="/servlet/asyservlets.asysOperArchive" msgfile="../../msg/archive.mc">
+			<scheduler class="com.windfire.agents.archive.asysAgentArSchedFifo">
+				<deviceIF class="com.windfire.agents.archive.asysAgentArMediaAWSS3"
+					basedir="/temp" DATEFORMAT="yyyyMMdd" DELETEDAGE="60" bucket="inzentedms" iam="false"
+					apikey="AKIA4NLH6Q46N5LPIYHM" secretkey="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" endpoint="localhost" />
+				<threadpool ops="read,write,delete" count="50" />
+			</scheduler>
+		</agent>
+		-->
+		
+		<!-- ArchiveAgentEnd -->
+		
+		<!-- DataAgentBegin -->
+		
+		<agent name="DATA" type="DATA" class="com.windfire.agents.data.asysAgentData" msgfile="../../msg/data.mc">
+			<dbpools>
+				<pool name="master" driver="oracle.jdbc.driver.OracleDriver" connect="jdbc:oracle:thin:@127.0.0.1:1522:orcl"
+					dbtype="3" user="XTORM" pswd="XTORM" count="50" preconnect="FALSE" unicode="FALSE" />
+			</dbpools>
+			<startup mainpool="master" locasysime="GMT+09:00" retentionignore="NO" />
+			<listspooler listdir="spool" memcache="1024" timeout="3600" />
+			<physicalvolumemanager iteration="43200" OnErrorReadOnly="no" />
+			<activemanager iteration="600" />
+			<checkquery CHECKQUERYENABLE="true" CHECKQUERYTIMEOUT="10" VALIDATIONINTERVAL="300" />
+			<defaultaudit agentserver="" agentname="" />
+			
+			 
+			<farm enabled="false" ucode="0" farmeid="true">
+				<dserver ucode="1" address="REAL IP2" port="2102" />
+			</farm>
+			
+			
+			
+			
+			
+			
+			<farm enabled="false" ucode="1" farmeid="true">
+				<dserver ucode="0" address="REAL IP1" port="2102" />
+			</farm>
+			
+			
+			<!-- Farm configuration in cloud server
+			<farm enabled="false" ucode="0" farmeid="false" farmcloud="true">
+			</farm>
+			-->
+		</agent>
+		
+		<!-- MSSQL
+		driver="com.jnetdirect.jsql.JSQLDriver"
+		connect="jdbc:JSQLConnect://127.0.0.1:10000/database=XTORM"
+		dbtype="1"
+		-->
+		
+		<!-- ORACLE	  
+		driver="oracle.jdbc.driver.OracleDriver"
+		connect="jdbc:oracle:thin:@127.0.0.1:1521:SID"
+		dbtype="2"
+		-->
+		
+		<!-- ORACLE (Load balancing-Failover)
+		driver="oracle.jdbc.driver.OracleDriver" 
+		connect="jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=OFF)(FAILOVER=ON)ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=edms1.co.kr)(PORT=1522))(ADDRESS=(PROTOCOL=TCP)(HOST=edms2.co.kr)(PORT=1522))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCL)))"
+		dbtype="2"
+		-->
+		
+		<!-- DB2
+		driver="com.ibm.db2.jcc.DB2Driver"
+		connect="jdbc:db2://127.0.0.1:50000/xtorm:driverType=4;"
+		dbtype="3"
+		-->
+		
+		<!-- MySQL
+		driver="com.mysql.cj.jdbc.Driver"
+		connect="jdbc:mysql://127.0.0.1:3306/DBNAME?characterEncoding=utf8amp;autoReconnect=true"
+		dbtype="5"
+		-->
+		
+		<!-- MariaDB
+		driver="org.mariadb.jdbc.Driver"
+		connect="jdbc:mariadb://127.0.0.1:3306/DATABASE"
+		dbtype="5"
+		-->
+		
+		<!-- Tibero
+		driver="com.tmax.tibero.jdbc.TbDriver"
+		connect="jdbc:tibero:thin:@127.0.0.1:1521:SID"
+		dbtype="8"
+		-->
+		
+		<!-- PostgreSql
+		driver="org.postgresql.Driver"
+		connect="jdbc:postgresql://127.0.0.1:5432/xtorm"
+		dbtype="9"
+		-->
+		
+		<!-- DataAgentEnd -->
+	</localagents>
+</XVARM>
