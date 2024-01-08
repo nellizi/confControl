@@ -136,14 +136,20 @@ function validateNumberInput(inputField) {
 }
 
 
+
 function validateCharInput(inputField) {
 	// 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
 	inputField.value = inputField.value.replace(/[^0-9.]/g, '');
 }
 
+function validateCharInputUser(inputField) {
+	// 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
+	inputField.value = inputField.value.replace(/[^a-zA-Z$0-9]/g, '');
+}
+
 function validateEngInput(inputField) {
 	// 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
-	inputField.value = inputField.value.replace(/[^a-zA-Z]/g, '');
+	inputField.value = inputField.value.replace(/[^a-zA-Z0-9]/g, '');
 }
 
 function validateNumberInputProName(inputField) {

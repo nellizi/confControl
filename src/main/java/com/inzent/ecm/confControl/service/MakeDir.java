@@ -6,7 +6,7 @@ public class MakeDir {
 	
 	public File makeDir() {
 		
-		String path = "C://TEST/";
+		String path = "C://DUMMY/";
 		
 		File dir = new File(path);
 		
