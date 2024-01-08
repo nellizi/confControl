@@ -156,8 +156,9 @@ function validateOnlyNumber(inputField) {
 	  inputField.value = inputField.value.replace(/[^0-9]/g, '');
 	}
 // 배열로 변경
+
 let values = [];
-var element = document.querySelector('.changeColor');
+
 
 function logValueOnClick(index, inputField) {
 	// value2가 이미 초기화되어 있다면 초기화하지 않도록 확인
@@ -167,6 +168,8 @@ function logValueOnClick(index, inputField) {
 }
 
 function myFunction(index, inputField) {
+	var element = document.querySelector('.changeColor');
+	
 	let value = inputField.value;
 	console.log(`Changed value ${index}: ` + value);
 

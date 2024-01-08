@@ -19,6 +19,9 @@ import lombok.ToString;
 @ToString
 public class ArchiveAgentDto {
 	
+	private List<String> AagNames;
+	
+	
 	private String Aag_Name;
 	
 	private String Aag_Type;
@@ -48,12 +51,6 @@ public class ArchiveAgentDto {
 	private String th_Ops;
 	
 	private String th_Count;
-
-	private List<ArchiveAgentDto> archiveAgentDtoList ;
-	
-	public ArchiveAgentDto() {
-		this.archiveAgentDtoList = new ArrayList<>();
-	}
 
 
 
@@ -177,15 +174,15 @@ public class ArchiveAgentDto {
 		this.th_Count = th_Count;
 	}
 
-	public List<ArchiveAgentDto> getArchiveAgentDtoList() {
-		return archiveAgentDtoList;
+	public List<String> getAagNames() {
+		return AagNames;
 	}
 
-	public void setArchiveAgentDtoList(List<ArchiveAgentDto> archiveAgentDtoList) {
-		this.archiveAgentDtoList = archiveAgentDtoList;
+	public void setAagNames(List<String> aagNames) {
+		AagNames = aagNames;
 	}
-	
-	
+
+
 	
 	
 
