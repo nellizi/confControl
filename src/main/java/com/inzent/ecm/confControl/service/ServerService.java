@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 import com.inzent.ecm.confControl.model.ServerDto;
 
-import jakarta.websocket.server.ServerEndpoint;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
