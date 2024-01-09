@@ -142,6 +142,11 @@ function validateCharInput(inputField) {
 	inputField.value = inputField.value.replace(/[^0-9.]/g, '');
 }
 
+function validateCharInputPwd(inputField) {
+	// 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
+	inputField.value = inputField.value.replace(/[^a-zA-Z$0-9]/g, '');
+}
+
 function validateCharInputUser(inputField) {
 	// 정규표현식을 사용하여 숫자 및 특수 문자를 필터링
 	inputField.value = inputField.value.replace(/[^a-zA-Z$0-9]/g, '');
